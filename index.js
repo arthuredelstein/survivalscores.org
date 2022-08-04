@@ -48,7 +48,7 @@ const disarmament_treaties = [
 const other_un_treaties = [
   {
     code: "rome",
-    url: "https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=XVIII-10&chapter=18&clang=_en#EndDec",
+    url: "https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=XVIII-10&chapter=18&clang=_en",
     columnCount: 3
   },
   {
@@ -58,13 +58,25 @@ const other_un_treaties = [
   }
 ];
 
+const formatDate = (raw) => {
+  const rawDate = new Date(raw.trim().replace("\t", " "));
+  const year = rawDate.getFullYear().toString();
+  const month = (rawDate.getMonth() + 1).toString().padStart(2, "0");
+  const day = rawDate.getDate().toString().padStart(2, "0");
+  if (year === "NaN") {
+    return undefined;
+  } else {
+    return `${year}-${month}-${day}`;
+  }
+};
+
 const getDisarmamentDateFromDataOrder = (td) => td.getAttribute("data-order").split("-")[0];
 
 const getDisarmamentDataFromRow = (row) => {
   const [td0, td1, td2, td3] = row.querySelectorAll("td");
   const country = td0.getAttribute("data-order");
-  const signed = getDisarmamentDateFromDataOrder(td1);
-  const td2_date = getDisarmamentDateFromDataOrder(td2);
+  const signed = formatDate(getDisarmamentDateFromDataOrder(td1));
+  const td2_date = formatDate(getDisarmamentDateFromDataOrder(td2));
   const link = td2.querySelector("a");
   let ratified, acceded;
   if (link) {
@@ -82,16 +94,16 @@ const getUNDataFromRow = (row, columnCount) => {
   const [td0, td1, td2] = row.querySelectorAll("td");
   const country = td0.textContent;
   if (columnCount === 3) {
+    const joined = formatDate(td2.textContent.split(/\s+/).slice(0,3).join(" "));
     return {
       country,
-      signed: td1.textContent,
-      joined: td2.textContent
+      signed: formatDate(td1.textContent),
+      joined
     };
   } else if (columnCount === 2) {
     return {
       country,
-      joined: td1.textContent
-    };
+      joined: formatDate(td1.textContent)    };
   }
 };
 
@@ -137,9 +149,7 @@ const other = async () => {
 
 const getAllData = async () => {
   const otherData = await other();
-  console.log(otherData);
   const disarmamentData = await disarmament();
-  console.log(disarmamentData);
   return Object.assign({}, otherData, disarmamentData);
 };
 
