@@ -48,17 +48,20 @@ const disarmament_treaties = [
 const other_un_treaties = [
   {
     code: "rome",
-    url: "https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=XVIII-10&chapter=18&clang=_en",
+    mtdsg_no: "XVIII-10",
+    chapter: 18,
     columnCount: 3
   },
   {
     code: "aggression",
-    url: "https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=XVIII-10-b&chapter=18&clang=_en",
+    mtdsg_no: "XVIII-10-b",
+    chapter: 18,
     columnCount: 2
   },
   {
     code: "biodiversity",
-    url: "https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=XXVII-8&chapter=27&clang=_en",
+    chapter: 27,
+    mtdsg_no: "XXVII-8",
     columnCount: 3
   }
 ];
@@ -145,7 +148,9 @@ const disarmament = async () => {
 const other = async () => {
   const results = {};
   for (let treaty of other_un_treaties) {
-    const { code, url, columnCount } = treaty;
+    const { code, chapter, mtdsg_no, columnCount } = treaty;
+    const url = `https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=${mtdsg_no}&chapter=${chapter}&clang=_en`;
+    console.log(url);
     const statuses = await unTreatyInfo(url, columnCount);
     results[code] = statuses;
   }
