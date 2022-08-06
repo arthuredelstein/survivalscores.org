@@ -55,6 +55,11 @@ const other_un_treaties = [
     code: "aggression",
     url: "https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=XVIII-10-b&chapter=18&clang=_en",
     columnCount: 2
+  },
+  {
+    code: "biodiversity",
+    url: "https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=XXVII-8&chapter=27&clang=_en",
+    columnCount: 3
   }
 ];
 
