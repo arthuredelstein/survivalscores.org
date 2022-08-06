@@ -1,0 +1,38 @@
+---
+disarmament_treaties:
+  - code: "tpnw"
+    tableSelector: "#sort_table_special"
+  - code: "ctbt"
+    tableSelector: "#sort_table"
+  - code: "npt"
+    tableSelector: "#sort_table_special"
+  - code: "bwc"
+    tableSelector: "#sort_table_special"
+  - code: "rarotonga"
+    nwfz: true
+    tableSelector: "#sort_table"
+  - code: "pelindaba"
+    nwfz: true
+    tableSelector: "#sort_table"
+  - code: "canwfz"
+    nwfz: true
+    tableSelector: "#sort_table"
+  - code: "bangkok"
+    nwfz: true
+    tableSelector: "#sort_table"
+  - code: "tlatelolco"
+    nwfz: true
+    tableSelector: "#sort_table"
+other_un_treaties:
+  - code: "rome"
+    mtdsg_no: "XVIII-10"
+    chapter: 18
+    columnCount: 3
+  - code: "aggression"
+    mtdsg_no: "XVIII-10-b"
+    chapter: 18
+    columnCount: 2
+  - code: "biodiversity"
+    chapter: 27
+    mtdsg_no: "XXVII-8"
+    columnCount: 3

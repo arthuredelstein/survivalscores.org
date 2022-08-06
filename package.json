@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "jsdom": "^20.0.0",
-    "node-fetch": "^3.2.10"
+    "node-fetch": "^3.2.10",
+    "yaml": "^2.1.1"
   },
   "type": "module"
 }

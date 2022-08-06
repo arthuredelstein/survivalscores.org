@@ -1,70 +1,7 @@
 import fetch from 'node-fetch';
 import { JSDOM } from 'jsdom';
-
-const disarmament_treaties = [
-  {
-    code: "tpnw",
-    tableSelector: "#sort_table_special"
-  },
-  {
-    code: "ctbt",
-    tableSelector: "#sort_table"
-  },
-  {
-    code: "npt",
-    tableSelector: "#sort_table_special"
-  },
-  {
-    code: "bwc",
-    tableSelector: "#sort_table_special"
-  },
-  {
-    code: "rarotonga",
-    nwfz: true,
-    tableSelector: "#sort_table"
-  },
-  {
-    code: "pelindaba",
-    nwfz: true,
-    tableSelector: "#sort_table"
-  },
-  {
-    code: "canwfz",
-    nwfz: true,
-    tableSelector: "#sort_table"
-  },
-  {
-    code: "bangkok",
-    nwfz: true,
-    tableSelector: "#sort_table"
-  },
-  {
-    code: "tlatelolco",
-    nwfz: true,
-    tableSelector: "#sort_table"
-  },
-];
-
-const other_un_treaties = [
-  {
-    code: "rome",
-    mtdsg_no: "XVIII-10",
-    chapter: 18,
-    columnCount: 3
-  },
-  {
-    code: "aggression",
-    mtdsg_no: "XVIII-10-b",
-    chapter: 18,
-    columnCount: 2
-  },
-  {
-    code: "biodiversity",
-    chapter: 27,
-    mtdsg_no: "XXVII-8",
-    columnCount: 3
-  }
-];
+import YAML from 'yaml';
+import fs from 'fs';
 
 const formatDate = (raw) => {
   const rawDate = new Date(raw.trim().replace("\t", " "));
@@ -135,7 +72,7 @@ const unTreatyInfo = async (url, columnCount) => {
   return [...rows].slice(1).map(row => getUNDataFromRow(row, columnCount));
 };
 
-const disarmament = async () => {
+const disarmament = async (disarmament_treaties) => {
   const results = {};
   for (let treaty of disarmament_treaties) {
     const { code, tableSelector, nwfz } = treaty;
@@ -145,7 +82,7 @@ const disarmament = async () => {
   return results;
 };
 
-const other = async () => {
+const other = async (other_un_treaties) => {
   const results = {};
   for (let treaty of other_un_treaties) {
     const { code, chapter, mtdsg_no, columnCount } = treaty;
@@ -158,8 +95,9 @@ const other = async () => {
 };
 
 const getAllData = async () => {
-  const otherData = await other();
-  const disarmamentData = await disarmament();
+  const { other_un_treaties, disarmament_treaties } = YAML.parse(fs.readFileSync("inputs.yaml").toString());
+  const otherData = await other(other_un_treaties);
+  const disarmamentData = await disarmament(disarmament_treaties);
   return Object.assign({}, otherData, disarmamentData);
 };
 
