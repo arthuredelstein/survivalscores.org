@@ -8,6 +8,7 @@ disarmament_treaties:
     tableSelector: "#sort_table_special"
   - code: "bwc"
     tableSelector: "#sort_table_special"
+nwfz_treaties:
   - code: "rarotonga"
     nwfz: true
     tableSelector: "#sort_table"

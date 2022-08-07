@@ -72,10 +72,11 @@ const unTreatyInfo = async (url, columnCount) => {
   return [...rows].slice(1).map(row => getUNDataFromRow(row, columnCount));
 };
 
-const disarmament = async (disarmament_treaties) => {
+const disarmament = async (treaties, nwfz) => {
   const results = {};
-  for (let treaty of disarmament_treaties) {
-    const { code, tableSelector, nwfz } = treaty;
+  for (let treaty of treaties) {
+    console.log(treaty.code);
+    const { code, tableSelector } = treaty;
     const statuses = await disarmamentTreatyInfo(code, tableSelector);
     results[code] = statuses;
   }
@@ -85,9 +86,9 @@ const disarmament = async (disarmament_treaties) => {
 const other = async (other_un_treaties) => {
   const results = {};
   for (let treaty of other_un_treaties) {
+    console.log(treaty.code);
     const { code, chapter, mtdsg_no, columnCount } = treaty;
     const url = `https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=${mtdsg_no}&chapter=${chapter}&clang=_en`;
-    console.log(url);
     const statuses = await unTreatyInfo(url, columnCount);
     results[code] = statuses;
   }
@@ -95,16 +96,37 @@ const other = async (other_un_treaties) => {
 };
 
 const getAllData = async () => {
-  const { other_un_treaties, disarmament_treaties } = YAML.parse(fs.readFileSync("inputs.yaml").toString());
+  const { other_un_treaties, disarmament_treaties, nwfz_treaties } = YAML.parse(fs.readFileSync("inputs.yaml").toString());
   const otherData = await other(other_un_treaties);
   const disarmamentData = await disarmament(disarmament_treaties);
-  return Object.assign({}, otherData, disarmamentData);
+  const nwfzData = await disarmament(nwfz_treaties);
+  return Object.assign({}, otherData, disarmamentData, nwfzData);
+};
+
+const aggregate = (rawData) => {
+  const results = {}
+  for (let [treaty, data] of Object.entries(rawData)) {
+    for (let {country, ratified, signed, acceded} of data) {
+      if (results[country] === undefined) {
+        results[country] = {};
+      }
+      results[country][treaty] = { signed, acceded, ratified };
+    }
+  }
+  return results;
+};
+
+const writeData = (filename, data) => {
+  fs.writeFileSync(filename, JSON.stringify(data));
+  console.log(`data written to '${filename}'.`);
 };
 
 const main = async () => {
-  const data = await getAllData();
-  console.log(data);
-  console.log(Object.keys(data));
+  const rawData = await getAllData();
+  console.log(Object.keys(rawData));
+  writeData("raw.json", rawData);
+  const aggregatedData = aggregate(rawData);
+  writeData("aggregated.json", aggregatedData);
 };
 
 main();
