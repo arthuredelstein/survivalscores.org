@@ -23,32 +23,39 @@ const getDisarmamentDataFromRow = (row) => {
   const signed = formatDate(getDisarmamentDateFromDataOrder(td1));
   const td2_date = formatDate(getDisarmamentDateFromDataOrder(td2));
   const link = td2.querySelector("a");
-  let ratified, acceded;
+  let ratified, acceded, succeeded;
   if (link) {
     const href = td2.querySelector("a").getAttribute("href");
     if (href.includes("RAT")) {
       ratified = td2_date;
     } else if (href.includes("ACC")) {
       acceded = td2_date;
+    } else if (href.includes("SUC")) {
+      succeeded = td2_date;
     }
   }
-  return { country, signed, ratified, acceded };
+  return { country, signed, ratified, acceded, succeeded };
 };
+
+const extractDate = td => formatDate(
+  td.textContent.split(/\s+/).slice(0,3).join(" "));
 
 const getUNDataFromRow = (row, columnCount) => {
   const [td0, td1, td2] = row.querySelectorAll("td");
+//  console.log([td0, td1, td2].map(t => t.textContent));
   const country = td0.textContent;
   if (columnCount === 3) {
-    const joined = formatDate(td2.textContent.split(/\s+/).slice(0,3).join(" "));
+    const joined = extractDate(td2);
     return {
       country,
-      signed: formatDate(td1.textContent),
+      signed: extractDate(td1),
       joined
     };
   } else if (columnCount === 2) {
     return {
       country,
-      joined: formatDate(td1.textContent)    };
+      joined: extractDate(td1)
+    };
   }
 };
 
@@ -70,9 +77,9 @@ const unTreatyInfo = async (url, columnCount) => {
   const dom = await domFromUrl(url);
   const rows = dom.window.document.querySelector("#ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolderInnerPage_tblgrid").querySelectorAll("tr");
   return [...rows].slice(1).map(row => getUNDataFromRow(row, columnCount));
-};
+}
 
-const disarmament = async (treaties, nwfz) => {
+const disarmament = async (treaties) => {
   const results = {};
   for (let treaty of treaties) {
     console.log(treaty.code);
@@ -106,11 +113,12 @@ const getAllData = async () => {
 const aggregate = (rawData) => {
   const results = {}
   for (let [treaty, data] of Object.entries(rawData)) {
-    for (let {country, ratified, signed, acceded} of data) {
+    for (let {country, ratified, signed, acceded, joined, succeeded} of data) {
+      console.log(treaty, country, ratified, signed, acceded, succeeded);
       if (results[country] === undefined) {
         results[country] = {};
       }
-      results[country][treaty] = { signed, acceded, ratified };
+      results[country][treaty] = { signed, acceded, ratified, joined, succeeded };
     }
   }
   return results;
@@ -129,4 +137,16 @@ const main = async () => {
   writeData("aggregated.json", aggregatedData);
 };
 
+const test = async () => {
+  return disarmament([ {code: "npt", tableSelector: "#sort_table_special"}]);
+
+//  return other([ { code: 'rome', mtdsg_no: 'XVIII-10', chapter: 18, columnCount: 2
+  //               }])
+};
+
+const runTest = async () => {
+  console.log(await test());
+};
+
 main();
+//runTest();
