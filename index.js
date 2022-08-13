@@ -17,24 +17,29 @@ const formatDate = (raw) => {
 
 const getDisarmamentDateFromDataOrder = (td) => td.getAttribute("data-order").split("-")[0];
 
+const joining_mechanisms = {
+  "RAT": "ratified",
+  "ACC": "acceded",
+  "SUC": "succeeded"
+};
+
 const getDisarmamentDataFromRow = (row) => {
   const [td0, td1, td2, td3] = row.querySelectorAll("td");
   const country = td0.getAttribute("data-order");
   const signed = formatDate(getDisarmamentDateFromDataOrder(td1));
   const td2_date = formatDate(getDisarmamentDateFromDataOrder(td2));
   const link = td2.querySelector("a");
-  let ratified, acceded, succeeded;
+  let joined, joining_mechanism;
   if (link) {
     const href = td2.querySelector("a").getAttribute("href");
-    if (href.includes("RAT")) {
-      ratified = td2_date;
-    } else if (href.includes("ACC")) {
-      acceded = td2_date;
-    } else if (href.includes("SUC")) {
-      succeeded = td2_date;
+    for (const [code, type] of Object.entries(joining_mechanisms)) {
+      if (href.includes(code)) {
+        joined = td2_date;
+        joining_mechanism = joining_mechanisms[code];
+      }
     }
   }
-  return { country, signed, ratified, acceded, succeeded };
+  return { country, signed, joined, joining_mechanism };
 };
 
 const extractDate = td => formatDate(
@@ -113,12 +118,12 @@ const getAllData = async () => {
 const aggregate = (rawData) => {
   const results = {}
   for (let [treaty, data] of Object.entries(rawData)) {
-    for (let {country, ratified, signed, acceded, joined, succeeded} of data) {
-      console.log(treaty, country, ratified, signed, acceded, succeeded);
+    for (let {country, signed, joined, joining_mechanism} of data) {
+      console.log(treaty, country, joined, joining_mechanism, signed);
       if (results[country] === undefined) {
         results[country] = {};
       }
-      results[country][treaty] = { signed, acceded, ratified, joined, succeeded };
+      results[country][treaty] = { signed, joined, joining_mechanism };
     }
   }
   return results;
