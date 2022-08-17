@@ -87,7 +87,6 @@ const unTreatyInfo = async (url, columnCount) => {
 const disarmament = async (treaties) => {
   const results = {};
   for (let treaty of treaties) {
-    console.log(treaty.code);
     const { code, tableSelector } = treaty;
     const statuses = await disarmamentTreatyInfo(code, tableSelector);
     results[code] = statuses;
@@ -98,7 +97,6 @@ const disarmament = async (treaties) => {
 const other = async (other_un_treaties) => {
   const results = {};
   for (let treaty of other_un_treaties) {
-    console.log(treaty.code);
     const { code, chapter, mtdsg_no, columnCount } = treaty;
     const url = `https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=${mtdsg_no}&chapter=${chapter}&clang=_en`;
     const statuses = await unTreatyInfo(url, columnCount);
@@ -119,7 +117,6 @@ const aggregate = (rawData) => {
   const results = {}
   for (let [treaty, data] of Object.entries(rawData)) {
     for (let {country, signed, joined, joining_mechanism} of data) {
-      console.log(treaty, country, joined, joining_mechanism, signed);
       if (results[country] === undefined) {
         results[country] = {};
       }
@@ -129,8 +126,28 @@ const aggregate = (rawData) => {
   return results;
 };
 
+const treatyList = ['rome', 'aggression', 'biodiversity', 'tpnw', 'ctbt', 'npt', 'bwc'];
+const header = ["country", ...treatyList];
+
+const tabulate = (aggregatedData) => {
+  let rows = header.join("\t") + "\n";
+  for (let [country, treatyData] of Object.entries(aggregatedData)) {
+    console.log(country, treatyData);
+    let row = [];
+    row.push(country);
+    for (let treaty of treatyList) {
+      row.push((treatyData[treaty] && treatyData[treaty]["joined"]) ? "yes" : "no");
+    }
+    let rowText = row.join("\t");
+    //          'rarotonga', 'pelindaba', 'canwfz', 'bangkok', 'tlatelolco'
+    console.log(rowText);
+    rows += rowText + "\n";
+  }
+  return rows;
+};
+
 const writeData = (filename, data) => {
-  fs.writeFileSync(filename, JSON.stringify(data));
+  fs.writeFileSync(filename, JSON.stringify(data), "utf-8");
   console.log(`data written to '${filename}'.`);
 };
 
@@ -140,6 +157,8 @@ const main = async () => {
   writeData("raw.json", rawData);
   const aggregatedData = aggregate(rawData);
   writeData("aggregated.json", aggregatedData);
+  const tabulatedText = tabulate(aggregatedData);
+  fs.writeFileSync("data.txt", tabulatedText, "utf-8");
 };
 
 const test = async () => {
