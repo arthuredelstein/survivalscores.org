@@ -8,3 +8,5 @@ parserOptions:
   sourceType: module
 rules:
   camelcase: off
+  quotes: ["error", "double"]
+  semi: ["error", "always"]
