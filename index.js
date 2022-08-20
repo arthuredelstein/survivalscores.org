@@ -53,6 +53,12 @@ const getUNDataFromRow = (row, columnCount) => {
     td0.removeChild(footnote);
   }
   const country = td0.textContent.trim();
+  if (td1.textContent.startsWith("[")) {
+    return {
+      country,
+      withdrew: true
+    }
+  }
   if (columnCount === 3) {
     const joined = extractDate(td2);
     return {
@@ -120,11 +126,11 @@ const getAllData = async () => {
 const aggregate = (rawData) => {
   const results = {}
   for (let [treaty, data] of Object.entries(rawData)) {
-    for (let {country, signed, joined, joining_mechanism} of data) {
+    for (let {country, signed, joined, joining_mechanism, withdrew} of data) {
       if (results[country] === undefined) {
         results[country] = {};
       }
-      results[country][treaty] = { signed, joined, joining_mechanism };
+      results[country][treaty] = { signed, joined, joining_mechanism, withdrew };
     }
   }
   return results;
