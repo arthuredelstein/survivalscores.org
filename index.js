@@ -47,8 +47,12 @@ const extractDate = td => formatDate(
 
 const getUNDataFromRow = (row, columnCount) => {
   const [td0, td1, td2] = row.querySelectorAll("td");
-//  console.log([td0, td1, td2].map(t => t.textContent));
-  const country = td0.textContent;
+  //  console.log([td0, td1, td2].map(t => t.textContent));
+  const footnote = td0.querySelector("sup");
+  if (footnote) {
+    td0.removeChild(footnote);
+  }
+  const country = td0.textContent.trim();
   if (columnCount === 3) {
     const joined = extractDate(td2);
     return {
