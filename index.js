@@ -115,8 +115,8 @@ const other = async (other_un_treaties) => {
   return results;
 };
 
-const getAllData = async () => {
-  const { other_un_treaties, disarmament_treaties, nwfz_treaties } = YAML.parse(fs.readFileSync("inputs.yaml").toString());
+const getAllData = async (inputs) => {
+  const { other_un_treaties, disarmament_treaties, nwfz_treaties } = inputs;
   const otherData = await other(other_un_treaties);
   const disarmamentData = await disarmament(disarmament_treaties);
   const nwfzData = await disarmament(nwfz_treaties);
@@ -136,10 +136,13 @@ const aggregate = (rawData) => {
   return results;
 };
 
-const treatyList = ['rome', 'aggression', 'biodiversity', 'tpnw', 'ctbt', 'npt', 'bwc'];
-const header = ["country", ...treatyList];
 
-const tabulate = (aggregatedData) => {
+const tabulate = (inputs, aggregatedData) => {
+  const { other_un_treaties, disarmament_treaties, nwfz_treaties } = inputs;
+  const treatyList = [...other_un_treaties.map(t => t.code),
+                      ...disarmament_treaties.map(t => t.code)];
+  const nwfzList = nwfz_treaties.map(t => t.code);
+  const header = ["country", ...treatyList, "nwfz"];
   let rows = header.join("\t") + "\n";
   for (let [country, treatyData] of Object.entries(aggregatedData)) {
     console.log(country, treatyData);
@@ -148,8 +151,14 @@ const tabulate = (aggregatedData) => {
     for (let treaty of treatyList) {
       row.push((treatyData[treaty] && treatyData[treaty]["joined"]) ? "yes" : "no");
     }
+    let nwfzMember = false;
+    for (let nwfz of nwfzList) {
+      if (treatyData[nwfz] && treatyData[nwfz]["joined"]) {
+        nwfzMember = true;
+      }
+    }
+    row.push(nwfzMember ? "yes" : "no");
     let rowText = row.join("\t");
-    //          'rarotonga', 'pelindaba', 'canwfz', 'bangkok', 'tlatelolco'
     console.log(rowText);
     rows += rowText + "\n";
   }
@@ -162,12 +171,13 @@ const writeData = (filename, data) => {
 };
 
 const main = async () => {
-  const rawData = await getAllData();
+  const inputs = YAML.parse(fs.readFileSync("inputs.yaml").toString());
+  const rawData = await getAllData(inputs);
   console.log(Object.keys(rawData));
   writeData("raw.json", rawData);
   const aggregatedData = aggregate(rawData);
   writeData("aggregated.json", aggregatedData);
-  const tabulatedText = tabulate(aggregatedData);
+  const tabulatedText = tabulate(inputs, aggregatedData);
   fs.writeFileSync("data.txt", tabulatedText, "utf-8");
 };
 
