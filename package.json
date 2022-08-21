@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "jsdom": "^20.0.0",
+    "lodash": "^4.17.21",
     "node-fetch": "^3.2.10",
     "nodemon": "^2.0.19",
     "yaml": "^2.1.1"

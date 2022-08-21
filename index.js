@@ -2,6 +2,31 @@ import fetch from "node-fetch";
 import { JSDOM } from "jsdom";
 import YAML from "yaml";
 import fs from "fs";
+import _ from 'lodash';
+
+const countryData = _.memoize(() => {
+  const codeToCountry = readYAML("countries.yaml");
+  const countryToCodeInitial = invertMap(codeToCountry);
+  const countryAliases = readYAML("country_aliases.yaml");
+  return {codeToCountry,
+          countryToCode: {...countryToCodeInitial, ...countryAliases}};
+});
+
+const countryToCode = (country) => {
+  const { countryToCode } = countryData();
+  if (!countryToCode[country]) {
+    throw new Error(`country code for '${country}' not found.`);
+  }
+  return countryToCode[country];
+};
+
+const codeToCountry = (code) => {
+  const { codeToCountry } = countryData();
+  if (!codeToCountry[code]) {
+    throw new Error(`country name for code '${code}' not found.`);
+  }
+  return codeToCountry[code];
+};
 
 const formatDate = (raw) => {
   const rawDate = new Date(raw.trim().replace("\t", " "));
@@ -26,7 +51,7 @@ const joining_mechanisms = {
 
 const getDisarmamentDataFromRow = (row) => {
   const [td0, td1, td2] = row.querySelectorAll("td");
-  const country = td0.getAttribute("data-order");
+  const country_code = countryToCode(td0.getAttribute("data-order"));
   const signed = formatDate(getDisarmamentDateFromDataOrder(td1));
   const td2_date = formatDate(getDisarmamentDateFromDataOrder(td2));
   const link = td2.querySelector("a");
@@ -40,7 +65,7 @@ const getDisarmamentDataFromRow = (row) => {
       }
     }
   }
-  return { country, signed, joined, joining_mechanism };
+  return { country_code, signed, joined, joining_mechanism };
 };
 
 const extractDate = td => formatDate(
@@ -53,23 +78,23 @@ const getUNDataFromRow = (row, columnCount) => {
   if (footnote) {
     td0.removeChild(footnote);
   }
-  const country = td0.textContent.trim();
+  const country_code = countryToCode(td0.textContent.trim());
   if (td1.textContent.startsWith("[")) {
     return {
-      country,
+      country_code,
       withdrew: true
     };
   }
   if (columnCount === 3) {
     const joined = extractDate(td2);
     return {
-      country,
+      country_code,
       signed: extractDate(td1),
       joined
     };
   } else if (columnCount === 2) {
     return {
-      country,
+      country_code,
       joined: extractDate(td1)
     };
   }
@@ -127,11 +152,11 @@ const getAllData = async (inputs) => {
 const aggregate = (rawData) => {
   const results = {};
   for (const [treaty, data] of Object.entries(rawData)) {
-    for (const { country, signed, joined, joining_mechanism, withdrew } of data) {
-      if (results[country] === undefined) {
-        results[country] = {};
+    for (const { country_code, signed, joined, joining_mechanism, withdrew } of data) {
+      if (results[country_code] === undefined) {
+        results[country_code] = {};
       }
-      results[country][treaty] = { signed, joined, joining_mechanism, withdrew };
+      results[country_code][treaty] = { signed, joined, joining_mechanism, withdrew };
     }
   }
   return results;
@@ -144,10 +169,10 @@ const tabulate = (inputs, aggregatedData) => {
   const nwfzList = nwfz_treaties.map(t => t.code);
   const header = ["country", ...treatyList, "nwfz"];
   let rows = header.join("\t") + "\n";
-  for (const [country, treatyData] of Object.entries(aggregatedData)) {
-    console.log(country, treatyData);
+  for (const [country_code, treatyData] of Object.entries(aggregatedData)) {
+    console.log(country_code, treatyData);
     const row = [];
-    row.push(country);
+    row.push(country_code);
     for (const treaty of treatyList) {
       row.push((treatyData[treaty] && treatyData[treaty].joined) ? "yes" : "no");
     }
@@ -170,9 +195,24 @@ const writeData = (filename, data) => {
   console.log(`data written to '${filename}'.`);
 };
 
+const readYAML = f => YAML.parse(fs.readFileSync(f).toString());
+
+const invertMap = (m) => {
+  const result = {};
+  for (const [k, v] of Object.entries(m)) {
+    if (result[v]) {
+      throw new Error("Map not invertable");
+    }
+    result[v] = k;
+  }
+  return result;
+};
+
 const main = async () => {
-  const inputs = YAML.parse(fs.readFileSync("inputs.yaml").toString());
-  const rawData = await getAllData(inputs);
+  const {codeToCountry, countryToCode} = countryData();
+  console.log(codeToCountry, countryToCode);
+  const inputs = readYAML("inputs.yaml");
+  const rawData = await getAllData(inputs, countryToCode);
   console.log(Object.keys(rawData));
   writeData("raw.json", rawData);
   const aggregatedData = aggregate(rawData);
