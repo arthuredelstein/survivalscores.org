@@ -167,12 +167,13 @@ const tabulate = (inputs, aggregatedData) => {
   const treatyList = [...other_un_treaties.map(t => t.code),
     ...disarmament_treaties.map(t => t.code)];
   const nwfzList = nwfz_treaties.map(t => t.code);
-  const header = ["country", ...treatyList, "nwfz"];
+  const header = ["country_code", "country", ...treatyList, "nwfz"];
   let rows = header.join("\t") + "\n";
   for (const [country_code, treatyData] of Object.entries(aggregatedData)) {
     console.log(country_code, treatyData);
     const row = [];
     row.push(country_code);
+    row.push(codeToCountry(country_code));
     for (const treaty of treatyList) {
       row.push((treatyData[treaty] && treatyData[treaty].joined) ? "yes" : "no");
     }
