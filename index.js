@@ -44,6 +44,14 @@ const getDisarmamentDataFromRow = (row) => {
   return { country_code, signed, joined, joining_mechanism };
 };
 
+const getPopulationDataFromRow = (row) => {
+  const [td0, td1, td2] = row.querySelectorAll("td");
+  const link = td1.querySelector("a");
+  const country_code = countryToCode(link.textContent.trim());
+  const population = 1000*parseInt(td2.textContent.replace(",",""));
+  return { country_code, population };
+};
+
 const extractDate = td => formatDate(
   td.textContent.split(/\s+/).slice(0, 3).join(" "));
 
@@ -82,18 +90,20 @@ const domFromUrl = async (url) => {
   return new JSDOM(text);
 };
 
+const tableRowsFromUrl = async (url, selector) => {
+  const dom = await domFromUrl(url);
+  const table = dom.window.document.querySelector(selector);
+  return [...table.querySelectorAll("tr")];
+};
+
 const disarmamentTreatyInfo = async (treaty, tableSelector) => {
-  const dom = await domFromUrl(`https://treaties.unoda.org/t/${treaty}`);
-  const rows = dom.window.document
-    .querySelector(tableSelector)
-    .querySelectorAll("tr");
-  return [...rows].slice(1).map(getDisarmamentDataFromRow);
+  const rows = await tableRowsFromUrl(`https://treaties.unoda.org/t/${treaty}`, tableSelector);
+  return rows.slice(1).map(getDisarmamentDataFromRow);
 };
 
 const unTreatyInfo = async (url, columnCount) => {
-  const dom = await domFromUrl(url);
-  const rows = dom.window.document.querySelector("#ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolderInnerPage_tblgrid").querySelectorAll("tr");
-  return [...rows].slice(1).map(row => getUNDataFromRow(row, columnCount));
+  const rows = await tableRowsFromUrl(url, "#ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolderInnerPage_tblgrid");
+  return rows.slice(1).map(row => getUNDataFromRow(row, columnCount));
 };
 
 const disarmament = async (treaties) => {
@@ -154,10 +164,14 @@ const main = async () => {
 };
 
 const test = async () => {
-  return disarmament([{ code: "npt", tableSelector: "#sort_table_special" }]);
+//  return disarmament([{ code: "npt", tableSelector: "#sort_table_special" }]);
 
 //  return other([ { code: 'rome', mtdsg_no: 'XVIII-10', chapter: 18, columnCount: 2
   //               }])
+
+  const rows = await tableRowsFromUrl("https://www.worldometers.info/world-population/population-by-country/", "#example2");
+  console.log(rows.slice(1).map(row => getPopulationDataFromRow(row)));
+
 };
 
 const runTest = async () => {
