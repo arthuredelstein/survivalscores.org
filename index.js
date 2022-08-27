@@ -2,31 +2,7 @@ import fetch from "node-fetch";
 import { JSDOM } from "jsdom";
 import YAML from "yaml";
 import fs from "fs";
-import _ from 'lodash';
-
-const countryData = _.memoize(() => {
-  const codeToCountry = readYAML("countries.yaml");
-  const countryToCodeInitial = invertMap(codeToCountry);
-  const countryAliases = readYAML("country_aliases.yaml");
-  return {codeToCountry,
-          countryToCode: {...countryToCodeInitial, ...countryAliases}};
-});
-
-const countryToCode = (country) => {
-  const { countryToCode } = countryData();
-  if (!countryToCode[country]) {
-    throw new Error(`country code for '${country}' not found.`);
-  }
-  return countryToCode[country];
-};
-
-const codeToCountry = (code) => {
-  const { codeToCountry } = countryData();
-  if (!codeToCountry[code]) {
-    throw new Error(`country name for code '${code}' not found.`);
-  }
-  return codeToCountry[code];
-};
+import { readYAML, countryToCode } from './utils.js';
 
 const formatDate = (raw) => {
   const rawDate = new Date(raw.trim().replace("\t", " "));
@@ -162,64 +138,19 @@ const aggregate = (rawData) => {
   return results;
 };
 
-const tabulate = (inputs, aggregatedData) => {
-  const { other_un_treaties, disarmament_treaties, nwfz_treaties } = inputs;
-  const treatyList = [...other_un_treaties.map(t => t.code),
-    ...disarmament_treaties.map(t => t.code)];
-  const nwfzList = nwfz_treaties.map(t => t.code);
-  const header = ["country_code", "country", ...treatyList, "nwfz"];
-  let rows = header.join("\t") + "\n";
-  for (const [country_code, treatyData] of Object.entries(aggregatedData)) {
-    console.log(country_code, treatyData);
-    const row = [];
-    row.push(country_code);
-    row.push(codeToCountry(country_code));
-    for (const treaty of treatyList) {
-      row.push((treatyData[treaty] && treatyData[treaty].joined) ? "yes" : "no");
-    }
-    let nwfzMember = false;
-    for (const nwfz of nwfzList) {
-      if (treatyData[nwfz] && treatyData[nwfz].joined) {
-        nwfzMember = true;
-      }
-    }
-    row.push(nwfzMember ? "yes" : "no");
-    const rowText = row.join("\t");
-    console.log(rowText);
-    rows += rowText + "\n";
-  }
-  return rows;
-};
 
 const writeData = (filename, data) => {
   fs.writeFileSync(filename, JSON.stringify(data), "utf-8");
   console.log(`data written to '${filename}'.`);
 };
 
-const readYAML = f => YAML.parse(fs.readFileSync(f).toString());
-
-const invertMap = (m) => {
-  const result = {};
-  for (const [k, v] of Object.entries(m)) {
-    if (result[v]) {
-      throw new Error("Map not invertable");
-    }
-    result[v] = k;
-  }
-  return result;
-};
-
 const main = async () => {
-  const {codeToCountry, countryToCode} = countryData();
-  console.log(codeToCountry, countryToCode);
   const inputs = readYAML("inputs.yaml");
-  const rawData = await getAllData(inputs, countryToCode);
+  const rawData = await getAllData(inputs);
   console.log(Object.keys(rawData));
   writeData("raw.json", rawData);
   const aggregatedData = aggregate(rawData);
   writeData("aggregated.json", aggregatedData);
-  const tabulatedText = tabulate(inputs, aggregatedData);
-  fs.writeFileSync("data.txt", tabulatedText, "utf-8");
 };
 
 const test = async () => {
