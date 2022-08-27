@@ -1,5 +1,6 @@
 import fs from "fs";
 import { inputs, readYAML, codeToCountry, invertMap, treatyCodeToName } from "./utils.js";
+import _ from 'lodash';
 
 const css = `
   table {
@@ -16,6 +17,9 @@ const css = `
   td:first-child {
     text-align: left;
     padding-left: 20px;
+  }
+  td:nth-child(2) {
+    text-align: right;
   }
   th {
     text-align: center;
@@ -103,6 +107,8 @@ const tabulate = (inputs, aggregatedData, population) => {
                description: (nwfzJoined ?? "")});
     rows.push(row);
   }
+  console.log(rows[0][0]);
+  rows = _.sortBy(rows, row => row[0].value).reverse();
   return {rows, header};
 };
 
