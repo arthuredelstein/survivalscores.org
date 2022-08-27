@@ -70,7 +70,7 @@ const render = (html) => {
   fs.writeFileSync("index.html", htmlPage);
 };
 
-const tabulate = (inputs, aggregatedData) => {
+const tabulate = (inputs, aggregatedData, population) => {
   const { other_un_treaties, disarmament_treaties, nwfz_treaties } = inputs;
   const treatyList = [...other_un_treaties.map(t => t.code),
     ...disarmament_treaties.map(t => t.code)];
@@ -78,11 +78,12 @@ const tabulate = (inputs, aggregatedData) => {
   const header = ["Country", "Population", ...treatyList, "nwfz"];
   let rows = [];
   for (const [country_code, treatyData] of Object.entries(aggregatedData)) {
-    console.log(country_code, treatyData);
+//    console.log(country_code, treatyData);
     const row = [];
 //    row.push({ value: country_code} );
     row.push({ value: codeToCountry(country_code), row_header: true });
-    row.push({value: 0, row_header: true});
+//    console.log(population[country_code]);
+    row.push({value: population[country_code], row_header: true});
     for (const treaty of treatyList) {
       const joined = treatyData[treaty] && treatyData[treaty].joined;
       const value = joined ? "yes" : "no";
@@ -131,7 +132,9 @@ const htmlTable = ({header, rows}) => {
 
 const main = () => {
   const aggregated = JSON.parse(fs.readFileSync("aggregated.json").toString());
-  const {rows, header} = tabulate(inputs(), aggregated);
+  const population = JSON.parse(fs.readFileSync("population.json").toString());
+  console.log(population);
+  const {rows, header} = tabulate(inputs(), aggregated, population);
   const cleanHeader = header.map(x => treatyCodeToName(x) ?? x);
 //  console.log(header, rows);
   render(htmlTable({rows, header: cleanHeader}));

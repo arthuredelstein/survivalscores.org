@@ -48,7 +48,7 @@ const getPopulationDataFromRow = (row) => {
   const [td0, td1, td2] = row.querySelectorAll("td");
   const link = td1.querySelector("a");
   const country_code = countryToCode(link.textContent.trim());
-  const population = 1000*parseInt(td2.textContent.replace(",",""));
+  const population = parseInt(td2.textContent.replaceAll(",",""));
   return { country_code, population };
 };
 
@@ -127,6 +127,16 @@ const other = async (other_un_treaties) => {
   return results;
 };
 
+const populationInfo = async () => {
+  const rows = await tableRowsFromUrl("https://www.worldometers.info/world-population/population-by-country/", "#example2");
+  let result = {};
+  for (let row of rows.slice(1)) {
+    const { country_code, population } = getPopulationDataFromRow(row);
+    result[country_code] = population;
+  }
+  return result;
+}
+
 const getAllData = async (inputs) => {
   const { other_un_treaties, disarmament_treaties, nwfz_treaties } = inputs;
   const otherData = await other(other_un_treaties);
@@ -156,10 +166,12 @@ const writeData = (filename, data) => {
 
 const main = async () => {
   const inputs = readYAML("inputs.yaml");
-  const rawData = await getAllData(inputs);
-  console.log(Object.keys(rawData));
-  writeData("raw.json", rawData);
-  const aggregatedData = aggregate(rawData);
+  const rawTreatyData = await getAllData(inputs);
+  const populationData = await populationInfo();
+  console.log(Object.keys(rawTreatyData));
+  writeData("raw.json", rawTreatyData);
+  writeData("population.json", populationData);
+  const aggregatedData = aggregate(rawTreatyData);
   writeData("aggregated.json", aggregatedData);
 };
 
@@ -169,8 +181,6 @@ const test = async () => {
 //  return other([ { code: 'rome', mtdsg_no: 'XVIII-10', chapter: 18, columnCount: 2
   //               }])
 
-  const rows = await tableRowsFromUrl("https://www.worldometers.info/world-population/population-by-country/", "#example2");
-  console.log(rows.slice(1).map(row => getPopulationDataFromRow(row)));
 
 };
 
