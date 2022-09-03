@@ -1,10 +1,9 @@
 import fetch from "node-fetch";
 import { JSDOM } from "jsdom";
-import YAML from "yaml";
 import fs from "fs";
-import { readYAML, countryToCode } from './utils.js';
+import { readYAML, countryToCode } from "./utils.js";
 import unzipper from "unzipper";
-import { parse } from 'csv-parse/sync';
+import { parse } from "csv-parse/sync";
 
 const formatDate = (raw) => {
   const rawDate = new Date(raw.trim().replace("\t", " "));
@@ -55,8 +54,8 @@ const getDisarmamentDataFromRow = (row) => {
 };
 
 const getPopulationDataFromItem = (item) => {
-  const countryName = item['Country or Area'];
-  const population = Math.round(parseFloat(item['Value']) * 1000);
+  const countryName = item["Country or Area"];
+  const population = Math.round(parseFloat(item.Value) * 1000);
   let country_code;
   try {
     country_code = countryToCode(countryName);
@@ -143,16 +142,16 @@ const other = async (other_un_treaties) => {
 };
 
 const populationInfo = async () => {
-    const timeID = (new Date().getFullYear()) - 2022 + 88;
+  const timeID = (new Date().getFullYear()) - 2022 + 88;
   const populationUrl = `https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=variableID:12;timeID:${timeID};varID:2&DataMartId=PopDiv&Format=csv&c=2,7&s=_crEngNameOrderBy:asc,_timeEngNameOrderBy:desc,_varEngNameOrderBy:asc`;
   const items = await readRemoteZippedCSV(populationUrl);
-  let result = {};
-  for (let item of items) {
+  const result = {};
+  for (const item of items) {
     const { country_code, population } = getPopulationDataFromItem(item);
     result[country_code] = population;
   }
   return result;
-}
+};
 
 const getAllData = async (inputs) => {
   const { other_un_treaties, disarmament_treaties, nwfz_treaties } = inputs;
@@ -175,7 +174,6 @@ const aggregate = (rawData) => {
   return results;
 };
 
-
 const writeData = (filename, data) => {
   fs.writeFileSync(filename, JSON.stringify(data), "utf-8");
   console.log(`data written to '${filename}'.`);
@@ -195,11 +193,10 @@ const main = async () => {
 const test = async () => {
 //  return disarmament([{ code: "npt", tableSelector: "#sort_table_special" }]);
 
-//  return other([ { code: 'rome', mtdsg_no: 'XVIII-10', chapter: 18, columnCount: 2
+  //  return other([ { code: 'rome', mtdsg_no: 'XVIII-10', chapter: 18, columnCount: 2
   //               }])
-  
-  console.log(await populationInfo());
 
+  console.log(await populationInfo());
 };
 
 const runTest = async () => {

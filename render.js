@@ -1,6 +1,6 @@
 import fs from "fs";
-import { inputs, readYAML, codeToCountry, invertMap, treatyCodeToName } from "./utils.js";
-import _ from 'lodash';
+import { inputs, codeToCountry, treatyCodeToName } from "./utils.js";
+import _ from "lodash";
 
 const css = `
   table {
@@ -87,12 +87,12 @@ const tabulate = (inputs, aggregatedData, population) => {
     //    row.push({ value: country_code} );
     row.push({ value: codeToCountry(country_code), row_header: true });
     //    console.log(population[country_code]);
-    row.push({value: population[country_code], row_header: true});
+    row.push({ value: population[country_code], row_header: true });
     for (const treaty of treatyList) {
       const joined = treatyData[treaty] && treatyData[treaty].joined;
       const value = joined ? "yes" : "no";
       const description = (joined ?? "");
-      row.push({description, value});
+      row.push({ description, value });
     }
     let nwfzMember = false;
     let nwfzJoined;
@@ -103,16 +103,18 @@ const tabulate = (inputs, aggregatedData, population) => {
         nwfzJoined = joined;
       }
     }
-    row.push({ value: nwfzMember ? "yes" : "no",
-               description: (nwfzJoined ?? "")});
+    row.push({
+      value: nwfzMember ? "yes" : "no",
+      description: (nwfzJoined ?? "")
+    });
     rows.push(row);
   }
-//  console.log(rows[0][0]);
+  //  console.log(rows[0][0]);
   rows = _.sortBy(rows, row => row[1].value).reverse();
-  return {rows, header};
+  return { rows, header };
 };
 
-const htmlTable = ({header, rows}) => {
+const htmlTable = ({ header, rows }) => {
   const fragments = [];
   fragments.push("<table>");
   fragments.push("<tr>");
@@ -135,16 +137,15 @@ const htmlTable = ({header, rows}) => {
   return fragments.join("");
 };
 
-
 const main = () => {
   const aggregated = JSON.parse(fs.readFileSync("aggregated.json").toString());
   const population = JSON.parse(fs.readFileSync("population.json").toString());
   //  console.log(population);
-  delete aggregated["EU"];
-  const {rows, header} = tabulate(inputs(), aggregated, population);
+  delete aggregated.EU;
+  const { rows, header } = tabulate(inputs(), aggregated, population);
   const cleanHeader = header.map(x => treatyCodeToName(x) ?? x);
-//  console.log(header, rows);
-  render(htmlTable({rows, header: cleanHeader}));
-}
+  //  console.log(header, rows);
+  render(htmlTable({ rows, header: cleanHeader }));
+};
 
 main();

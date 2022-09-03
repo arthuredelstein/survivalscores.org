@@ -1,6 +1,6 @@
 import YAML from "yaml";
 import fs from "fs";
-import _ from 'lodash';
+import _ from "lodash";
 
 export const readYAML = f => YAML.parse(fs.readFileSync(f).toString());
 
@@ -8,8 +8,10 @@ const countryData = _.memoize(() => {
   const codeToCountry = readYAML("countries.yaml");
   const countryToCodeInitial = invertMap(codeToCountry);
   const countryAliases = readYAML("country_aliases.yaml");
-  return {codeToCountry,
-          countryToCode: {...countryToCodeInitial, ...countryAliases}};
+  return {
+    codeToCountry,
+    countryToCode: { ...countryToCodeInitial, ...countryAliases }
+  };
 });
 
 export const countryToCode = (country) => {
@@ -31,9 +33,9 @@ export const codeToCountry = (code) => {
 export const inputs = _.memoize(() => readYAML("inputs.yaml"));
 
 export const treatyCodeToName = _.memoize((code) => {
-  let result = {};
-  const {disarmament_treaties, other_un_treaties} = inputs();
-  const list = [...disarmament_treaties, ...other_un_treaties, {code: "nwfz", name: "Nuclear-Weapon-Free Zone"}];
+  const result = {};
+  const { disarmament_treaties, other_un_treaties } = inputs();
+  const list = [...disarmament_treaties, ...other_un_treaties, { code: "nwfz", name: "Nuclear-Weapon-Free Zone" }];
   for (const item of list) {
     result[item.code] = item.name;
   }
