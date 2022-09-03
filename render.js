@@ -107,8 +107,8 @@ const tabulate = (inputs, aggregatedData, population) => {
                description: (nwfzJoined ?? "")});
     rows.push(row);
   }
-  console.log(rows[0][0]);
-  rows = _.sortBy(rows, row => row[0].value).reverse();
+//  console.log(rows[0][0]);
+  rows = _.sortBy(rows, row => row[1].value).reverse();
   return {rows, header};
 };
 
@@ -139,7 +139,7 @@ const htmlTable = ({header, rows}) => {
 const main = () => {
   const aggregated = JSON.parse(fs.readFileSync("aggregated.json").toString());
   const population = JSON.parse(fs.readFileSync("population.json").toString());
-  console.log(population);
+//  console.log(population);
   const {rows, header} = tabulate(inputs(), aggregated, population);
   const cleanHeader = header.map(x => treatyCodeToName(x) ?? x);
 //  console.log(header, rows);

@@ -3,6 +3,8 @@ import { JSDOM } from "jsdom";
 import YAML from "yaml";
 import fs from "fs";
 import { readYAML, countryToCode } from './utils.js';
+import unzipper from "unzipper";
+import { parse } from 'csv-parse/sync';
 
 const formatDate = (raw) => {
   const rawDate = new Date(raw.trim().replace("\t", " "));
@@ -14,6 +16,14 @@ const formatDate = (raw) => {
   } else {
     return `${year}-${month}-${day}`;
   }
+};
+
+const readRemoteZippedCSV = async (url) => {
+  const response = await fetch(url);
+  const buffer = await response.arrayBuffer();
+  const directory = await unzipper.Open.buffer(Buffer.from(buffer));
+  const mainFile = await directory.files[0].buffer();
+  return parse(mainFile, { columns: true, skipEmptyLines: true });
 };
 
 const getDisarmamentDateFromDataOrder = (td) =>
@@ -44,11 +54,16 @@ const getDisarmamentDataFromRow = (row) => {
   return { country_code, signed, joined, joining_mechanism };
 };
 
-const getPopulationDataFromRow = (row) => {
-  const [td0, td1, td2] = row.querySelectorAll("td");
-  const link = td1.querySelector("a");
-  const country_code = countryToCode(link.textContent.trim());
-  const population = parseInt(td2.textContent.replaceAll(",",""));
+const getPopulationDataFromItem = (item) => {
+  const countryName = item['Country or Area'];
+  const population = parseFloat(item['Value']) * 1000;
+  let country_code;
+  try {
+    country_code = countryToCode(countryName);
+  } catch (e) {
+    country_code = countryName;
+    console.log(`no country code found for ${countryName}`);
+  }
   return { country_code, population };
 };
 
@@ -128,10 +143,12 @@ const other = async (other_un_treaties) => {
 };
 
 const populationInfo = async () => {
-  const rows = await tableRowsFromUrl("https://www.worldometers.info/world-population/population-by-country/", "#example2");
+    const timeID = (new Date().getFullYear()) - 2022 + 88;
+  const populationUrl = `https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=variableID:12;timeID:${timeID};varID:2&DataMartId=PopDiv&Format=csv&c=2,7&s=_crEngNameOrderBy:asc,_timeEngNameOrderBy:desc,_varEngNameOrderBy:asc`;
+  const items = await readRemoteZippedCSV(populationUrl);
   let result = {};
-  for (let row of rows.slice(1)) {
-    const { country_code, population } = getPopulationDataFromRow(row);
+  for (let item of items) {
+    const { country_code, population } = getPopulationDataFromItem(item);
     result[country_code] = population;
   }
   return result;
@@ -180,7 +197,8 @@ const test = async () => {
 
 //  return other([ { code: 'rome', mtdsg_no: 'XVIII-10', chapter: 18, columnCount: 2
   //               }])
-
+  
+  console.log(await populationInfo());
 
 };
 
