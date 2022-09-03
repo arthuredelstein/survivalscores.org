@@ -56,7 +56,7 @@ const getDisarmamentDataFromRow = (row) => {
 
 const getPopulationDataFromItem = (item) => {
   const countryName = item['Country or Area'];
-  const population = parseFloat(item['Value']) * 1000;
+  const population = Math.round(parseFloat(item['Value']) * 1000);
   let country_code;
   try {
     country_code = countryToCode(countryName);

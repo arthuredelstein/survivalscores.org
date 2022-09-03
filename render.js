@@ -82,11 +82,11 @@ const tabulate = (inputs, aggregatedData, population) => {
   const header = ["Country", "Population", ...treatyList, "nwfz"];
   let rows = [];
   for (const [country_code, treatyData] of Object.entries(aggregatedData)) {
-//    console.log(country_code, treatyData);
+    //    console.log(country_code, treatyData);
     const row = [];
-//    row.push({ value: country_code} );
+    //    row.push({ value: country_code} );
     row.push({ value: codeToCountry(country_code), row_header: true });
-//    console.log(population[country_code]);
+    //    console.log(population[country_code]);
     row.push({value: population[country_code], row_header: true});
     for (const treaty of treatyList) {
       const joined = treatyData[treaty] && treatyData[treaty].joined;
@@ -139,7 +139,8 @@ const htmlTable = ({header, rows}) => {
 const main = () => {
   const aggregated = JSON.parse(fs.readFileSync("aggregated.json").toString());
   const population = JSON.parse(fs.readFileSync("population.json").toString());
-//  console.log(population);
+  //  console.log(population);
+  delete aggregated["EU"];
   const {rows, header} = tabulate(inputs(), aggregated, population);
   const cleanHeader = header.map(x => treatyCodeToName(x) ?? x);
 //  console.log(header, rows);
