@@ -2,7 +2,14 @@ import YAML from "yaml";
 import fs from "fs";
 import _ from "lodash";
 
+// Read data from a YAML file.
 export const readYAML = f => YAML.parse(fs.readFileSync(f).toString());
+
+// Write JSON data to a file.
+export const writeJsonData = (filename, jsonData) => {
+  fs.writeFileSync(filename, JSON.stringify(jsonData), "utf-8");
+  console.log(`data written to '${filename}'.`);
+};
 
 const countryData = _.memoize(() => {
   const codeToCountry = readYAML("countries.yaml");

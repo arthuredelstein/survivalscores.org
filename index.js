@@ -1,9 +1,8 @@
 import fetch from "node-fetch";
 import { JSDOM } from "jsdom";
-import fs from "fs";
-import { readYAML, countryToCode } from "./utils.js";
 import unzipper from "unzipper";
 import { parse } from "csv-parse/sync";
+import { readYAML, countryToCode, writeJsonData } from "./utils.js";
 
 const formatDate = (raw) => {
   const rawDate = new Date(raw.trim().replace("\t", " "));
@@ -174,20 +173,15 @@ const aggregate = (rawData) => {
   return results;
 };
 
-const writeData = (filename, data) => {
-  fs.writeFileSync(filename, JSON.stringify(data), "utf-8");
-  console.log(`data written to '${filename}'.`);
-};
-
 const main = async () => {
   const inputs = readYAML("inputs.yaml");
   const rawTreatyData = await getAllData(inputs);
   const populationData = await populationInfo();
   console.log(Object.keys(rawTreatyData));
-  writeData("raw.json", rawTreatyData);
-  writeData("population.json", populationData);
+  writeJsonData("raw.json", rawTreatyData);
+  writeJsonData("population.json", populationData);
   const aggregatedData = aggregate(rawTreatyData);
-  writeData("aggregated.json", aggregatedData);
+  writeJsonData("aggregated.json", aggregatedData);
 };
 
 const test = async () => {
