@@ -1,5 +1,6 @@
 
-let state = { sortedColumn: 10, ascending: true };
+// Initially will be sorted by population
+let state = { sortedColumn: 1, ascending: false };
 
 const rowComparator = (row1, row2, columnIndex) => {
   const td1 = [...row1.querySelectorAll("td")][columnIndex];
