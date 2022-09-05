@@ -27,6 +27,9 @@ const css = `
     border: 0px;
     padding: 5px;
   }
+  td, th {
+    cursor: pointer;
+  }
   th:first-child {
     text-align: left;
     padding-left: 20px;
