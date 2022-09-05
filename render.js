@@ -124,6 +124,9 @@ const tabulate = (inputs, aggregatedData, population) => {
   return { rows, header };
 };
 
+const htmlHeading = () =>
+ `<h1>Human Survival</h1>`
+
 const htmlTable = ({ header, rows }) => {
   const fragments = [];
   fragments.push("<table>");
@@ -155,7 +158,7 @@ const main = () => {
   const { rows, header } = tabulate(inputs(), aggregated, population);
   const cleanHeader = header.map(x => treatyCodeToName(x) ?? x);
   //  console.log(header, rows);
-  render(htmlTable({ rows, header: cleanHeader }));
+  render(htmlHeading() + htmlTable({ rows, header: cleanHeader }));
 };
 
 main();
