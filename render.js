@@ -54,13 +54,14 @@ const css = `
 }
 `;
 
-const page = (css, content) => `
+const page = ({css, js, content}) => `
 <!DOCTYPE html>
 <html>
  <head>
   <title>Human Survival</title>
   <meta charset="utf8"/>
   <style>${css}</style>
+  <script>${js}</script>
  </head>
  <body>
   ${content}
@@ -68,9 +69,12 @@ const page = (css, content) => `
 </html>
 `;
 
+const loadJs = () => fs.readFileSync("./script.js");
+
 const render = (html) => {
-  //  console.log(aggregated);
-  const htmlPage = page(css, html);
+  //  consolee.log(aggregated);
+  const js = loadJs();
+  const htmlPage = page({css, js, content: html});
   fs.writeFileSync("index.html", htmlPage);
 };
 
@@ -79,7 +83,7 @@ const tabulate = (inputs, aggregatedData, population) => {
   const treatyList = [...other_un_treaties.map(t => t.code),
     ...disarmament_treaties.map(t => t.code)];
   const nwfzList = nwfz_treaties.map(t => t.code);
-  const header = ["Country", "Population", ...treatyList, "nwfz", "Treaty Count"];
+  const header = ["Country", "Population", ...treatyList, "nwfz", "Country Score"];
   let rows = [];
   for (const [country_code, treatyData] of Object.entries(aggregatedData)) {
     //    console.log(country_code, treatyData);
