@@ -79,7 +79,7 @@ const tabulate = (inputs, aggregatedData, population) => {
   const treatyList = [...other_un_treaties.map(t => t.code),
     ...disarmament_treaties.map(t => t.code)];
   const nwfzList = nwfz_treaties.map(t => t.code);
-  const header = ["Country", "Population", ...treatyList, "nwfz"];
+  const header = ["Country", "Population", ...treatyList, "nwfz", "Treaty Count"];
   let rows = [];
   for (const [country_code, treatyData] of Object.entries(aggregatedData)) {
     //    console.log(country_code, treatyData);
@@ -88,8 +88,12 @@ const tabulate = (inputs, aggregatedData, population) => {
     row.push({ value: codeToCountry(country_code), row_header: true });
     //    console.log(population[country_code]);
     row.push({ value: population[country_code], row_header: true });
+    let memberCount = 0;
     for (const treaty of treatyList) {
       const joined = treatyData[treaty] && treatyData[treaty].joined;
+      if (joined) {
+        ++memberCount;
+      }
       const value = joined ? "yes" : "no";
       const description = (joined ?? "");
       row.push({ description, value });
@@ -101,16 +105,22 @@ const tabulate = (inputs, aggregatedData, population) => {
       if (joined) {
         nwfzMember = true;
         nwfzJoined = joined;
+        ++memberCount;
       }
     }
     row.push({
       value: nwfzMember ? "yes" : "no",
       description: (nwfzJoined ?? "")
     });
+    row.push({
+      value: memberCount,
+      row_header: true,
+      description: ""
+    });
     rows.push(row);
   }
   //  console.log(rows[0][0]);
-  rows = _.sortBy(rows, row => row[1].value).reverse();
+  rows = _.sortBy(rows, row => row[10].value);//.reverse();
   return { rows, header };
 };
 
