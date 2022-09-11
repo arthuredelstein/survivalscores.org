@@ -131,6 +131,30 @@ const flagEmojiHtml = (country_code) =>
   country_code.split("").map(convertCharacter).join("");
 */
 
+const composeDescription = ({country, treaty, joining_mechanism, joined, signed}) => {
+  let description = "";
+  const isNwfz = treaty === "nwfz";
+  const treatyName = treatyCodeToName(treaty);
+  if (!joined) {
+    description = `${country} has not yet joined ${isNwfz ? "a" : "the"} ${treatyName}.`;
+  } else {
+    const treatyOrNwfzName = isNwfz ? "pelindaba" : treatyName;
+    description = country;
+    let treatyMentioned = false;
+    if (signed) {
+      description += ` signed the ${treatyOrNwfzName} on ${signed} and`;
+      treatyMentioned = true;
+    }
+    description += " " + ({"ratified":"ratified",
+                           "acceded":"acceded to",
+                           "succeeded":"inherited membership to",
+                           "joined":"joined"}[joining_mechanism] ?? "joined");
+    description += treatyMentioned ? " it" : ` the ${treatyOrNwfzName}`;
+    description += ` on ${joined}.`;
+  }
+  return description;
+};
+
 const tabulate = (inputs, aggregatedData, population) => {
   const { other_un_treaties, disarmament_treaties, nwfz_treaties } = inputs;
   //const treatyList = [...other_un_treaties.map(t => t.code),
@@ -140,7 +164,8 @@ const tabulate = (inputs, aggregatedData, population) => {
   let rows = [];
   for (const [country_code, treatyData] of Object.entries(aggregatedData)) {
     const row = [];
-    row.push({ value: codeToCountry(country_code), row_header: true, });
+    const country = codeToCountry(country_code);
+    row.push({ value: country, row_header: true, });
     row.push({ value: population[country_code], row_header: true });
     let memberCount = 0;
     for (const treaty of treatyList) {
@@ -154,7 +179,8 @@ const tabulate = (inputs, aggregatedData, population) => {
         ++memberCount;
       }
       const value = joined ? "yes" : "no";
-      const description = (joined ?? "");
+      const { joining_mechanism, signed } = treatyData[treaty] ?? {};
+      const description = composeDescription({country, treaty, joined, joining_mechanism, signed});
       row.push({ description, value });
     }
     row.push({
