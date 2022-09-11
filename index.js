@@ -60,7 +60,7 @@ const getPopulationDataFromItem = (item) => {
     country_code = countryToCode(countryName);
   } catch (e) {
     country_code = countryName;
-    console.log(`no country code found for ${countryName}`);
+    //console.log(`no country code found for ${countryName}`);
   }
   return { country_code, population };
 };
@@ -154,9 +154,11 @@ const populationInfo = async () => {
 
 const getAllData = async (inputs) => {
   const { other_un_treaties, disarmament_treaties, nwfz_treaties } = inputs;
-  const otherData = await other(other_un_treaties);
-  const disarmamentData = await disarmament(disarmament_treaties);
-  const nwfzData = await disarmament(nwfz_treaties);
+  const [otherData, disarmamentData, nwfzData] = await Promise.all([
+    other(other_un_treaties),
+    disarmament(disarmament_treaties),
+    disarmament(nwfz_treaties),
+  ]);
   return Object.assign({}, otherData, disarmamentData, nwfzData);
 };
 
@@ -175,8 +177,10 @@ const aggregate = (rawData) => {
 
 const main = async () => {
   const inputs = readYAML("inputs.yaml");
-  const rawTreatyData = await getAllData(inputs);
-  const populationData = await populationInfo();
+  const [rawTreatyData, populationData] = await Promise.all([
+    getAllData(inputs),
+    populationInfo(),
+  ]);
   console.log(Object.keys(rawTreatyData));
   writeJsonData("raw.json", rawTreatyData);
   writeJsonData("population.json", populationData);
