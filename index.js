@@ -3,9 +3,17 @@ import { JSDOM } from "jsdom";
 import unzipper from "unzipper";
 import { parse } from "csv-parse/sync";
 import { readYAML, countryToCode, writeJsonData } from "./utils.js";
+import https from 'node:https';
+
+const httpsAgent = new https.Agent({
+  //	keepAlive: true
+  maxSockets: 256
+});
 
 const formatDate = (raw) => {
-  const rawDate = new Date(raw.trim().replace("\t", " "));
+  const cleanString = raw.replaceAll(/\t|\&nbsp;/g, " ").trim();
+  console.log(raw, cleanString);
+  const rawDate = new Date(cleanString);
   const year = rawDate.getFullYear().toString();
   const month = (rawDate.getMonth() + 1).toString().padStart(2, "0");
   const day = rawDate.getDate().toString().padStart(2, "0");
@@ -17,11 +25,15 @@ const formatDate = (raw) => {
 };
 
 const readRemoteZippedCSV = async (url) => {
-  const response = await fetch(url);
+  const t1 = performance.now();
+  console.log("start:", t1, url);
+  const response = await fetch(url, { agent: httpsAgent });
+  const t2 = performance.now();
+  console.log("delta:", t2-t1, url);
   const buffer = await response.arrayBuffer();
   const directory = await unzipper.Open.buffer(Buffer.from(buffer));
   const mainFile = await directory.files[0].buffer();
-  return parse(mainFile, { columns: true, skipEmptyLines: true });
+  return parse(mainFile, { columns: true, skipEmptyLines: true, encoding: "utf8" });
 };
 
 const getDisarmamentDateFromDataOrder = (td) =>
@@ -52,15 +64,17 @@ const getDisarmamentDataFromRow = (row) => {
   return { country_code, signed, joined, joining_mechanism };
 };
 
+const fixBrokenUtf8 = (s) => Buffer.from(s, "ascii").toString("utf8");
+
 const getPopulationDataFromItem = (item) => {
-  const countryName = item["Country or Area"];
-  const population = Math.round(parseFloat(item.Value) * 1000);
+  const countryName = fixBrokenUtf8(item["Country or Area"]);
+  const population = Math.round(parseFloat(fixBrokenUtf8(item.Value)) * 1000);
   let country_code;
   try {
     country_code = countryToCode(countryName);
   } catch (e) {
     country_code = countryName;
-    //console.log(`no country code found for ${countryName}`);
+    console.log(`no country code found for ${countryName}`);
   }
   return { country_code, population };
 };
@@ -98,7 +112,11 @@ const getUNDataFromRow = (row, columnCount) => {
 };
 
 const domFromUrl = async (url) => {
-  const response = await fetch(url);
+  const t1 = performance.now();
+  console.log("start:", t1, url);
+  const response = await fetch(url, { agent: httpsAgent });
+  const t2 = performance.now();
+  console.log("delta:", t2-t1, url);
   const text = await response.text();
   return new JSDOM(text);
 };
@@ -119,26 +137,25 @@ const unTreatyInfo = async (url, columnCount) => {
   return rows.slice(1).map(row => getUNDataFromRow(row, columnCount));
 };
 
-const disarmament = async (treaties) => {
-  const results = {};
-  for (const treaty of treaties) {
-    const { code, tableSelector } = treaty;
-    const statuses = await disarmamentTreatyInfo(code, tableSelector);
-    results[code] = statuses;
-  }
-  return results;
-};
+const mapParallel = (asyncFunc, items) =>
+  Promise.all(items.map(item => asyncFunc(item)))
 
-const other = async (other_un_treaties) => {
-  const results = {};
-  for (const treaty of other_un_treaties) {
-    const { code, chapter, mtdsg_no, columnCount } = treaty;
-    const url = `https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=${mtdsg_no}&chapter=${chapter}&clang=_en`;
-    const statuses = await unTreatyInfo(url, columnCount);
-    results[code] = statuses;
-  }
-  return results;
-};
+const mapParallelToObject = async (asyncFunc, items) =>
+  Object.fromEntries(await mapParallel(asyncFunc, items));
+
+const disarmament = async (treaties) =>
+      mapParallelToObject(async treaty => [
+        treaty.code,
+        await disarmamentTreatyInfo(treaty.code, treaty.tableSelector)],
+                                          treaties);
+
+const other = async (other_un_treaties) =>
+      mapParallelToObject(async treaty => {
+        const { code, chapter, mtdsg_no, columnCount } = treaty;
+        const url = `https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=${mtdsg_no}&chapter=${chapter}&clang=_en`;
+        return [treaty.code,
+                await unTreatyInfo(url, columnCount)];
+      }, other_un_treaties);
 
 const populationInfo = async () => {
   const timeID = (new Date().getFullYear()) - 2022 + 88;
@@ -147,6 +164,7 @@ const populationInfo = async () => {
   const result = {};
   for (const item of items) {
     const { country_code, population } = getPopulationDataFromItem(item);
+    console.log(country_code);
     result[country_code] = population;
   }
   return result;
@@ -159,6 +177,7 @@ const getAllData = async (inputs) => {
     disarmament(disarmament_treaties),
     disarmament(nwfz_treaties),
   ]);
+  //console.log(disarmamentData);
   return Object.assign({}, otherData, disarmamentData, nwfzData);
 };
 
