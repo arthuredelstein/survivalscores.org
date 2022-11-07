@@ -1,6 +1,6 @@
 # Human Survival Dashboard
 
-The goal of Human Survival Dashboard project is to provide a simple overview of humanity's progress toward the long-term survival of our species.
+The goal of Human Survival Dashboard project is to provide a simple overview of humanity's progress toward protecting the long-term survival of our species.
 
 We want this overview to be simple, pragmatic, systematic, up-to-date and actionable:
 * Simple because human survival is ultimately a political problem and thus requires the coordinated efforts of journalists, activists, and ordinary citizens
@@ -34,9 +34,24 @@ A number of treaties have been created at the UN to prevent nuclear war. In this
 * Treaty for the Prohibition of Nuclear Weapons (TPNW)
 * Membership of Nuclear Weapons-Free Zones
 
-It is quite likely that nuclear war could arise from the escalation of a conventional war. In addition, the threat of conventional war is one of the reasons that some state maintain a nuclear deterrent. Unfortunately, the "Security Dilemma" implies that a nuclear deterrent from one state can be perceived by others as a nuclear threat. So we decided to include other treaties that deter aggressive war:
+It is quite likely that nuclear war could arise from the escalation of a conventional war. In addition, the threat of conventional war is one of the reasons that some states maintain a nuclear deterrent. Unfortunately, the "Security Dilemma" implies that a nuclear deterrent from one state can be perceived by others as a nuclear threat. So we decided to include treaties that provide an alternative deterrent aggressive war:
 
 * Rome Treaty, establishing the International Criminal Court (ICC), which punishes (and thus deters), war crimes and crimes against humanity.
 * Aggression Amendment to the Rome Treaty, adding the Crime of Aggression to the ICC's jurisdiction, deterring the invasion of one state by another.
 
+### Pandemic
+
+The danger of pandemics has become all too familiar in the world following the experience of COVID-19. Two possible sources of pathogens are worth considering: natural and human-engineered. The category of human-engineered pathogens can be both accidental and deliberate spread. The latter (intentional) are frequently called biological weapons. The development of such bioweapons is prohibited by the Biological Weapons Convention, introduced in 1972 and first in effect in 1975.
+
+Accidental pathogens and natural pathogens are also highly important source of civilization-endangered pandemics. The World Health Organization has primary responsibility for protecting the world against such pandemics. All nations apart from Liechtenstein are members of the WHO, so membership is currently not included in our table.
+
+### Ecosystem collapse
+
+The threat of collapse of large numbers of species or whole ecosystems is not merely a threat to
+
+### Hostile artificial intelligence
+
+### Asteroid impact
+
+### Mass repression, leading to genocide or 
 
