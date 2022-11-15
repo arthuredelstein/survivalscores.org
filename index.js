@@ -12,7 +12,7 @@ const httpsAgent = new https.Agent({
 
 const formatDate = (raw) => {
   const cleanString = raw.replaceAll(/\t|\&nbsp;/g, " ").trim();
-  console.log(raw, cleanString);
+  console.log({raw, cleanString});
   const rawDate = new Date(cleanString);
   const year = rawDate.getFullYear().toString();
   const month = (rawDate.getMonth() + 1).toString().padStart(2, "0");
@@ -80,7 +80,7 @@ const getPopulationDataFromItem = (item) => {
 };
 
 const extractDate = td => formatDate(
-  td.textContent.split(/\s+/).slice(0, 3).join(" "));
+  td.textContent.trim().split(/\s+/).slice(0, 3).join(" "));
 
 const getUNDataFromRow = (row, columnCount) => {
   const [td0, td1, td2] = row.querySelectorAll("td");
@@ -104,6 +104,7 @@ const getUNDataFromRow = (row, columnCount) => {
       joined
     };
   } else if (columnCount === 2) {
+    console.log(td1.textContent);
     return {
       country_code,
       joined: extractDate(td1)
