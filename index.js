@@ -10,6 +10,12 @@ const httpsAgent = new https.Agent({
   maxSockets: 256
 });
 
+const mapParallel = (asyncFunc, items) =>
+      Promise.all(items.map(item => asyncFunc(item)));
+
+const mapParallelToObject = async (asyncFunc, items) =>
+      Object.fromEntries(await mapParallel(asyncFunc, items));
+
 const formatDate = (raw) => {
   const cleanString = raw.replaceAll(/\t|\&nbsp;/g, " ").trim();
   console.log({raw, cleanString});
@@ -33,7 +39,8 @@ const readRemoteZippedCSV = async (url) => {
   const buffer = await response.arrayBuffer();
   const directory = await unzipper.Open.buffer(Buffer.from(buffer));
   const mainFile = await directory.files[0].buffer();
-  return parse(mainFile, { columns: true, skipEmptyLines: true, encoding: "utf8" });
+  return parse(mainFile,
+               { columns: true, skipEmptyLines: true, encoding: "utf8" });
 };
 
 const getDisarmamentDateFromDataOrder = (td) =>
@@ -138,12 +145,6 @@ const unTreatyInfo = async (url, columnCount) => {
   return rows.slice(1).map(row => getUNDataFromRow(row, columnCount));
 };
 
-const mapParallel = (asyncFunc, items) =>
-  Promise.all(items.map(item => asyncFunc(item)))
-
-const mapParallelToObject = async (asyncFunc, items) =>
-  Object.fromEntries(await mapParallel(asyncFunc, items));
-
 const disarmament = async (treaties) =>
       mapParallelToObject(async treaty => [
         treaty.code,
@@ -158,14 +159,18 @@ const other = async (other_un_treaties) =>
                 await unTreatyInfo(url, columnCount)];
       }, other_un_treaties);
 
+const getPopulationZip = async () => {
+  const populationUrl = `https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=variableID:12;varID:2&DataMartId=PopDiv&Format=csv&c=2,4,7&s=_crEngNameOrderBy:asc,_timeEngNameOrderBy:desc,_varEngNameOrderBy:asc`;
+  return await readRemoteZippedCSV(populationUrl);
+};
+
 const populationInfo = async () => {
-  const timeID = (new Date().getFullYear()) - 2022 + 88;
-  const populationUrl = `https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=variableID:12;timeID:${timeID};varID:2&DataMartId=PopDiv&Format=csv&c=2,7&s=_crEngNameOrderBy:asc,_timeEngNameOrderBy:desc,_varEngNameOrderBy:asc`;
-  const items = await readRemoteZippedCSV(populationUrl);
+  const itemsRaw = await getPopulationZip();
+  const thisYear = new Date().getFullYear().toString();
+  const items = itemsRaw.filter(i => i["Year(s)"] === thisYear);
   const result = {};
   for (const item of items) {
     const { country_code, population } = getPopulationDataFromItem(item);
-    console.log(country_code);
     result[country_code] = population;
   }
   return result;
@@ -221,5 +226,8 @@ const runTest = async () => {
   console.log(await test());
 };
 
-main();
-// runTest();
+if (require.main === module) {
+  main();
+  // runTest();
+}
+
