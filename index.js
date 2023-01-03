@@ -5,16 +5,58 @@ import { parse } from "csv-parse/sync";
 import { readYAML, countryToCode, writeJsonData } from "./utils.js";
 import https from 'node:https';
 
+const mapParallel = (asyncFunc, items) =>
+      Promise.all(items.map(item => asyncFunc(item)));
+
+const mapParallelToObject = async (asyncFunc, items) =>
+  Object.fromEntries(await mapParallel(asyncFunc, items));
+
+
 const httpsAgent = new https.Agent({
   //	keepAlive: true
   maxSockets: 256
 });
 
-const mapParallel = (asyncFunc, items) =>
-      Promise.all(items.map(item => asyncFunc(item)));
+const readRemoteZippedCSV = async (url) => {
+  const response = await fetch(url, { agent: httpsAgent });
+  const buffer = await response.arrayBuffer();
+  const directory = await unzipper.Open.buffer(Buffer.from(buffer));
+  const mainFile = await directory.files[0].buffer();
+  return parse(mainFile,
+               { columns: true, skipEmptyLines: true, encoding: "utf8" });
+};
 
-const mapParallelToObject = async (asyncFunc, items) =>
-      Object.fromEntries(await mapParallel(asyncFunc, items));
+const fixBrokenUtf8 = (s) => Buffer.from(s, "ascii").toString("utf8");
+
+const getPopulationDataFromItem = (item) => {
+  const countryName = fixBrokenUtf8(item["Country or Area"]);
+  const population = Math.round(parseFloat(fixBrokenUtf8(item.Value)) * 1000);
+  let country_code;
+  try {
+    country_code = countryToCode(countryName);
+  } catch (e) {
+    country_code = countryName;
+    //console.log(`no country code found for ${countryName}`);
+  }
+  return { country_code, population };
+};
+
+const getPopulationZip = async () => {
+  const populationUrl = `https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=variableID:12;varID:2&DataMartId=PopDiv&Format=csv&c=2,4,7&s=_crEngNameOrderBy:asc,_timeEngNameOrderBy:desc,_varEngNameOrderBy:asc`;
+  return await readRemoteZippedCSV(populationUrl);
+};
+
+const populationInfo = async () => {
+  const itemsRaw = await getPopulationZip();
+  const thisYear = new Date().getFullYear().toString();
+  const items = itemsRaw.filter(i => i["Year(s)"] === thisYear);
+  const result = {};
+  for (const item of items) {
+    const { country_code, population } = getPopulationDataFromItem(item);
+    result[country_code] = population;
+  }
+  return result;
+};
 
 const formatDate = (raw) => {
   const cleanString = raw.replaceAll(/\t|\&nbsp;/g, " ").trim();
@@ -28,19 +70,6 @@ const formatDate = (raw) => {
   } else {
     return `${year}-${month}-${day}`;
   }
-};
-
-const readRemoteZippedCSV = async (url) => {
-  const t1 = performance.now();
-  console.log("start:", t1, url);
-  const response = await fetch(url, { agent: httpsAgent });
-  const t2 = performance.now();
-  console.log("delta:", t2-t1, url);
-  const buffer = await response.arrayBuffer();
-  const directory = await unzipper.Open.buffer(Buffer.from(buffer));
-  const mainFile = await directory.files[0].buffer();
-  return parse(mainFile,
-               { columns: true, skipEmptyLines: true, encoding: "utf8" });
 };
 
 const getDisarmamentDateFromDataOrder = (td) =>
@@ -69,21 +98,6 @@ const getDisarmamentDataFromRow = (row) => {
     }
   }
   return { country_code, signed, joined, joining_mechanism };
-};
-
-const fixBrokenUtf8 = (s) => Buffer.from(s, "ascii").toString("utf8");
-
-const getPopulationDataFromItem = (item) => {
-  const countryName = fixBrokenUtf8(item["Country or Area"]);
-  const population = Math.round(parseFloat(fixBrokenUtf8(item.Value)) * 1000);
-  let country_code;
-  try {
-    country_code = countryToCode(countryName);
-  } catch (e) {
-    country_code = countryName;
-    console.log(`no country code found for ${countryName}`);
-  }
-  return { country_code, population };
 };
 
 const extractDate = td => formatDate(
@@ -159,23 +173,6 @@ const other = async (other_un_treaties) =>
                 await unTreatyInfo(url, columnCount)];
       }, other_un_treaties);
 
-const getPopulationZip = async () => {
-  const populationUrl = `https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=variableID:12;varID:2&DataMartId=PopDiv&Format=csv&c=2,4,7&s=_crEngNameOrderBy:asc,_timeEngNameOrderBy:desc,_varEngNameOrderBy:asc`;
-  return await readRemoteZippedCSV(populationUrl);
-};
-
-const populationInfo = async () => {
-  const itemsRaw = await getPopulationZip();
-  const thisYear = new Date().getFullYear().toString();
-  const items = itemsRaw.filter(i => i["Year(s)"] === thisYear);
-  const result = {};
-  for (const item of items) {
-    const { country_code, population } = getPopulationDataFromItem(item);
-    result[country_code] = population;
-  }
-  return result;
-};
-
 const getAllData = async (inputs) => {
   const { other_un_treaties, disarmament_treaties, nwfz_treaties } = inputs;
   const [otherData, disarmamentData, nwfzData] = await Promise.all([
@@ -200,30 +197,22 @@ const aggregate = (rawData) => {
   return results;
 };
 
-const main = async () => {
+const collectAllData = async () => {
   const inputs = readYAML("inputs.yaml");
   const [rawTreatyData, populationData] = await Promise.all([
     getAllData(inputs),
     populationInfo(),
   ]);
+  return {rawTreatyData, populationData, aggregatedData: aggregate(rawTreatyData)};
+};
+
+const main = async () => {
+  const {rawTreatyData, populationData, aggregatedData} = await collectAllData();
   console.log(Object.keys(rawTreatyData));
   writeJsonData("raw.json", rawTreatyData);
   writeJsonData("population.json", populationData);
-  const aggregatedData = aggregate(rawTreatyData);
+
   writeJsonData("aggregated.json", aggregatedData);
-};
-
-const test = async () => {
-//  return disarmament([{ code: "npt", tableSelector: "#sort_table_special" }]);
-
-  //  return other([ { code: 'rome', mtdsg_no: 'XVIII-10', chapter: 18, columnCount: 2
-  //               }])
-
-  console.log(await populationInfo());
-};
-
-const runTest = async () => {
-  console.log(await test());
 };
 
 if (require.main === module) {
