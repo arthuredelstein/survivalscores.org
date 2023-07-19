@@ -15,11 +15,11 @@ const css = `
     padding: 5px;
     height: 30px;
   }
-  td:first-child {
+  td:nth-child(2) {
     text-align: left;
     padding-left: 20px;
   }
-  td:nth-child(2) {
+  td:nth-child(3) {
     text-align: right;
   }
   table tr:first {
@@ -40,9 +40,17 @@ const css = `
     width: 8.5%;
   }
   td:first-child,th:first-child {
-    width: 15%;
+    width: 5px;
   }
   td:nth-child(2),th:nth-child(2) {
+    width: 10%;
+  }
+  td:nth-child(3),th:nth-child(3) {
+    width: 10px;
+    text-align: center;
+  }
+  td:nth-child(4),th:nth-child(4) {
+    width: 10%;
     padding-right: 20px;
   }
 /*
@@ -51,15 +59,19 @@ const css = `
     padding-left: 10px;
   }
 */
-  th:first-child {
+  th:nth-child(2) {
     text-align: left;
     padding-left: 20px;
+  }
+  .country-name {
+    flex-grow
   }
   tr:nth-child(2n+1) {
     background-color: #eee;
   }
   thead {
     position: sticky;
+    z-index: 1;
     top: 0;
     background-color: #fff
   }
@@ -90,6 +102,10 @@ const css = `
   .treaty-count {
     font-weight: normal;
     padding: 5px;
+  }
+  .flag {
+    opacity: 60%;
+    padding-right: 0.6em;
   }
 `;
 
@@ -130,16 +146,18 @@ const findNwfzMembership = (treatyData, nwfzList) => {
   return false;
 };
 
-/*
 const convertCharacter = (char) => {
   const index = char.charCodeAt(0) - 64;
   const newIndex = index + 127461;
   return `&#${newIndex};`;
 };
 
-const flagEmojiHtml = (country_code) =>
-  country_code.split("").map(convertCharacter).join("");
-*/
+const flagEmojiHtml = (country_code) => {
+  if (country_code === "TP") {
+    country_code = "TL";
+  }
+  return country_code.split("").map(convertCharacter).join("");
+};
 
 const composeDescription = ({country, treaty, joining_mechanism, joined, signed}) => {
   let description = "";
@@ -170,14 +188,15 @@ const tabulate = (inputs, aggregatedData, population) => {
   //const treatyList = [...other_un_treaties.map(t => t.code),
   //  ...disarmament_treaties.map(t => t.code)];
   const nwfzList = nwfz_treaties.map(t => t.code);
-  const headerNames = ["Country", "Population", ...treatyList, "Country Score"];
+  const headerNames = ["", "Country", "Country Score", "Population", ...treatyList];
   let rows = [];
   const treatyCount = {};
   for (const [country_code, treatyData] of Object.entries(aggregatedData)) {
     const row = [];
     const country = codeToCountry(country_code);
-    row.push({ value: country, row_header: true, });
-    row.push({ value: population[country_code], row_header: true });
+    const flagItem = {value: flagEmojiHtml(country_code), row_header: true };
+    const countryItem = { value: country, row_header: true, };
+    const populationItem =  { value: population[country_code], row_header: true };
     let memberCount = 0;
     for (const treaty of treatyList) {
       let joined;
@@ -195,16 +214,16 @@ const tabulate = (inputs, aggregatedData, population) => {
       const description = composeDescription({country, treaty, joined, joining_mechanism, signed});
       row.push({ description, value });
     }
-    row.push({
+    const countryScoreItem = {
       value: `${memberCount}/${treatyList.length}`,
       row_header: true,
       description: ""
-    });
-    rows.push(row);
+    };
+    rows.push([flagItem, countryItem, countryScoreItem, populationItem, ...row]);
   }
   const header = headerNames.map(name => ({ name, count: treatyCount[name]}));
   // Sort by population
-  rows = _.sortBy(rows, row => row[1].value).reverse();
+  rows = _.sortBy(rows, row => row[3].value).reverse();
   return { rows, header };
 };
 
