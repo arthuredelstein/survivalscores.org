@@ -22,6 +22,10 @@ const css = `
   td:nth-child(2) {
     text-align: right;
   }
+  table tr:first {
+    display: flex;
+    flex-direction: row;
+  }
   th {
     text-align: center;
     margin: 0px;
@@ -29,6 +33,7 @@ const css = `
     padding: 5px;
     padding: 5px 10px;
     hyphens: auto;
+    flex-direction: column;
   }
   td, th {
     cursor: pointer;
@@ -53,9 +58,10 @@ const css = `
   tr:nth-child(2n+1) {
     background-color: #eee;
   }
-  tr:first-child {
+  thead {
     position: sticky;
     top: 0;
+    background-color: #fff
   }
   .good, .bad, .na {
     font-size: 16px;
@@ -80,6 +86,10 @@ const css = `
   .footer ul {
     padding-top: 0px;
     margin-top: 0px;
+  }
+  .treaty-count {
+    font-weight: normal;
+    padding: 5px;
   }
 `;
 
@@ -160,8 +170,9 @@ const tabulate = (inputs, aggregatedData, population) => {
   //const treatyList = [...other_un_treaties.map(t => t.code),
   //  ...disarmament_treaties.map(t => t.code)];
   const nwfzList = nwfz_treaties.map(t => t.code);
-  const header = ["Country", "Population", ...treatyList, "Country Score"];
+  const headerNames = ["Country", "Population", ...treatyList, "Country Score"];
   let rows = [];
+  const treatyCount = {};
   for (const [country_code, treatyData] of Object.entries(aggregatedData)) {
     const row = [];
     const country = codeToCountry(country_code);
@@ -177,6 +188,7 @@ const tabulate = (inputs, aggregatedData, population) => {
       }
       if (joined) {
         ++memberCount;
+        treatyCount[treaty] = 1 + (treatyCount[treaty] ?? 0);
       }
       const value = joined ? "yes" : "no";
       const { joining_mechanism, signed } = treatyData[treaty] ?? {};
@@ -184,12 +196,13 @@ const tabulate = (inputs, aggregatedData, population) => {
       row.push({ description, value });
     }
     row.push({
-      value: memberCount,
+      value: `${memberCount}/${treatyList.length}`,
       row_header: true,
       description: ""
     });
     rows.push(row);
   }
+  const header = headerNames.map(name => ({ name, count: treatyCount[name]}));
   // Sort by population
   rows = _.sortBy(rows, row => row[1].value).reverse();
   return { rows, header };
@@ -213,15 +226,24 @@ un.org/Pages/ParticipationStatus.aspx</a> on [date on which the material was acc
 
 const htmlTable = ({ header, rows }) => {
   const fragments = [];
+  const total = rows.length;
   fragments.push("<table>");
-  fragments.push("<tbody>");
-  fragments.push("<tr>");
+  fragments.push("<thead>");
+  fragments.push("<tr class='header'>");
   for (const headerItem of header) {
-    fragments.push(`<th>${headerItem}</th>`);
+    fragments.push(`<th>${treatyCodeToName(headerItem.name) ?? headerItem.name}</th>`);
   }
   fragments.push("</tr>");
+  fragments.push("<tr class='header'>");
+  for (const headerItem of header) {
+    const countString = headerItem.count ? `${headerItem.count}/${total}`: "";
+    fragments.push(`<th class='treaty-count'>${countString}</th>`)
+  }
+  fragments.push("</tr>");
+  fragments.push("</thead>");
+  fragments.push("<tbody>");
   for (const row of rows) {
-    fragments.push("<tr>");
+    fragments.push(`<tr class='data'>`);
     for (const cell of row) {
       if (cell.row_header) {
         fragments.push(`<td title="${cell.description}" class="row_header">${cell.value}</td>`);
@@ -236,15 +258,14 @@ const htmlTable = ({ header, rows }) => {
   return fragments.join("");
 };
 
+
 const main = () => {
   const aggregated = JSON.parse(fs.readFileSync("aggregated.json").toString());
   const population = JSON.parse(fs.readFileSync("population.json").toString());
   //  console.log(population);
   delete aggregated.EU;
   const { rows, header } = tabulate(inputs(), aggregated, population);
-  const cleanHeader = header.map(x => treatyCodeToName(x) ?? x);
-  //  console.log(header, rows);
-  render(htmlHeading() + htmlTable({ rows, header: cleanHeader }) + htmlFooter());
+  render(htmlHeading() + htmlTable({ rows, header }) + htmlFooter());
 };
 
 main();

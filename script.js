@@ -31,7 +31,7 @@ const sortColumn = (columnIndex) => {
     state.ascending = true;
   }
   state.sortedColumn = columnIndex;
-  const rows = [...document.querySelectorAll("table tr")].slice(1);
+  const rows = [...document.querySelectorAll("table tr.data")];
   const table = document.querySelector("table");
   let rows2 = rows.sort((rowA, rowB) => rowComparator(rowA, rowB, columnIndex, state.ascending));
   for (const row of rows2) {
@@ -40,7 +40,7 @@ const sortColumn = (columnIndex) => {
 }
 
 window.addEventListener("DOMContentLoaded", (e) => {
-  const headers = [...document.querySelectorAll("tbody tr th")];
+  const headers = [...document.querySelectorAll("thead tr th")];
   for (let i = 0; i < headers.length; ++i) {
     headers[i].addEventListener("click", (e) => {
       sortColumn(i);
