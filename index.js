@@ -1,9 +1,8 @@
-import fetch from "node-fetch";
 import { JSDOM } from "jsdom";
 import unzipper from "unzipper";
 import { parse } from "csv-parse/sync";
 import { readYAML, countryToCode, writeJsonData } from "./utils.js";
-import https from 'node:https';
+import esMain from 'es-main';
 
 const mapParallel = (asyncFunc, items) =>
       Promise.all(items.map(item => asyncFunc(item)));
@@ -11,14 +10,8 @@ const mapParallel = (asyncFunc, items) =>
 const mapParallelToObject = async (asyncFunc, items) =>
   Object.fromEntries(await mapParallel(asyncFunc, items));
 
-
-const httpsAgent = new https.Agent({
-  //	keepAlive: true
-  maxSockets: 256
-});
-
 const readRemoteZippedCSV = async (url) => {
-  const response = await fetch(url, { agent: httpsAgent });
+  const response = await fetch(url);
   const buffer = await response.arrayBuffer();
   const directory = await unzipper.Open.buffer(Buffer.from(buffer));
   const mainFile = await directory.files[0].buffer();
@@ -42,7 +35,7 @@ const getPopulationDataFromItem = (item) => {
 };
 
 const getPopulationZip = async () => {
-  const populationUrl = `https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=variableID:12;varID:2&DataMartId=PopDiv&Format=csv&c=2,4,7&s=_crEngNameOrderBy:asc,_timeEngNameOrderBy:desc,_varEngNameOrderBy:asc`;
+  const populationUrl = `http://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=variableID:12;varID:2&DataMartId=PopDiv&Format=csv&c=2,4,7&s=_crEngNameOrderBy:asc,_timeEngNameOrderBy:desc,_varEngNameOrderBy:asc`;
   return await readRemoteZippedCSV(populationUrl);
 };
 
@@ -215,8 +208,7 @@ const main = async () => {
   writeJsonData("aggregated.json", aggregatedData);
 };
 
-if (require.main === module) {
+if (esMain(import.meta)) {
   main();
-  // runTest();
 }
 

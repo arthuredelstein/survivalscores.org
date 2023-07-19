@@ -11,10 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "csv-parse": "^5.3.0",
+    "es-main": "^1.2.0",
     "jsdom": "^20.0.0",
     "lodash": "^4.17.21",
-    "node-fetch": "^3.2.10",
-    "nodemon": "^2.0.19",
+    "nodemon": "^3.0.1",
     "unzipper": "^0.10.11",
     "yaml": "^2.1.1"
   },
