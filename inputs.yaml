@@ -14,14 +14,19 @@ disarmament_treaties:
     tableSelector: "#sort_table_special"
 nwfz_treaties:
   - code: "rarotonga"
+    name: "South Pacific Nuclear-Free Zone Treaty"
     tableSelector: "#sort_table"
   - code: "pelindaba"
+    name: "African Nuclear-Weapon-Free Zone Treaty"
     tableSelector: "#sort_table"
   - code: "canwfz"
+    name: "Central Asian Nuclear-Weapon-Free Zone Treaty"
     tableSelector: "#sort_table"
   - code: "bangkok"
+    name: "Southeast Asian Nuclear-Weapon-Free Zone Treaty"
     tableSelector: "#sort_table"
   - code: "tlatelolco"
+    name: "Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean"
     tableSelector: "#sort_table"
 other_un_treaties:
   - code: "rome"
@@ -38,4 +43,9 @@ other_un_treaties:
     name: "Biodiversity Convention"
     chapter: 27
     mtdsg_no: "XXVII-8"
+    columnCount: 3
+  - code: "paris"
+    name: "Paris Agreement on Climate"
+    chapter: 27
+    mtdsg_no: "XXVII-7-d"
     columnCount: 3
