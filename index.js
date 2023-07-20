@@ -129,7 +129,7 @@ const getUNDataFromRow = (row, columnCount) => {
 const domFromUrl = async (url) => {
   const t1 = performance.now();
   console.log("start:", t1, url);
-  const response = await fetch(url, { agent: httpsAgent });
+  const response = await fetch(url);
   const t2 = performance.now();
   console.log("delta:", t2-t1, url);
   const text = await response.text();
