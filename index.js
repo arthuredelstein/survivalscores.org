@@ -3,12 +3,8 @@ import unzipper from "unzipper";
 import { parse } from "csv-parse/sync";
 import { readYAML, countryToCode, writeJsonData } from "./utils.js";
 import esMain from 'es-main';
-
-const mapParallel = (asyncFunc, items) =>
-      Promise.all(items.map(item => asyncFunc(item)));
-
-const mapParallelToObject = async (asyncFunc, items) =>
-  Object.fromEntries(await mapParallel(asyncFunc, items));
+import { join } from "lodash";
+import { disarmament } from "./disarmament.js";
 
 const readRemoteZippedCSV = async (url) => {
   const response = await fetch(url);
@@ -65,32 +61,10 @@ const formatDate = (raw) => {
   }
 };
 
-const getDisarmamentDateFromDataOrder = (td) =>
-  td.getAttribute("data-order").split("-")[0];
-
 const joining_mechanisms = {
   RAT: "ratified",
   ACC: "acceded",
   SUC: "succeeded"
-};
-
-const getDisarmamentDataFromRow = (row) => {
-  const [td0, td1, td2] = row.querySelectorAll("td");
-  const country_code = countryToCode(td0.getAttribute("data-order"));
-  const signed = formatDate(getDisarmamentDateFromDataOrder(td1));
-  const td2_date = formatDate(getDisarmamentDateFromDataOrder(td2));
-  const link = td2.querySelector("a");
-  let joined, joining_mechanism;
-  if (link) {
-    const href = td2.querySelector("a").getAttribute("href");
-    for (const [code, type] of Object.entries(joining_mechanisms)) {
-      if (href.includes(code)) {
-        joined = td2_date;
-        joining_mechanism = type;
-      }
-    }
-  }
-  return { country_code, signed, joined, joining_mechanism };
 };
 
 const extractDate = td => formatDate(
@@ -142,146 +116,11 @@ const tableRowsFromUrl = async (url, selector) => {
   return [...table.querySelectorAll("tr")];
 };
 
-const disarmamentGraphQLQuery = {
-  operationName: 'Treaty',
-  variables: { input: { id: null, short_name: 'tpnw', type: 'GET_TREATY' } },
-  query: `query Treaty($input: TreatyRequestInput_) {
-    treaty_(input: $input) {
-      ... on ReadResponse {
-        data {
-          ... on Treaty_ {
-            id
-            description
-            full_name
-            is_protocol
-            name
-            protocol_parent_id
-            protocols_ {
-              id
-              name
-              short_name
-              count_states_parties
-              adopted_date
-              open_for_signature_date
-              __typename
-            }
-            short_name
-            treaty_text
-            note
-            is_amendment
-            signature_location
-            show_deposit_location
-            show_signature_location
-            show_signature_for_protocol
-            adopted_date
-            adopted_location
-            open_for_signature_date
-            entry_into_force_date
-            entry_into_force_note
-            search_keywords
-            certified_copy_url
-            count_sig_states
-            count_states_parties
-            depositaries_ {
-              id
-              short_name
-              name
-              url_name
-              __typename
-            }
-            actions_ {
-              id
-              date
-              note
-              type
-              action_type_
-              state {
-                name
-                country_id
-                country_ {
-                  country_persistent_name
-                  country_country_name {
-                    countryname_official_short_name
-                    countryname_official_long_name
-                    countryname_country_code_2
-                    __typename
-                  }
-                  country_country_groups {
-                    countrygroup_group_name
-                    countrygroup_group_type
-                    __typename
-                  }
-                  __typename
-                }
-                __typename
-              }
-              depositary {
-                id
-                short_name
-                name
-                url_name
-                __typename
-              }
-              objections_ {
-                date
-                note
-                state {
-                  country_ {
-                    country_persistent_name
-                    country_country_name {
-                      countryname_country_code_3
-                      countryname_official_short_name
-                      __typename
-                    }
-                    __typename
-                  }
-                  __typename
-                }
-                __typename
-              }
-              __typename
-            }
-            __typename
-          }
-          __typename
-        }
-        __typename
-      }
-      __typename
-    }
-  }`
-};
-
-const getDisarmamentTreatyData = async (treaty) => {
-  const response = await fetch("https://gql-api-dataportal.unoda.org/", {
-    "headers": {
-      "content-type": "application/json",
-    },
-    "body": JSON.stringify(disarmamentGraphQLQuery),
-    "method": "POST",
-  });
-  const json = await response.json();
-  return json.data.treaty_.data;
-}
-
-const disarmamentTreatyInfo = async (treaty, tableSelector) => {
-  const dom = await domFromUrl(`https://treaties.unoda.org/t/${treaty}/participants`);
-  const table = dom.window.document.querySelectorAll("mat-table");
-  return table;
-  //return table.querySelectorAll("mat-row")
-//  return rows.slice(1).map(getDisarmamentDataFromRow);
-};
 
 const unTreatyInfo = async (url, columnCount) => {
   const rows = await tableRowsFromUrl(url, "#ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolderInnerPage_tblgrid");
   return rows.slice(1).map(row => getUNDataFromRow(row, columnCount));
 };
-
-const disarmament = async (treaties) =>
-      mapParallelToObject(async treaty => [
-        treaty.code,
-        await disarmamentTreatyInfo(treaty.code, treaty.tableSelector)],
-                                          treaties);
 
 const other = async (other_un_treaties) =>
       mapParallelToObject(async treaty => {
@@ -298,7 +137,6 @@ const getAllData = async (inputs) => {
     disarmament(disarmament_treaties),
     disarmament(nwfz_treaties),
   ]);
-  //console.log(disarmamentData);
   return Object.assign({}, otherData, disarmamentData, nwfzData);
 };
 
