@@ -1,8 +1,5 @@
-const mapParallel = (asyncFunc, items) =>
-      Promise.all(items.map(item => asyncFunc(item)));
-
-const mapParallelToObject = async (asyncFunc, items) =>
-  Object.fromEntries(await mapParallel(asyncFunc, items));
+import { join } from "lodash";
+import { mapParallelToObject, formatDate } from "./utils.js";
 
 const disarmamentGraphQLQuery = {
   operationName: 'Treaty',
@@ -133,16 +130,18 @@ const gatherDisarmamentData = (rawData) => {
     const country_code = action.state.country_.country_country_name.countryname_country_code_2;
     results[country_code] ||= {};
     const result = results[country_code];
-    const date = new Date(action.date);
+    const date = formatDate(new Date(action.date));
     const joining_mechanism = action.type;
     if (joining_mechanism === "SIG") {
       result.signed = date;
     }
     if (joining_mechanism === "RAT") {
-      result.ratified = date;
+      result.joined = date;
+      result.joining_mechanism = "ratified"
     }
     if (joining_mechanism === "ACC") {
-      result.acceded = date;  
+      result.joined = date;
+      result.joining_mechanism = "acceded to"
     }
   }
   return results;
