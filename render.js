@@ -178,10 +178,12 @@ const composeDescription = ({country, treaty, joining_mechanism, joined, signed}
       description += ` signed the ${treatyOrNwfzName} on ${signed} and`;
       treatyMentioned = true;
     }
-    description += " " + ({"ratified":"ratified",
-                           "acceded":"acceded to",
-                           "succeeded":"inherited membership to",
-                           "joined":"joined"}[joining_mechanism] ?? "joined");
+    description += " " + ({"ratified": "ratified",
+                           "acceded": "acceded to",
+                           "accepted": "accepted membership of",
+                           "approved": "gave its approval to",
+                           "succeeded": "inherited membership of",
+                           "joined": "joined"}[joining_mechanism] ?? "joined");
     description += treatyMentioned ? " it" : ` the ${treatyOrNwfzName}`;
     description += ` on ${joined}.`;
   }
@@ -201,7 +203,8 @@ const tabulate = (inputs, aggregatedData, population) => {
     const country = codeToCountry(country_code);
     const flagItem = {value: flagEmojiHtml(country_code), row_header: true };
     const countryItem = { value: country, row_header: true, };
-    const populationItem =  { value: population[country_code], row_header: true };
+    const populationItem = { value: population[country_code], row_header: true };
+    console.log(populationItem);
     let memberCount = 0;
     for (const treaty of treatyList) {
       let joined;
@@ -286,8 +289,9 @@ const htmlTable = ({ header, rows }) => {
 const main = () => {
   const aggregated = JSON.parse(fs.readFileSync("aggregated.json").toString());
   const population = JSON.parse(fs.readFileSync("population.json").toString());
-  //  console.log(population);
+  //console.log(population);
   delete aggregated.EU;
+  delete aggregated.XX;
   const { rows, header } = tabulate(inputs(), aggregated, population);
   render(htmlHeading() + htmlTable({ rows, header }) + htmlFooter());
 };

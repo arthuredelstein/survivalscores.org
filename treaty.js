@@ -13,9 +13,9 @@ const extractData = (td) => {
 };
 
 const tagToMechanism = {
-  "a": "acceded to",
-  "AA": "gave its approval to",
-  "d": "succeeded to",
+  "a": "acceded",
+  "AA": "approved",
+  "d": "succeeded",
   "A": "accepted",
 };
 

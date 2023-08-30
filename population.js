@@ -1,5 +1,6 @@
 import unzipper from "unzipper";
 import { parse } from "csv-parse/sync";
+import { countryToCode } from "./utils";
 
 const readRemoteZippedCSV = async (url) => {
   const response = await fetch(url);
@@ -15,13 +16,7 @@ const fixBrokenUtf8 = (s) => Buffer.from(s, "ascii").toString("utf8");
 const getPopulationDataFromItem = (item) => {
   const countryName = fixBrokenUtf8(item["Country or Area"]);
   const population = Math.round(parseFloat(fixBrokenUtf8(item.Value)) * 1000);
-  let country_code;
-  try {
-    country_code = countryToCode(countryName);
-  } catch (e) {
-    country_code = countryName;
-    //console.log(`no country code found for ${countryName}`);
-  }
+  const country_code = countryToCode(countryName);
   return { country_code, population };
 };
 
@@ -36,8 +31,12 @@ export const populationInfo = async () => {
   const items = itemsRaw.filter(i => i["Year(s)"] === thisYear);
   const result = {};
   for (const item of items) {
-    const { country_code, population } = getPopulationDataFromItem(item);
-    result[country_code] = population;
+    try {
+      const { country_code, population } = getPopulationDataFromItem(item);
+      result[country_code] = population;
+    } catch (e) {
+      console.log(e.message);
+    }
   }
   return result;
 };
