@@ -144,7 +144,7 @@ const gatherDisarmamentData = (rawData) => {
     }
     if (joining_mechanism === "ACC") {
       result.joined = date;
-      result.joining_mechanism = "acceded to"
+      result.joining_mechanism = "acceded"
     }
   }
   return results;
