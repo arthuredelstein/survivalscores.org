@@ -2,12 +2,24 @@ import { mapParallelToObject, formatDate } from "./utils.js";
 import { JSDOM } from "jsdom";
 import { countryToCode } from './utils.js'
 
-const extractDate = (td) => {
-  const raw = td.textContent.trim().split(/\s+/).slice(0, 3).join(" ");
+const extractData = (td) => {
+  const pieces = td.textContent.trim().split(/\s+/);
+  const raw = pieces.slice(0, 3).join(" ");
   const cleanString = raw.replaceAll(/\t|\&nbsp;/g, " ").trim();
   const rawDate = new Date(cleanString);
-  return formatDate(rawDate);
+  const date = formatDate(rawDate);
+  const tag = pieces[3];
+  return { date, tag };
 };
+
+const tagToMechanism = {
+  "a": "acceded to",
+  "AA": "gave its approval to",
+  "d": "succeeded to",
+  "A": "accepted",
+};
+
+const mechanismFromTag = (tag) => tagToMechanism[tag] ?? "ratified";
 
 const getUNDataFromRow = (row, columnCount) => {
   const [td0, td1, td2] = row.querySelectorAll("td");
@@ -23,17 +35,18 @@ const getUNDataFromRow = (row, columnCount) => {
     ];
   }
   if (columnCount === 3) {
-    const joined = extractDate(td2);
+    const { date: joined, tag: tagJoined } = extractData(td2);
+    const { date: signed } = extractData(td1);
+    const joining_mechanism = mechanismFromTag(tagJoined);
     return [
       country_code,
-      {signed: extractDate(td1),
-      joined}
-      ];
+      {signed, joined, joining_mechanism}];
   } else if (columnCount === 2) {
+    const { date: joined, tag } = extractData(td1);
+    const joining_mechanism = mechanismFromTag(tag);
     return [
       country_code,
-      {joined: extractDate(td1)}
-    ];
+      { joined, tag, joining_mechanism }];
   }
 };
 
@@ -53,15 +66,15 @@ const tableRowsFromUrl = async (url, selector) => {
   return [...table.querySelectorAll("tr")];
 };
 
-const unTreatyInfo = async (url, columnCount) => {
+const unTreatyInfo = async (treaty) => {
+  const { code, chapter, mtdsg_no, columnCount } = treaty;
+  const url = `https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=${mtdsg_no}&chapter=${chapter}&clang=_en`;
   const rows = await tableRowsFromUrl(url, "#ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolderInnerPage_tblgrid");
   return Object.fromEntries(rows.slice(1).map(row => getUNDataFromRow(row, columnCount)));
 };
 
 export const other = async (other_un_treaties) =>
       mapParallelToObject(async treaty => {
-        const { code, chapter, mtdsg_no, columnCount } = treaty;
-        const url = `https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=${mtdsg_no}&chapter=${chapter}&clang=_en`;
-        return [code,
-                await unTreatyInfo(url, columnCount)];
+        return [treaty.code,
+                await unTreatyInfo(treaty)];
       }, other_un_treaties);
