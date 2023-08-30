@@ -1,9 +1,9 @@
 import { join } from "lodash";
-import { mapParallelToObject, formatDate } from "./utils.js";
+import { mapParallelToObject, formatDate, countryToCode } from "./utils.js";
 
-const disarmamentGraphQLQuery = {
+const disarmamentGraphQLQuery = (treatyCode) => ({
   operationName: 'Treaty',
-  variables: { input: { id: null, short_name: 'tpnw', type: 'GET_TREATY' } },
+  variables: { input: { id: null, short_name: treatyCode, type: 'GET_TREATY' } },
   query: `query Treaty($input: TreatyRequestInput_) {
     treaty_(input: $input) {
       ... on ReadResponse {
@@ -109,14 +109,14 @@ const disarmamentGraphQLQuery = {
       __typename
     }
   }`
-};
+});
 
-const rawDisarmamentTreatyData = async (treaty) => {
+const rawDisarmamentTreatyData = async (treatyCode) => {
   const response = await fetch("https://gql-api-dataportal.unoda.org/", {
     "headers": {
       "content-type": "application/json",
     },
-    "body": JSON.stringify(disarmamentGraphQLQuery),
+    "body": JSON.stringify(disarmamentGraphQLQuery(treatyCode)),
     "method": "POST",
   });
   const json = await response.json();
@@ -127,7 +127,10 @@ const gatherDisarmamentData = (rawData) => {
   const actions = rawData.actions_;
   const results = {};
   for (const action of actions) {
-    const country_code = action.state.country_.country_country_name.countryname_country_code_2;
+    let country_code = action.state.country_.country_country_name.countryname_country_code_2;
+    if (country_code === "XX") {
+      country_code = countryToCode(action.state.country_.country_country_name.countryname_official_short_name);
+    }
     results[country_code] ||= {};
     const result = results[country_code];
     const date = formatDate(new Date(action.date));
@@ -148,12 +151,12 @@ const gatherDisarmamentData = (rawData) => {
 }
 
 const disarmamentTreatyInfo = async (treaty) => {
-  const raw = await rawDisarmamentTreatyData(treaty);
+  const raw = await rawDisarmamentTreatyData(treaty.code);
   return gatherDisarmamentData(raw);
 };
 
 export const disarmament = async (treaties) =>
       mapParallelToObject(async treaty => [
         treaty.code,
-        await disarmamentTreatyInfo(treaty.code)],
-                                          treaties);
+        await disarmamentTreatyInfo(treaty)
+      ], treaties);

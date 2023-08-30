@@ -204,7 +204,6 @@ const tabulate = (inputs, aggregatedData, population) => {
     const flagItem = {value: flagEmojiHtml(country_code), row_header: true };
     const countryItem = { value: country, row_header: true, };
     const populationItem = { value: population[country_code], row_header: true };
-    console.log(populationItem);
     let memberCount = 0;
     for (const treaty of treatyList) {
       let joined;
