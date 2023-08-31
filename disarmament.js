@@ -1,4 +1,3 @@
-import { join } from "lodash";
 import { mapParallelToObject, formatDate, countryToCode } from "./utils.js";
 
 const disarmamentGraphQLQuery = (treatyCode) => ({

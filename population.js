@@ -1,6 +1,6 @@
 import unzipper from "unzipper";
 import { parse } from "csv-parse/sync";
-import { countryToCode } from "./utils";
+import { countryToCode } from "./utils.js";
 
 const readRemoteZippedCSV = async (url) => {
   const response = await fetch(url);
