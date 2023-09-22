@@ -37,10 +37,15 @@ const sortColumn = (columnIndex) => {
   for (const row of rows2) {
     table.appendChild(row);
   }
+  const arrowImages = [...document.querySelectorAll("thead tr th.sort-arrows img")];
+  arrowImages.forEach(img => img.src = "./sortArrowsUnsorted.svg");
+  const arrowImage = arrowImages[columnIndex-1];
+
+  arrowImage.src = state.ascending ? "./sortArrowsDown.svg" : "./sortArrowsUp.svg";
 }
 
 window.addEventListener("DOMContentLoaded", (e) => {
-  const headers = [...document.querySelectorAll("thead tr th")];
+  const headers = [...document.querySelectorAll("thead tr th.sort-arrows")];
   for (let i = 0; i < headers.length; ++i) {
     headers[i].addEventListener("click", (e) => {
       sortColumn(i);

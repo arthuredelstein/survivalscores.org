@@ -40,6 +40,9 @@ td, th {
 td:first-child,th:first-child {
   width: 5px;
 }
+th.sort-arrows {
+  text-align: center;
+}
 td:nth-child(2),th:nth-child(2) {
   width: 10%;
 }
@@ -47,17 +50,11 @@ td:nth-child(3),th:nth-child(3) {
   width: 10px;
   text-align: center;
 }
-td:nth-child(4),th:nth-child(4) {
+td:nth-child(4) {
   width: 10%;
   padding-right: 20px;
   text-align: right;
 }
-/*
-td:first-child::before {
-  content: attr(data-content);
-  padding-left: 10px;
-}
-*/
 th:nth-child(2) {
   text-align: left;
   padding-left: 20px;
@@ -65,7 +62,7 @@ th:nth-child(2) {
 .country-name {
   flex-grow
 }
-tr:nth-child(2n+1) {
+tr:nth-child(2n+1) td {
   background-color: #eee;
 }
 thead {
@@ -105,4 +102,9 @@ thead {
 .flag {
   opacity: 60%;
   padding-right: 0.6em;
+}
+h3 {
+  font-size: 16px;
+  font-style: italic;
+  font-weight: normal;
 }

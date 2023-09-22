@@ -126,7 +126,7 @@ const tabulate = (inputs, aggregatedData, population) => {
 
 
 const htmlHeading = () =>
-  `<h1>KeyTreaties.org</h1>`
+  `<h1>KeyTreaties.org</h1><h3>Key Treaties for Human Survival</h3>`
 
 const htmlFooter = () => `
   <div class="footer"><b>Data sources</b><br>
@@ -154,6 +154,15 @@ const htmlTable = ({ header, rows }) => {
   for (const headerItem of header) {
     const countString = headerItem.count ? `${headerItem.count}/${total}`: "";
     fragments.push(`<th class='treaty-count'>${countString}</th>`)
+  }
+  fragments.push("</tr>");
+  fragments.push("<tr class='header'>");
+  for (const headerItem of header) {
+    fragments.push(`<th class='sort-arrows'>`);
+    if (headerItem.name.length > 0) {
+      fragments.push(`<img src="./sortArrowsUnsorted.svg" width="16">`);
+    }
+    fragments.push(`</th>`);
   }
   fragments.push("</tr>");
   fragments.push("</thead>");
