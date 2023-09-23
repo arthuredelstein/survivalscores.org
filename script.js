@@ -1,13 +1,16 @@
 
 // Initially will be sorted by population
-let state = { sortedColumn: 1, ascending: false };
+let state = { sortedColumn: 1, ascending: true };
 
 const rowComparator = (row1, row2, columnIndex, reverse = false) => {
-  const reverseFactor = reverse ? -1 : 1;
+  let reverseFactor = reverse ? -1 : 1;
   const td1 = [...row1.querySelectorAll("td")][columnIndex];
   const td2 = [...row2.querySelectorAll("td")][columnIndex];
   const text1 = td1.innerText.trim();
   const text2 = td2.innerText.trim();
+  if (text1.includes("/") && text2.includes("/")) {
+    reverseFactor *= -1;
+  }
   if (text1.length > 0 && !isNaN(text1)) {
     return reverseFactor * (parseInt(text1) - parseInt(text2));
   }
@@ -16,7 +19,7 @@ const rowComparator = (row1, row2, columnIndex, reverse = false) => {
   if (class1 && (class1.includes("good") || class1.includes("bad"))) {
     return reverseFactor * class1.localeCompare(class2);
   }
-  return reverseFactor * text1.localeCompare(text2);
+  return -reverseFactor * text1.localeCompare(text2);
 };
 
 const sortValue = (row, columnIndex) => {
@@ -41,7 +44,7 @@ const sortColumn = (columnIndex) => {
   arrowImages.forEach(img => img.src = "./sortArrowsUnsorted.svg");
   const arrowImage = arrowImages[columnIndex-1];
 
-  arrowImage.src = state.ascending ? "./sortArrowsDown.svg" : "./sortArrowsUp.svg";
+  arrowImage.src = !state.ascending ? "./sortArrowsDown.svg" : "./sortArrowsUp.svg";
 }
 
 window.addEventListener("DOMContentLoaded", (e) => {
@@ -51,4 +54,6 @@ window.addEventListener("DOMContentLoaded", (e) => {
       sortColumn(i);
     });
   }
+  sortColumn(3);
 });
+
