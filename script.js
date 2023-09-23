@@ -3,13 +3,16 @@
 let state = { sortedColumn: 1, ascending: true };
 
 const rowComparator = (row1, row2, columnIndex, reverse = false) => {
-  let reverseFactor = reverse ? -1 : 1;
+  const reverseFactor = reverse ? -1 : 1;
   const td1 = [...row1.querySelectorAll("td")][columnIndex];
   const td2 = [...row2.querySelectorAll("td")][columnIndex];
   const text1 = td1.innerText.trim();
   const text2 = td2.innerText.trim();
   if (text1.includes("/") && text2.includes("/")) {
-    reverseFactor *= -1;
+    // Sorting fractions
+    const numerator1 = text1.split("/")[0];
+    const numerator2 = text2.split("/")[0];
+    return reverseFactor * (parseInt(numerator1) - parseInt(numerator2));
   }
   if (text1.length > 0 && !isNaN(text1)) {
     return reverseFactor * (parseInt(text1) - parseInt(text2));

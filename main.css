@@ -12,6 +12,7 @@ td {
   border: 0px;
   padding: 5px;
   height: 30px;
+  cursor: pointer;
 }
 td:nth-child(2) {
   text-align: left;
@@ -32,6 +33,7 @@ th {
   padding: 5px 10px;
   hyphens: auto;
   flex-direction: column;
+  cursor: pointer;
 }
 td, th {
   cursor: pointer;
@@ -98,6 +100,7 @@ thead {
 .treaty-count {
   font-weight: normal;
   padding: 5px;
+  background-color: #eee;
 }
 .flag {
   opacity: 60%;
