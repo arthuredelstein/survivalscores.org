@@ -21,6 +21,14 @@ td:nth-child(2) {
 td:nth-child(3) {
   text-align: right;
 }
+tr {
+  position: relative;
+  overflow: auto;
+}
+td:nth-child(1), td:nth-child(2), td:nth-child(3), th:nth-child(1), th:nth-child(2), th:nth-child(3) {
+  position: sticky;
+  left: 0px;
+}
 table tr:first {
   display: flex;
   flex-direction: row;
@@ -110,4 +118,18 @@ h3 {
   font-size: 16px;
   font-style: italic;
   font-weight: normal;
+}
+.title {
+  margin: 0px;
+  color: white;
+  padding: 10px;
+  height: 100px;
+  background-image: url("https://images-assets.nasa.gov/image/PIA00076/PIA00076~small.jpg");
+  background-position: center;
+  background-size: 450px;
+  background-repeat: no-repeat;
+  background-color: black;
+}
+.header {
+  vertical-align: bottom;
 }

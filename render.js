@@ -126,7 +126,7 @@ const tabulate = (inputs, aggregatedData, population) => {
 
 
 const htmlHeading = () =>
-  `<h1>KeyTreaties.org</h1><h3>Key Treaties for Human Survival</h3>`
+  `<div class='title'><h1>KeyTreaties.org</h1><h3>Critical Treaties for the Survival of Humanity</h3></div>`
 
 const htmlFooter = () => `
   <div class="footer"><b>Data sources</b><br>
