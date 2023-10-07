@@ -1,11 +1,11 @@
 ---
 disarmament_treaties:
   - code: "tpnw"
-    name: "Treaty on the Prohibition of Nuclear Weapons"
+    name: "Prohibition of Nuclear Weapons"
   - code: "ctbt"
     name: "Comprehensive Nuclear-Test-Ban Treaty"
   - code: "npt"
-    name: "Treaty on the Non-Proliferation of Nuclear Weapons"
+    name: "Non-Proliferation Treaty"
   - code: "bwc"
     name: "Biological Weapons Convention"
 nwfz_treaties:
@@ -21,7 +21,7 @@ nwfz_treaties:
     name: "Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean"
 other_un_treaties:
   - code: "rome"
-    name: "Rome Statute of the International Criminal Court"
+    name: "International Criminal Court"
     mtdsg_no: "XVIII-10"
     chapter: 18
     columnCount: 3
@@ -31,7 +31,7 @@ other_un_treaties:
     chapter: 18
     columnCount: 2
   - code: "biodiversity"
-    name: "Biodiversity Convention"
+    name: "Convention on Biological Diversity"
     chapter: 27
     mtdsg_no: "XXVII-8"
     columnCount: 3
