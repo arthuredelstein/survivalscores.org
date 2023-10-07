@@ -126,7 +126,7 @@ const tabulate = (inputs, aggregatedData, population) => {
 
 
 const htmlHeading = () =>
-  `<div class='title'><h1>SurvivalScores.org</h1><h3>Participation in Treaties Critical to the Survival of Humanity</h3></div>`
+  `<div class='title'><h1>SurvivalScores.org</h1><h3>Monitoring Treaties Critical to the Survival of Humanity</h3></div>`
 
 const htmlFooter = () => `
   <div class="footer"><b>Data sources</b><br>
@@ -150,7 +150,7 @@ const htmlTable = ({ header, rows }) => {
     const treatyInfo = treatyInfoByCode()[headerItem.name];
     console.log(`'${headerItem.name}'`, treatyInfo);
     const logo = treatyInfo ? treatyInfo.logo : undefined;
-    const imageElement = logo ? `<img src='./images/${logo}' height=32>` : '';
+    const imageElement = logo ? `<img src='./images/${logo}' height=48>` : '';
     fragments.push(`<th>${imageElement}<br>${treatyInfo?.name ?? headerItem.name}</th>`);
   }
   fragments.push("</tr>");

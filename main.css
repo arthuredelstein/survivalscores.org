@@ -50,6 +50,7 @@ td, th {
 }
 td:first-child,th:first-child {
   width: 5px;
+  font-size: 24px;
 }
 th.sort-arrows {
   text-align: center;
