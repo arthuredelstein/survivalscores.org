@@ -2,12 +2,16 @@
 disarmament_treaties:
   - code: "tpnw"
     name: "Prohibition of Nuclear Weapons"
+    logo: "tpnw.svg"
   - code: "ctbt"
     name: "Comprehensive Nuclear-Test-Ban Treaty"
+    logo: "ctbt.svg"
   - code: "npt"
     name: "Non-Proliferation Treaty"
+    logo: "npt.svg"
   - code: "bwc"
     name: "Biological Weapons Convention"
+    logo: "bwc.svg"
 nwfz_treaties:
   - code: "rarotonga"
     name: "South Pacific Nuclear-Free Zone Treaty"
@@ -25,18 +29,22 @@ other_un_treaties:
     mtdsg_no: "XVIII-10"
     chapter: 18
     columnCount: 3
+    logo: "icc.svg"
   - code: "aggression"
     name: "ICC Crime of Aggression Amendment"
     mtdsg_no: "XVIII-10-b"
     chapter: 18
     columnCount: 2
+    logo: "aggression.png"
   - code: "biodiversity"
     name: "Convention on Biological Diversity"
     chapter: 27
     mtdsg_no: "XXVII-8"
     columnCount: 3
+    logo: "biodiversity.svg"
   - code: "paris"
     name: "Paris Agreement on Climate"
     chapter: 27
     mtdsg_no: "XXVII-7-d"
     columnCount: 3
+    logo: "paris.svg"

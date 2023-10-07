@@ -50,14 +50,15 @@ export const codeToCountry = (code) => {
 
 export const inputs = _.memoize(() => readYAML("inputs.yaml"));
 
-export const treatyCodeToName = _.memoize((code) => {
-  const result = {};
-  const { disarmament_treaties, other_un_treaties } = inputs();
-  const list = [...disarmament_treaties, ...other_un_treaties, { code: "nwfz", name: "Nuclear-Weapon-Free Zone" }];
+export const treatyInfoByCode = _.memoize(() => {
+  const results = {};
+  const { disarmament_treaties, other_un_treaties } = inputs(); 
+  const list = [...disarmament_treaties, ...other_un_treaties,
+                { code: "nwfz", name: "Nuclear-Weapon-Free Zone", logo: "nwfz.jpeg" }];
   for (const item of list) {
-    result[item.code] = item.name;
+    results[item.code] = item;
   }
-  return result[code];
+  return results;
 });
 
 export const invertMap = (m) => {

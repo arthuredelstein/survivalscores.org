@@ -1,5 +1,5 @@
 import fs from "fs";
-import { inputs, codeToCountry, treatyCodeToName } from "./utils.js";
+import { inputs, codeToCountry, treatyInfoByCode } from "./utils.js";
 import _ from "lodash";
 
 const page = ({css, js, content}) => `
@@ -57,11 +57,11 @@ const flagEmojiHtml = (country_code) => {
 const composeDescription = ({country, treaty, joining_mechanism, joined, signed}) => {
   let description = "";
   const isNwfz = treaty === "nwfz";
-  const treatyName = treatyCodeToName(treaty);
+  const { name: treatyName } = treatyInfoByCode()[treaty];
   if (!joined) {
     description = `${country} has not yet joined ${isNwfz ? "a" : "the"} ${treatyName}.`;
   } else {
-    const treatyOrNwfzName = isNwfz ? "pelindaba" : treatyName;
+    const treatyOrNwfzName = isNwfz ? "NWFZ" : treatyName;
     description = country;
     let treatyMentioned = false;
     if (signed) {
@@ -126,7 +126,7 @@ const tabulate = (inputs, aggregatedData, population) => {
 
 
 const htmlHeading = () =>
-  `<div class='title'><h1>KeyTreaties.org</h1><h3>Critical Treaties for the Survival of Humanity</h3></div>`
+  `<div class='title'><h1>SurvivalScores.org</h1><h3>Participation in Treaties Critical to the Survival of Humanity</h3></div>`
 
 const htmlFooter = () => `
   <div class="footer"><b>Data sources</b><br>
@@ -147,7 +147,11 @@ const htmlTable = ({ header, rows }) => {
   fragments.push("<thead>");
   fragments.push("<tr class='header'>");
   for (const headerItem of header) {
-    fragments.push(`<th>${treatyCodeToName(headerItem.name) ?? headerItem.name}</th>`);
+    const treatyInfo = treatyInfoByCode()[headerItem.name];
+    console.log(`'${headerItem.name}'`, treatyInfo);
+    const logo = treatyInfo ? treatyInfo.logo : undefined;
+    const imageElement = logo ? `<img src='./images/${logo}' height=32>` : '';
+    fragments.push(`<th>${imageElement}<br>${treatyInfo?.name ?? headerItem.name}</th>`);
   }
   fragments.push("</tr>");
   fragments.push("<tr class='header'>");
@@ -160,7 +164,7 @@ const htmlTable = ({ header, rows }) => {
   for (const headerItem of header) {
     fragments.push(`<th class='sort-arrows'>`);
     if (headerItem.name.length > 0) {
-      fragments.push(`<img src="./sortArrowsUnsorted.svg" width="16">`);
+      fragments.push(`<img src="./images/sortArrowsUnsorted.svg" width="16">`);
     }
     fragments.push(`</th>`);
   }

@@ -44,10 +44,10 @@ const sortColumn = (columnIndex) => {
     table.appendChild(row);
   }
   const arrowImages = [...document.querySelectorAll("thead tr th.sort-arrows img")];
-  arrowImages.forEach(img => img.src = "./sortArrowsUnsorted.svg");
+  arrowImages.forEach(img => img.src = "./images/sortArrowsUnsorted.svg");
   const arrowImage = arrowImages[columnIndex-1];
 
-  arrowImage.src = !state.ascending ? "./sortArrowsDown.svg" : "./sortArrowsUp.svg";
+  arrowImage.src = !state.ascending ? "./images/sortArrowsDown.svg" : "./images/sortArrowsUp.svg";
 }
 
 window.addEventListener("DOMContentLoaded", (e) => {
