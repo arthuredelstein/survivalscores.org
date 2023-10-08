@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  margin: 0px;
 }
 table {
   position: relative;
@@ -125,7 +126,7 @@ h3 {
   margin: 0px;
   color: white;
   padding: 10px;
-  height: 100px;
+  height: 180px;
   background-image: url("./images/PIA00076~small.jpg");
   background-position: center;
   background-size: 450px;
