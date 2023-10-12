@@ -151,7 +151,8 @@ const htmlTable = ({ header, rows }) => {
     console.log(`'${headerItem.name}'`, treatyInfo);
     const logo = treatyInfo ? treatyInfo.logo : undefined;
     const imageElement = logo ? `<img src='./images/${logo}' height=48>` : '';
-    fragments.push(`<th>${imageElement}<br>${treatyInfo?.name ?? headerItem.name}</th>`);
+    const className = imageElement.length > 0 ? 'treaty-header' : ''
+    fragments.push(`<th class='${className}'>${imageElement}<br>${treatyInfo?.name ?? headerItem.name}</th>`);
   }
   fragments.push("</tr>");
   fragments.push("<tr class='header'>");
