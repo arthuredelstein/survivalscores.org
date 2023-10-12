@@ -85,7 +85,7 @@ const tabulate = (inputs, aggregatedData, population) => {
   //const treatyList = [...other_un_treaties.map(t => t.code),
   //  ...disarmament_treaties.map(t => t.code)];
   const nwfzList = nwfz_treaties.map(t => t.code);
-  const headerNames = ["", "Country", "Country Score", "Population", ...treatyList];
+  const headerNames = ["", "Country", "Score", "Population", ...treatyList];
   let rows = [];
   const treatyCount = {};
   for (const [country_code, treatyData] of Object.entries(aggregatedData)) {
