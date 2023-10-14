@@ -25,7 +25,7 @@ const render = (html) => {
   const js = loadJs();
   const css = fs.readFileSync("./main.css").toString();
   const htmlPage = page({css, js, content: html});
-  fs.writeFileSync("index.html", htmlPage);
+  fs.writeFileSync("./build/index.html", htmlPage);
 };
 
 const treatyList = [
@@ -145,7 +145,6 @@ un.org/Pages/ParticipationStatus.aspx</a> on [date on which the material was acc
 const htmlTable = ({ header, rows }) => {
   const fragments = [];
   const total = rows.length;
-  fragments.push("<div class='table-container'>")
   fragments.push("<table>");
   fragments.push("<thead>");
   fragments.push("<tr class='header'>");
@@ -188,7 +187,6 @@ const htmlTable = ({ header, rows }) => {
   }
   fragments.push("</tbody>");
   fragments.push("</table>");
-  fragments.push("</div");
   return fragments.join("");
 };
 
@@ -199,7 +197,7 @@ const main = () => {
   delete aggregated.EU;
   delete aggregated.XX;
   const { rows, header } = tabulate(inputs(), aggregated, population);
-  render(htmlHeading() + htmlTable({ rows, header }) + htmlFooter());
+  render(htmlHeading() + "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter() +   "</div>");
 };
 
 main();

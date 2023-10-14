@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "render-dev": "npx live-server . & npx nodemon --ext js,css --watch . render.js"
+    "render-dev": "npx live-server ./build/ & npx nodemon --ext js,css --watch . render.js"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +25,7 @@
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.4",
-    "eslint-plugin-promise": "^6.0.0"
+    "eslint-plugin-promise": "^6.0.0",
+    "gh-pages": "^6.0.0"
   }
 }
