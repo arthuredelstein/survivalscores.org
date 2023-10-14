@@ -143,6 +143,7 @@ un.org/Pages/ParticipationStatus.aspx</a> on [date on which the material was acc
 const htmlTable = ({ header, rows }) => {
   const fragments = [];
   const total = rows.length;
+  fragments.push("<div class='table-container'>")
   fragments.push("<table>");
   fragments.push("<thead>");
   fragments.push("<tr class='header'>");
@@ -185,6 +186,7 @@ const htmlTable = ({ header, rows }) => {
   }
   fragments.push("</tbody>");
   fragments.push("</table>");
+  fragments.push("</div");
   return fragments.join("");
 };
 
