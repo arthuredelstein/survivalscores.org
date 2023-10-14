@@ -35,10 +35,10 @@ const treatyList = [
 const findNwfzMembership = (treatyData, nwfzList) => {
   for (const nwfz of nwfzList) {
     if (treatyData[nwfz] && treatyData[nwfz].joined) {
-      return treatyData[nwfz].joined;
+      return { joined: treatyData[nwfz].joined, nwfz } ;
     }
   }
-  return false;
+  return { joined: false };
 };
 
 const convertCharacter = (char) => {
@@ -54,14 +54,14 @@ const flagEmojiHtml = (country_code) => {
   return country_code.split("").map(convertCharacter).join("");
 };
 
-const composeDescription = ({country, treaty, joining_mechanism, joined, signed}) => {
+const composeDescription = ({country, treaty, nwfz, joining_mechanism, joined, signed}) => {
   let description = "";
   const isNwfz = treaty === "nwfz";
-  const { name: treatyName } = treatyInfoByCode()[treaty];
+  const { name: treatyName } = treatyInfoByCode()[isNwfz ? (nwfz ?? "nwfz"): treaty];
   if (!joined) {
     description = `${country} has not yet joined ${isNwfz ? "a" : "the"} ${treatyName}.`;
   } else {
-    const treatyOrNwfzName = isNwfz ? "NWFZ" : treatyName;
+    const treatyOrNwfzName = treatyName;
     description = country;
     let treatyMentioned = false;
     if (signed) {
@@ -96,9 +96,11 @@ const tabulate = (inputs, aggregatedData, population) => {
     const populationItem = { value: population[country_code], row_header: true };
     let memberCount = 0;
     for (const treaty of treatyList) {
-      let joined;
+      let joined, nwfz;
       if (treaty === "nwfz") {
-        joined = findNwfzMembership(treatyData, nwfzList);
+        let found = findNwfzMembership(treatyData, nwfzList);
+        joined = found.joined;
+        nwfz = found.nwfz;
       } else {
         joined = treatyData[treaty] && treatyData[treaty].joined;
       }
@@ -108,7 +110,7 @@ const tabulate = (inputs, aggregatedData, population) => {
       }
       const value = joined ? "yes" : "no";
       const { joining_mechanism, signed } = treatyData[treaty] ?? {};
-      const description = composeDescription({country, treaty, joined, joining_mechanism, signed});
+      const description = composeDescription({country, treaty, nwfz, joined, joining_mechanism, signed});
       row.push({ description, value });
     }
     const countryScoreItem = {
@@ -149,7 +151,6 @@ const htmlTable = ({ header, rows }) => {
   fragments.push("<tr class='header'>");
   for (const headerItem of header) {
     const treatyInfo = treatyInfoByCode()[headerItem.name];
-    console.log(`'${headerItem.name}'`, treatyInfo);
     const logo = treatyInfo ? treatyInfo.logo : undefined;
     const imageElement = logo ? `<img src='./images/${logo}' height=48>` : '';
     const className = imageElement.length > 0 ? 'treaty-header' : ''
@@ -194,7 +195,6 @@ const htmlTable = ({ header, rows }) => {
 const main = () => {
   const aggregated = JSON.parse(fs.readFileSync("aggregated.json").toString());
   const population = JSON.parse(fs.readFileSync("population.json").toString());
-  //console.log(population);
   delete aggregated.EU;
   delete aggregated.XX;
   const { rows, header } = tabulate(inputs(), aggregated, population);
