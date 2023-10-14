@@ -177,10 +177,11 @@ const htmlTable = ({ header, rows }) => {
   for (const row of rows) {
     fragments.push(`<tr class='data'>`);
     for (const cell of row) {
+      const tooltip = cell.description ? `title="${cell.description}"` : "";
       if (cell.row_header) {
-        fragments.push(`<td title="${cell.description}" class="row_header">${cell.value}</td>`);
+        fragments.push(`<td ${tooltip} class="row_header">${cell.value}</td>`);
       } else {
-        fragments.push(`<td title="${cell.description}" class="${cell.value === "yes" ? "good" : "bad"}">&nbsp;</td>`);
+        fragments.push(`<td ${tooltip} class="${cell.value === "yes" ? "good" : "bad"}">&nbsp;</td>`);
       }
     }
     fragments.push("</tr>");
