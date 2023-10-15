@@ -28,7 +28,7 @@ const aggregate = (rawData) => {
   return results;
 };
 
-const collectAllData = async () => {
+export const collectAllData = async () => {
   const inputs = readYAML("inputs.yaml");
   const [rawTreatyData, populationData] = await Promise.all([
     getAllData(inputs),

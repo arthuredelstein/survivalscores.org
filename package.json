@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "render-dev": "npx live-server ./build/ & npx nodemon --ext js,css --watch . render.js",
-    "publish": "npx gh-pages -d build"
+    "publish": "npx gh-pages -d build",
+    "build": "node index.js"
   },
   "author": "",
   "license": "ISC",

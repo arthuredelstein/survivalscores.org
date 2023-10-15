@@ -1,6 +1,7 @@
 import fs from "fs";
 import { inputs, codeToCountry, treatyInfoByCode } from "./utils.js";
 import _ from "lodash";
+import esMain from 'es-main';
 
 const page = ({css, js, content}) => `
 <!DOCTYPE html>
@@ -8,7 +9,7 @@ const page = ({css, js, content}) => `
  <head>
   <title>Key Treaties for Human Survival</title>
   <meta charset="utf8"/>
-  <meta name="format-detection" content="telephone=no"/>
+  <meta name="format-detection" content="telephone=no" />
   <style>${css}</style>
   <script>${js}</script>
  </head>
@@ -20,12 +21,14 @@ const page = ({css, js, content}) => `
 
 const loadJs = () => fs.readFileSync("./script.js");
 
-const render = (html) => {
+const render = (filename, html) => {
   //  consolee.log(aggregated);
   const js = loadJs();
   const css = fs.readFileSync("./main.css").toString();
   const htmlPage = page({css, js, content: html});
-  fs.writeFileSync("./build/index.html", htmlPage);
+  const path = `./build/${filename}`;
+  fs.writeFileSync(path, htmlPage);
+  console.log(`wrote ${path}`);
 };
 
 const treatyList = [
@@ -191,13 +194,19 @@ const htmlTable = ({ header, rows }) => {
 };
 
 
+export const renderSite = ({aggregatedData, populationData}) => {
+  delete aggregatedData.EU;
+  delete aggregatedData.XX;
+  const { rows, header } = tabulate(inputs(), aggregatedData, populationData);
+  render("index.html", htmlHeading() + "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter() +   "</div>");
+};
+
 const main = () => {
   const aggregated = JSON.parse(fs.readFileSync("aggregated.json").toString());
   const population = JSON.parse(fs.readFileSync("population.json").toString());
-  delete aggregated.EU;
-  delete aggregated.XX;
-  const { rows, header } = tabulate(inputs(), aggregated, population);
-  render(htmlHeading() + "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter() +   "</div>");
+  renderSite({ aggregated, population });
 };
 
-main();
+if (esMain(import.meta)) {
+  main();
+}
