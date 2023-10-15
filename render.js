@@ -7,7 +7,7 @@ const page = ({css, js, content }) => `
 <!DOCTYPE html>
 <html>
  <head>
-  <title>SurvivalScores.org: Key Treaties for Human Survival</title>
+  <title>SurvivalScores.org: Monitoring treaties critical to the survival of humanity</title>
   <meta charset="utf8"/>
   <meta name="format-detection" content="telephone=no" />
   <style>${css}</style>
@@ -131,7 +131,7 @@ const tabulate = (inputs, aggregatedData, population) => {
 
 
 const htmlHeading = () =>
-  `<div class='title'><h1>SurvivalScores.org</h1><h3>Monitoring Treaties Critical to the Survival of Humanity</h3><div id='updated'></div></div>`
+  `<div class='title'><h1><img id='logo' src='./images/survivalscores_logo.svg'>SurvivalScores.org</h1><h3>Monitoring treaties critical to the survival of humanity</h3><div id='updated'></div></div>`
 
 const htmlFooter = (dataDate) => `
   <div class="footer"><b>Data sources</b><br>
