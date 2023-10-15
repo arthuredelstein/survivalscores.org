@@ -135,12 +135,13 @@ const htmlHeading = () =>
 
 const htmlFooter = (dataDate) => `
   <div class="footer"><b>Data sources</b><br>
-    Data presented in this table was retrieved at ${(new Date(dataDate)).toISOString()} from live databases maintained by the United Nations:
+    Data presented in this table was retrieved from live databases maintained by the United Nations:
     <ul>
       <li><a href="https://treaties.unoda.org/">Disarmament Treaties Database</a>, United Nations Office for Disarmament Affairs</li>
       <li><a href="https://treaties.un.org/Pages/ParticipationStatus.aspx">Multilateral Treaties Deposited with the Secretary-General</a>, United Nations, New York</li>
       <li><a href="https://data.un.org/">UNdata</a>, United Nations Statistics Division</li>
     </ul>
+    Data retrieved at ${(new Date(dataDate)).toISOString()}
   </div>
 `;
 
