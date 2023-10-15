@@ -7,7 +7,7 @@ const page = ({css, js, content}) => `
 <!DOCTYPE html>
 <html>
  <head>
-  <title>SurvivalScores.org: Key Treaties for Human Survival!</title>
+  <title>SurvivalScores.org: Key Treaties for Human Survival</title>
   <meta charset="utf8"/>
   <meta name="format-detection" content="telephone=no" />
   <style>${css}</style>
