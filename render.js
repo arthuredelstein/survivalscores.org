@@ -142,6 +142,7 @@ const htmlFooter = () => `
 un.org/Pages/ParticipationStatus.aspx</a> on [date on which the material was accessed]</li>
       <li><a href="https://data.un.org/">UNdata</a>, United Nations Statistics Division</li>
     </ul>
+    Updated ${(new Date()).toISOString()}.
   </div>
 `;
 
