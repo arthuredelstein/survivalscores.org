@@ -96,6 +96,10 @@ th {
 th.treaty-header {
   width: 120px;
   min-width: 100px;
+  vertical-align: top;
+}
+th.data-header {
+  vertical-align: bottom;
 }
 td, th {
   cursor: pointer;
@@ -195,9 +199,6 @@ h3 {
   top: 0px;
   height: 180px;
   position: fixed;
-}
-.header {
-  vertical-align: bottom;
 }
 h1 {
   font-size: 48px;
