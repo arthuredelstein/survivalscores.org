@@ -15,10 +15,10 @@ td {
   cursor: pointer;
 }
 td:first-child, th:first-child {
-  border-radius: 15px 0px 0px 15px;
+  border-radius: 5px 0px 0px 5px;
 }
 td:last-child, th:last-child {
-  border-radius: 0px 15px 15px 0px;
+  border-radius: 0px 5px 5px 0px;
 }
 td:nth-child(2) {
   text-align: left;
