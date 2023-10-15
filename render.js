@@ -3,7 +3,7 @@ import { inputs, codeToCountry, treatyInfoByCode } from "./utils.js";
 import _ from "lodash";
 import esMain from 'es-main';
 
-const page = ({css, js, content}) => `
+const page = ({css, js, content }) => `
 <!DOCTYPE html>
 <html>
  <head>
@@ -21,9 +21,9 @@ const page = ({css, js, content}) => `
 
 const loadJs = () => fs.readFileSync("./script.js");
 
-const render = (filename, html) => {
+const render = (filename, html, dataDate) => {
   //  consolee.log(aggregated);
-  const js = loadJs();
+  const js = `const dataDate = new Date('${dataDate}');\n` + loadJs();
   const css = fs.readFileSync("./main.css").toString();
   const htmlPage = page({css, js, content: html});
   const path = `./build/${filename}`;
@@ -131,18 +131,16 @@ const tabulate = (inputs, aggregatedData, population) => {
 
 
 const htmlHeading = () =>
-  `<div class='title'><h1>SurvivalScores.org</h1><h3>Monitoring Treaties Critical to the Survival of Humanity</h3></div>`
+  `<div class='title'><h1>SurvivalScores.org</h1><h3>Monitoring Treaties Critical to the Survival of Humanity</h3><div id='updated'></div></div>`
 
-const htmlFooter = () => `
+const htmlFooter = (dataDate) => `
   <div class="footer"><b>Data sources</b><br>
-    Data presented in this table is updated from live databases maintained by the United Nations:
+    Data presented in this table was retrieved at ${(new Date(dataDate)).toISOString()} from live databases maintained by the United Nations:
     <ul>
       <li><a href="https://treaties.unoda.org/">Disarmament Treaties Database</a>, United Nations Office for Disarmament Affairs</li>
-      <li>Multilateral Treaties Deposited with the Secretary-General, United Nations, New York, as available on <a href="https://treaties.un.org/Pages/ParticipationStatus.aspx">https://treaties.\
-un.org/Pages/ParticipationStatus.aspx</a> on [date on which the material was accessed]</li>
+      <li><a href="https://treaties.un.org/Pages/ParticipationStatus.aspx">Multilateral Treaties Deposited with the Secretary-General</a>, United Nations, New York</li>
       <li><a href="https://data.un.org/">UNdata</a>, United Nations Statistics Division</li>
     </ul>
-    Updated ${(new Date()).toISOString()}.
   </div>
 `;
 
@@ -195,17 +193,18 @@ const htmlTable = ({ header, rows }) => {
 };
 
 
-export const renderSite = ({aggregatedData, populationData}) => {
+export const renderSite = ({dataDate, aggregatedData, populationData}) => {
   delete aggregatedData.EU;
   delete aggregatedData.XX;
   const { rows, header } = tabulate(inputs(), aggregatedData, populationData);
-  render("index.html", htmlHeading() + "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter() +   "</div>");
+  render("index.html", htmlHeading() + "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter(dataDate) + "</div>", dataDate);
 };
 
 const main = () => {
-  const aggregated = JSON.parse(fs.readFileSync("aggregated.json").toString());
-  const population = JSON.parse(fs.readFileSync("population.json").toString());
-  renderSite({ aggregated, population });
+  const aggregatedData = JSON.parse(fs.readFileSync("aggregated.json").toString());
+  const populationData = JSON.parse(fs.readFileSync("population.json").toString());
+  const dataDate = '2010-01-01T00:00:00Z';
+  renderSite({ aggregatedData, populationData, dataDate });
 };
 
 if (esMain(import.meta)) {

@@ -52,6 +52,8 @@ const sortColumn = (columnIndex) => {
 
 window.addEventListener("DOMContentLoaded", (e) => {
   const headers = [...document.querySelectorAll("thead tr th.sort-arrows")];
+  const updatedElement = document.getElementById("updated");
+  updatedElement.innerText = "As of " + dataDate.toLocaleDateString();
   for (let i = 0; i < headers.length; ++i) {
     headers[i].addEventListener("click", (e) => {
       sortColumn(i);

@@ -167,7 +167,7 @@ thead {
 }
 h3 {
   font-size: 16px;
-  font-style: italic;
+  font-style: normal;
   font-weight: normal;
 }
 .title {
@@ -195,4 +195,13 @@ h3 {
 }
 h1 {
   font-size: 48px;
+  margin-bottom: 8px;
+}
+#updated {
+  font-style: italic;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 200px;
+  height: 30px;
 }
