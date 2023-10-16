@@ -10,6 +10,8 @@ const page = ({css, js, content }) => `
   <title>SurvivalScores.org: Monitoring treaties critical to the survival of humanity</title>
   <meta charset="utf8"/>
   <meta name="format-detection" content="telephone=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.7" />
+  <link rel="icon" type="image/x-icon" href="./images/survivalscores_logo_dark.svg">
   <style>${css}</style>
   <script>${js}</script>
  </head>

@@ -41,7 +41,7 @@ td:nth-child(2) {
   left: 30px;
   z-index: 10;
 }
-td:nth-child(3) {
+/*td:nth-child(3) {
   position: sticky;
   left: 140px;
   z-index: 10;
@@ -51,6 +51,7 @@ td:nth-child(4) {
   left: 200px;
   z-index: 10;
 }
+*/
 th:nth-child(1) {
   position: sticky;
   left: 0px;
@@ -61,6 +62,7 @@ th:nth-child(2) {
   left: 30px;
   z-index: 20;
 }
+/*
 th:nth-child(3) {
   position: sticky;
   left: 140px;
@@ -71,6 +73,7 @@ th:nth-child(4) {
   left: 200px;
   z-index: 20;
 }
+*/
 .table-container {
   padding: 10px;
   background-color: white;
@@ -188,7 +191,7 @@ h3 {
   padding-left: 10px;
   text-align: center;
   background-image: url("./images/PIA00076~small.jpg");
-  background-position-x: -40px;
+  background-position-x: -140px;
   background-position-y: center;
   background-size: 450px;
   background-repeat: no-repeat;
