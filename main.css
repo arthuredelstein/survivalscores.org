@@ -86,8 +86,7 @@ th {
   text-align: center;
   margin: 0px;
   border: 0px;
-  padding: 5px;
-  padding: 5px 10px;
+  padding: 5px 8px;
   hyphens: auto;
   flex-direction: column;
   cursor: pointer;
@@ -95,7 +94,7 @@ th {
 }
 th.treaty-header {
   width: 120px;
-  min-width: 100px;
+  min-width: 50px;
   vertical-align: top;
 }
 th.data-header {
