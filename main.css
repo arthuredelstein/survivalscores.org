@@ -178,7 +178,7 @@ thead {
   padding-right: 0.6em;
 }
 h3 {
-  font-size: 18px;
+  font-size: calc(0.4 * max(min(4vw, 48px), 36px));
   font-style: italic;
   font-weight: normal;
 }
@@ -191,7 +191,7 @@ h3 {
   padding-left: 10px;
   text-align: center;
   background-image: url("./images/PIA00076~small.jpg");
-  background-position-x: -0px;
+  background-position-x: calc(-550px + 40vw);
   background-position-y: center;
   background-size: 450px;
   background-repeat: no-repeat;
@@ -203,7 +203,7 @@ h3 {
   position: fixed;
 }
 h1 {
-  font-size: 48px;
+  font-size: max(min(4vw, 48px), 36px);
   margin-bottom: 8px;
   color:white;
 }
@@ -217,6 +217,6 @@ h1 {
 }
 #logo {
   padding-right: 10px;
-  transform: translate(0px, 18px);
-  width: 80px;
+  transform: translate(0px, calc(0.15 * max(min(4vw, 48px), 36px)));
+  width: calc(1.2 * max(min(4vw, 48px), 36px));
 }
