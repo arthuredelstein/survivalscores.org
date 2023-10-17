@@ -2,6 +2,7 @@ import fs from "fs";
 import { inputs, codeToCountry, treatyInfoByCode } from "./utils.js";
 import _ from "lodash";
 import esMain from 'es-main';
+import captureWebsite from 'capture-website';
 
 const page = ({css, js, content }) => `
 <!DOCTYPE html>
@@ -14,12 +15,27 @@ const page = ({css, js, content }) => `
   <link rel="icon" type="image/x-icon" href="./images/survivalscores_logo_dark.svg">
   <style>${css}</style>
   <script>${js}</script>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta property="og:image" content="https://survivalscores.org/index-preview.png"/>
+  <meta property="og:title" content="Is humanity doing its best?"/>
+  <meta property="og:description" content="Monitoring treaties critical to human survival."/>
+  <meta property="og:type" content="website"/>
  </head>
  <body>
   ${content}
  </body>
 </html>
 `;
+
+const createPreviewImage = async (htmlFile, pngFile) => {
+  await captureWebsite.file(htmlFile, pngFile, {
+    width: 1280,
+    height: 669,
+    scaleFactor: 0.625,
+    overwrite: true
+  });
+  console.log('wrote', pngFile);
+};
 
 const loadJs = () => fs.readFileSync("./script.js");
 
@@ -203,11 +219,12 @@ export const renderSite = ({dataDate, aggregatedData, populationData}) => {
   render("index.html", htmlHeading() + "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter(dataDate) + "</div>", dataDate);
 };
 
-const main = () => {
+const main = async () => {
   const aggregatedData = JSON.parse(fs.readFileSync("aggregated.json").toString());
   const populationData = JSON.parse(fs.readFileSync("population.json").toString());
   const dataDate = '2010-01-01T00:00:00Z';
   renderSite({ aggregatedData, populationData, dataDate });
+  await createPreviewImage("./build/index.html", "./build/index-preview.png");
 };
 
 if (esMain(import.meta)) {

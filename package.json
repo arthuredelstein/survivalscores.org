@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "capture-website": "^3.2.0",
     "csv-parse": "^5.3.0",
     "es-main": "^1.2.0",
     "jsdom": "^20.0.0",
