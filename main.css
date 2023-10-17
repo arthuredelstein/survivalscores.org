@@ -203,7 +203,7 @@ h3 {
   position: fixed;
 }
 h1 {
-  font-size: max(min(4vw, 48px), 36px);
+  font-size: max(min(4vw, 48px), 40px);
   margin-bottom: 8px;
   color:white;
 }
