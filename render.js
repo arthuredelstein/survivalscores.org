@@ -151,13 +151,14 @@ const tabulate = (inputs, aggregatedData, population) => {
 const htmlHeading = () =>
   `<div class='title'><h1><img id='logo' src='./images/survivalscores_logo.svg'>SurvivalScores.org</h1>
     <h3>Monitoring treaties critical to the survival of humanity</h3>
-    <div class='links'>
-      <a href="./about">About</a> |
-      <a href="https://twitter.com/survivalscores">Twitter</a> |
-      <a rel="me" href="<a rel="me" href="https://mastodon.social/@survivalscores">Mastodon</a>
-    </div>
     <div id='updated'></div>
-  </div>`
+    <div class='links'>
+    <a href="./about">About</a> &#x2022;
+    <a href="https://twitter.com/survivalscores">Twitter</a> &#x2022;
+    <a rel="me" href="<a rel="me" href="https://mastodon.social/@survivalscores">Mastodon</a>
+  </div>
+  </div>
+`;
 
 const htmlFooter = (dataDate) => `
   <div class="footer"><b>Data sources</b><br>
