@@ -212,21 +212,21 @@ const htmlTable = ({ header, rows }) => {
 };
 
 
-export const renderSite = ({dataDate, aggregatedData, populationData}) => {
+export const renderSite = async ({dataDate, aggregatedData, populationData}) => {
   delete aggregatedData.EU;
   delete aggregatedData.XX;
   const { rows, header } = tabulate(inputs(), aggregatedData, populationData);
   render("index.html", htmlHeading() + "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter(dataDate) + "</div>", dataDate);
+  await createPreviewImage("./build/index.html", "./build/index-preview.png");
 };
 
 const main = async () => {
   const aggregatedData = JSON.parse(fs.readFileSync("aggregated.json").toString());
   const populationData = JSON.parse(fs.readFileSync("population.json").toString());
   const dataDate = '2010-01-01T00:00:00Z';
-  renderSite({ aggregatedData, populationData, dataDate });
-  await createPreviewImage("./build/index.html", "./build/index-preview.png");
+  await renderSite({ aggregatedData, populationData, dataDate });
 };
 
 if (esMain(import.meta)) {
-  main();
+  await main();
 }
