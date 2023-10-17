@@ -155,7 +155,7 @@ const htmlHeading = () =>
     <div class='links'>
     <a href="./about">About</a> &#x2022;
     <a href="https://twitter.com/survivalscores">Twitter</a> &#x2022;
-    <a rel="me" href="<a rel="me" href="https://mastodon.social/@survivalscores">Mastodon</a>
+    <a rel="me" href="https://mastodon.social/@survivalscores">Mastodon</a>
   </div>
   </div>
 `;
