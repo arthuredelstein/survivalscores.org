@@ -13,6 +13,9 @@ const page = ({css, js, content }) => `
   <meta name="format-detection" content="telephone=no" />
   <meta name="viewport" content="width=device-width, initial-scale=0.7" />
   <link rel="icon" type="image/x-icon" href="./images/survivalscores_logo_dark.svg">
+  <link rel="preload" href="./images/sortArrowsDown.svg" as="image">
+  <link rel="preload" href="./images/sortArrowsUp.svg" as="image">
+  <link rel="preload" href="./images/sortArrowsUnsorted.svg" as="image">
   <style>${css}</style>
   <script>${js}</script>
   <meta name="twitter:card" content="summary_large_image"/>
