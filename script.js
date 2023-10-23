@@ -1,3 +1,4 @@
+import { polyfillCountryFlagEmojis } from './country-flag-emoji-polyfill/country-flag-emoji-polyfill.js';
 
 // Initially will be sorted by population
 let state = { sortedColumn: 1, ascending: true };
@@ -51,6 +52,8 @@ const sortColumn = (columnIndex) => {
 }
 
 window.addEventListener("DOMContentLoaded", (e) => {
+  console.log("DOMContentLoaded");
+  polyfillCountryFlagEmojis();
   const headers = [...document.querySelectorAll("thead tr th.sort-arrows")];
   const updatedElement = document.getElementById("updated");
   updatedElement.innerText = "As of " + dataDate.toLocaleDateString();
@@ -61,4 +64,3 @@ window.addEventListener("DOMContentLoaded", (e) => {
   }
   sortColumn(3);
 });
-

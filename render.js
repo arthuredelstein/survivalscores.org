@@ -17,7 +17,7 @@ const page = ({css, js, content }) => `
   <link rel="preload" href="./images/sortArrowsUp.svg" as="image">
   <link rel="preload" href="./images/sortArrowsUnsorted.svg" as="image">
   <style>${css}</style>
-  <script>${js}</script>
+  <script type="module">${js}</script>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta property="og:image" content="https://survivalscores.org/index-preview.png"/>
   <meta property="og:title" content="Is humanity doing its best?"/>
@@ -115,9 +115,9 @@ const tabulate = (inputs, aggregatedData, population) => {
   for (const [country_code, treatyData] of Object.entries(aggregatedData)) {
     const row = [];
     const country = codeToCountry(country_code);
-    const flagItem = {value: flagEmojiHtml(country_code), row_header: true };
-    const countryItem = { value: country, row_header: true, };
-    const populationItem = { value: population[country_code], row_header: true };
+    const flagItem = {value: flagEmojiHtml(country_code), classValue: "flag" };
+    const countryItem = { value: country, classValue: "row_header" };
+    const populationItem = { value: population[country_code], classValue: "row_header" };
     let memberCount = 0;
     for (const treaty of treatyList) {
       let joined, nwfz;
@@ -139,7 +139,7 @@ const tabulate = (inputs, aggregatedData, population) => {
     }
     const countryScoreItem = {
       value: `${memberCount}/${treatyList.length}`,
-      row_header: true,
+      classValue: "row_header",
       description: ""
     };
     rows.push([flagItem, countryItem, countryScoreItem, populationItem, ...row]);
@@ -210,8 +210,8 @@ const htmlTable = ({ header, rows }) => {
     fragments.push(`<tr class='data'>`);
     for (const cell of row) {
       const tooltip = cell.description ? `title="${cell.description}"` : "";
-      if (cell.row_header) {
-        fragments.push(`<td ${tooltip} class="row_header">${cell.value}</td>`);
+      if (cell.classValue) {
+        fragments.push(`<td ${tooltip} class="${cell.classValue}">${cell.value}</td>`);
       } else {
         fragments.push(`<td ${tooltip} class="${cell.value === "yes" ? "good" : "bad"}">&nbsp;</td>`);
       }

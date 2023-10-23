@@ -151,8 +151,7 @@ thead {
   background-color: #eee;
 }
 .flag {
-  opacity: 60%;
-  padding-right: 0.6em;
+  font-family: "Twemoji Country Flags", serif;
 }
 h3 {
   font-size: calc(0.5 * max(min(4vw, 48px), 40px));
