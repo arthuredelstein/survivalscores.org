@@ -152,8 +152,11 @@ const tabulate = (inputs, aggregatedData, population) => {
 
 
 const htmlHeading = () =>
-  `<div class='title'><h1><img id='logo' src='./images/survivalscores_logo.svg'>SurvivalScores.org</h1>
-    <h3>Monitoring treaties critical to the survival of humanity</h3>
+  `<div class='title'>
+    <div class='title-group'>
+      <div class='title-text'><img id='logo' src='./images/survivalscores_logo.svg'>SurvivalScores.org</div>
+      <div class='tagline-text'>Monitoring treaties critical to the survival of humanity</div>
+    </div>
     <div id='updated'></div>
     <div class='links'>
     <a href="./about">About</a> &#x2022;

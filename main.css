@@ -153,11 +153,6 @@ thead {
 .flag {
   font-family: "Twemoji Country Flags", serif;
 }
-h3 {
-  font-size: calc(0.5 * max(min(4vw, 48px), 40px));
-  font-style: italic;
-  font-weight: normal;
-}
 .title {
   margin: 0px;
   color: white;
@@ -178,6 +173,25 @@ h3 {
   height: 180px;
   position: fixed;
 }
+.title-group {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color:white;
+}
+.title-text {
+  font-size: max(min(4vw, 48px), 40px);
+  font-weight: bold;
+  margin: 5px;
+}
+.tagline-text {
+  font-size: calc(0.5 * max(min(4vw, 48px), 40px));
+  font-style: italic;
+  font-weight: normal;
+  margin: 5px;
+}
 .links {
   position: absolute;
   top: 10px;
@@ -194,11 +208,6 @@ h3 {
 .links a:visited {
   color: white;
   text-decoration-line: none;
-}
-h1 {
-  font-size: max(min(4vw, 48px), 40px);
-  margin-bottom: 8px;
-  color:white;
 }
 #updated {
   font-style: normal;
