@@ -133,21 +133,21 @@ const gatherDisarmamentData = (rawData) => {
     results[country_code] ||= {}
     const result = results[country_code]
     const date = formatDate(new Date(action.date))
-    const joining_mechanism = action.type
-    if (joining_mechanism === 'SIG') {
+    const joiningMechanism = action.type
+    if (joiningMechanism === 'SIG') {
       result.signed = date
     }
-    if (joining_mechanism === 'RAT') {
+    if (joiningMechanism === 'RAT') {
       result.joined = date
-      result.joining_mechanism = 'ratified'
+      result.joiningMechanism = 'ratified'
     }
-    if (joining_mechanism === 'ACC') {
+    if (joiningMechanism === 'ACC') {
       result.joined = date
-      result.joining_mechanism = 'acceded'
+      result.joiningMechanism = 'acceded'
     }
-    if (joining_mechanism === 'SUC') {
+    if (joiningMechanism === 'SUC') {
       result.joined = date
-      result.joining_mechanism = 'succeeded'
+      result.joiningMechanism = 'succeeded'
     }
   }
   return results

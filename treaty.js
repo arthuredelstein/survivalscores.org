@@ -36,16 +36,16 @@ const getUNDataFromRow = (row, columnCount) => {
   if (columnCount === 3) {
     const { date: joined, tag: tagJoined } = extractData(td2)
     const { date: signed } = extractData(td1)
-    const joining_mechanism = mechanismFromTag(tagJoined)
+    const joiningMechanism = mechanismFromTag(tagJoined)
     return [
       country_code,
-      { signed, joined, joining_mechanism }]
+      { signed, joined, joiningMechanism }]
   } else if (columnCount === 2) {
     const { date: joined, tag } = extractData(td1)
-    const joining_mechanism = mechanismFromTag(tag)
+    const joiningMechanism = mechanismFromTag(tag)
     return [
       country_code,
-      { joined, tag, joining_mechanism }]
+      { joined, tag, joiningMechanism }]
   }
 }
 
