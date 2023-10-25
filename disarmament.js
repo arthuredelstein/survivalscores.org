@@ -126,9 +126,10 @@ const gatherDisarmamentData = (rawData) => {
   const actions = rawData.actions_
   const results = {}
   for (const action of actions) {
-    let countryCode = action.state.country_.country_country_name.countryname_country_code_2
-    if (countryCode === 'XX') {
-      countryCode = countryToCode(action.state.country_.country_country_name.countryname_official_short_name)
+    console.log(action)
+    let countryCode = action.state.country_.country_country_name?.countryname_country_code_2
+    if (countryCode === undefined || countryCode === 'XX') {
+      countryCode = countryToCode(action.state.country_.country_country_name?.countryname_official_short_name ?? action.state.country_.country_persistent_name)
     }
     results[countryCode] ||= {}
     const result = results[countryCode]
@@ -155,6 +156,7 @@ const gatherDisarmamentData = (rawData) => {
 
 const disarmamentTreatyInfo = async (treaty) => {
   const raw = await rawDisarmamentTreatyData(treaty.code)
+  console.log(raw)
   return gatherDisarmamentData(raw)
 }
 
