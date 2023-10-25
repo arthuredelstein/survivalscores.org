@@ -10,7 +10,7 @@ function isEmojiSupported (unicode) {
 function setCacheHandler (store) {
   cache = store
 }
-var isSupported = (function () {
+const isSupported = (function () {
   let ctx = null
   try {
     ctx = document.createElement('canvas')
