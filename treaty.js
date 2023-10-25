@@ -72,8 +72,8 @@ const unTreatyInfo = async (treaty) => {
   return Object.fromEntries(rows.slice(1).map(row => getUNDataFromRow(row, columnCount)))
 }
 
-export const other = async (other_un_treaties) =>
+export const other = async (otherUNTreaties) =>
   mapParallelToObject(async treaty => {
     return [treaty.code,
       await unTreatyInfo(treaty)]
-  }, other_un_treaties)
+  }, otherUNTreaties)

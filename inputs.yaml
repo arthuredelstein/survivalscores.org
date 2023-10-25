@@ -12,7 +12,7 @@ disarmament_treaties:
   - code: "bwc"
     name: "Biological Weapons Convention"
     logo: "bwc.svg"
-nwfz_treaties:
+nwfzTreaties:
   - code: "rarotonga"
     name: "South Pacific Nuclear-Free Zone Treaty"
   - code: "pelindaba"
@@ -23,7 +23,7 @@ nwfz_treaties:
     name: "Southeast Asian Nuclear-Weapon-Free Zone Treaty"
   - code: "tlatelolco"
     name: "Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean"
-other_un_treaties:
+otherUNTreaties:
   - code: "rome"
     name: "International Criminal Court"
     mtdsg_no: "XVIII-10"

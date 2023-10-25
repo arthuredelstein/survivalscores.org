@@ -5,11 +5,11 @@ import { populationInfo } from './population.js'
 import { other } from './treaty.js'
 
 const getAllData = async (inputs) => {
-  const { other_un_treaties, disarmament_treaties, nwfz_treaties } = inputs
+  const { otherUNTreaties, disarmament_treaties, nwfzTreaties } = inputs
   const [otherData, disarmamentData, nwfzData] = await Promise.all([
-    other(other_un_treaties),
+    other(otherUNTreaties),
     disarmament(disarmament_treaties),
-    disarmament(nwfz_treaties)
+    disarmament(nwfzTreaties)
   ])
   return Object.assign({}, otherData, disarmamentData, nwfzData)
 }

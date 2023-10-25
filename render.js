@@ -107,10 +107,10 @@ const composeDescription = ({ country, treaty, nwfz, joiningMechanism, joined, s
 }
 
 const tabulate = (inputs, aggregatedData, population) => {
-  const { other_un_treaties, disarmament_treaties, nwfz_treaties } = inputs
-  // const treatyList = [...other_un_treaties.map(t => t.code),
+  const { otherUNTreaties, disarmament_treaties, nwfzTreaties } = inputs
+  // const treatyList = [...otherUNTreaties.map(t => t.code),
   //  ...disarmament_treaties.map(t => t.code)];
-  const nwfzList = nwfz_treaties.map(t => t.code)
+  const nwfzList = nwfzTreaties.map(t => t.code)
   const headerNames = ['', 'Country', 'Score', 'Population', ...treatyList]
   let rows = []
   const treatyCount = {}
