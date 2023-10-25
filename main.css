@@ -218,3 +218,9 @@ thead {
   transform: translate(0px, calc(0.15 * max(min(4vw, 48px), 40px)));
   width: calc(1.2 * max(min(4vw, 48px), 40px));
 }
+img.treaty-logo {
+  height: 48px;
+}
+img.arrow-icon {
+  width: 16px;
+}

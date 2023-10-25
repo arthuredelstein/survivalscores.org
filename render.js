@@ -3,6 +3,7 @@ import { inputs, codeToCountry, treatyInfoByCode } from './utils.js'
 import _ from 'lodash'
 import esMain from 'es-main'
 import captureWebsite from 'capture-website'
+import cleaner from 'clean-html'
 
 const page = ({ css, js, content }) => `
 <!DOCTYPE html>
@@ -30,6 +31,8 @@ const page = ({ css, js, content }) => `
 </html>
 `
 
+const cleanHtml = (content) => new Promise(resolve => cleaner.clean(content, resolve))
+
 const createPreviewImage = async (htmlFile, pngFile) => {
   await captureWebsite.file(htmlFile, pngFile, {
     width: 1280,
@@ -42,11 +45,11 @@ const createPreviewImage = async (htmlFile, pngFile) => {
 
 const loadJs = () => fs.readFileSync('./script.js')
 
-const render = (filename, html, dataDate) => {
+const render = async (filename, html, dataDate) => {
   //  consolee.log(aggregated);
   const js = `const dataDate = new Date('${dataDate}');\n` + loadJs()
   const css = fs.readFileSync('./main.css').toString()
-  const htmlPage = page({ css, js, content: html })
+  const htmlPage = await cleanHtml(page({ css, js, content: html }))
   const path = `./build/${filename}`
   fs.writeFileSync(path, htmlPage)
   console.log(`wrote ${path}`)
@@ -188,7 +191,7 @@ const htmlTable = ({ header, rows }) => {
   for (const headerItem of header) {
     const treatyInfo = treatyInfoByCode()[headerItem.name]
     const logo = treatyInfo ? treatyInfo.logo : undefined
-    const imageElement = logo ? `<img src='./images/${logo}' height=48>` : ''
+    const imageElement = logo ? `<img src='./images/${logo}' class='treaty-logo'>` : ''
     const className = imageElement.length > 0 ? 'treaty-header' : 'data-header'
     fragments.push(`<th class='${className}'>${imageElement}<br>${treatyInfo?.name ?? headerItem.name}</th>`)
   }
@@ -203,7 +206,7 @@ const htmlTable = ({ header, rows }) => {
   for (const headerItem of header) {
     fragments.push('<th class=\'sort-arrows\'>')
     if (headerItem.name.length > 0) {
-      fragments.push('<img src="./images/sortArrowsUnsorted.svg" width="16">')
+      fragments.push('<img src="./images/sortArrowsUnsorted.svg" class="arrow-icon">')
     }
     fragments.push('</th>')
   }
@@ -231,7 +234,7 @@ export const renderSite = async ({ dataDate, aggregatedData, populationData }) =
   delete aggregatedData.EU
   delete aggregatedData.XX
   const { rows, header } = tabulate(inputs(), aggregatedData, populationData)
-  render('index.html', htmlHeading() + "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter(dataDate) + '</div>', dataDate)
+  await render('index.html', htmlHeading() + "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter(dataDate) + '</div>', dataDate)
   await createPreviewImage('./build/index.html', './build/index-preview.png')
 }
 
