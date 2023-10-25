@@ -52,8 +52,8 @@ export const inputs = _.memoize(() => readYAML('inputs.yaml'))
 
 export const treatyInfoByCode = _.memoize(() => {
   const results = {}
-  const { disarmament_treaties, otherUNTreaties, nwfzTreaties } = inputs()
-  const list = [...disarmament_treaties, ...otherUNTreaties,
+  const { disarmamentTreaties, otherUNTreaties, nwfzTreaties } = inputs()
+  const list = [...disarmamentTreaties, ...otherUNTreaties,
     ...nwfzTreaties,
     { code: 'nwfz', name: 'Nuclear-Weapon-Free Zone', logo: 'nwfz.jpeg' }]
   for (const item of list) {

@@ -1,5 +1,5 @@
 ---
-disarmament_treaties:
+disarmamentTreaties:
   - code: "tpnw"
     name: "Prohibition of Nuclear Weapons"
     logo: "tpnw.svg"
