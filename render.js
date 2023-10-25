@@ -71,14 +71,14 @@ const convertCharacter = (char) => {
   return `&#${newIndex};`
 }
 
-const flagEmojiHtml = (country_code) => {
-  if (country_code === 'TP') {
-    country_code = 'TL'
+const flagEmojiHtml = (countryCode) => {
+  if (countryCode === 'TP') {
+    countryCode = 'TL'
   }
-  return country_code.split('').map(convertCharacter).join('')
+  return countryCode.split('').map(convertCharacter).join('')
 }
 
-const composeDescription = ({ country, treaty, nwfz, joining_mechanism, joined, signed }) => {
+const composeDescription = ({ country, treaty, nwfz, joiningMechanism, joined, signed }) => {
   let description = ''
   const isNwfz = treaty === 'nwfz'
   const { name: treatyName } = treatyInfoByCode()[isNwfz ? (nwfz ?? 'nwfz') : treaty]
@@ -99,7 +99,7 @@ const composeDescription = ({ country, treaty, nwfz, joining_mechanism, joined, 
       approved: 'gave its approval to',
       succeeded: 'inherited membership of',
       joined: 'joined'
-    }[joining_mechanism] ?? 'joined')
+    }[joiningMechanism] ?? 'joined')
     description += treatyMentioned ? ' it' : ` the ${treatyOrNwfzName}`
     description += ` on ${joined}.`
   }
@@ -107,19 +107,19 @@ const composeDescription = ({ country, treaty, nwfz, joining_mechanism, joined, 
 }
 
 const tabulate = (inputs, aggregatedData, population) => {
-  const { other_un_treaties, disarmament_treaties, nwfz_treaties } = inputs
-  // const treatyList = [...other_un_treaties.map(t => t.code),
-  //  ...disarmament_treaties.map(t => t.code)];
-  const nwfzList = nwfz_treaties.map(t => t.code)
+  const { nwfzTreaties } = inputs
+  // const treatyList = [...otherUNTreaties.map(t => t.code),
+  //  ...disarmamentTreaties.map(t => t.code)];
+  const nwfzList = nwfzTreaties.map(t => t.code)
   const headerNames = ['', 'Country', 'Score', 'Population', ...treatyList]
   let rows = []
   const treatyCount = {}
-  for (const [country_code, treatyData] of Object.entries(aggregatedData)) {
+  for (const [countryCode, treatyData] of Object.entries(aggregatedData)) {
     const row = []
-    const country = codeToCountry(country_code)
-    const flagItem = { value: flagEmojiHtml(country_code), classValue: 'flag' }
+    const country = codeToCountry(countryCode)
+    const flagItem = { value: flagEmojiHtml(countryCode), classValue: 'flag' }
     const countryItem = { value: country, classValue: 'row_header' }
-    const populationItem = { value: population[country_code], classValue: 'row_header' }
+    const populationItem = { value: population[countryCode], classValue: 'row_header' }
     let memberCount = 0
     for (const treaty of treatyList) {
       let joined, nwfz
@@ -135,8 +135,8 @@ const tabulate = (inputs, aggregatedData, population) => {
         treatyCount[treaty] = 1 + (treatyCount[treaty] ?? 0)
       }
       const value = joined ? 'yes' : 'no'
-      const { joining_mechanism, signed } = treatyData[treaty] ?? {}
-      const description = composeDescription({ country, treaty, nwfz, joined, joining_mechanism, signed })
+      const { joiningMechanism, signed } = treatyData[treaty] ?? {}
+      const description = composeDescription({ country, treaty, nwfz, joined, joiningMechanism, signed })
       row.push({ description, value })
     }
     const countryScoreItem = {

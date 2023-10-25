@@ -26,11 +26,6 @@ const rowComparator = (row1, row2, columnIndex, reverse = false) => {
   return -reverseFactor * text1.localeCompare(text2)
 }
 
-const sortValue = (row, columnIndex) => {
-  const td = [...row.querySelectorAll('td')][columnIndex]
-  return td.innerText
-}
-
 const sortColumn = (columnIndex) => {
   if (state.sortedColumn === columnIndex) {
     state.ascending = !state.ascending
@@ -45,7 +40,7 @@ const sortColumn = (columnIndex) => {
     table.appendChild(row)
   }
   const arrowImages = [...document.querySelectorAll('thead tr th.sort-arrows img')]
-  arrowImages.forEach(img => img.src = './images/sortArrowsUnsorted.svg')
+  arrowImages.forEach(img => { img.src = './images/sortArrowsUnsorted.svg' })
   const arrowImage = arrowImages[columnIndex - 1]
 
   arrowImage.src = !state.ascending ? './images/sortArrowsDown.svg' : './images/sortArrowsUp.svg'
@@ -56,7 +51,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
   polyfillCountryFlagEmojis()
   const headers = [...document.querySelectorAll('thead tr th.sort-arrows')]
   const updatedElement = document.getElementById('updated')
-  updatedElement.innerText = 'As of ' + dataDate.toLocaleDateString()
+  updatedElement.innerText = 'As of ' + dataDate.toLocaleDateString() // eslint-disable-line no-undef
   for (let i = 0; i < headers.length; ++i) {
     headers[i].addEventListener('click', (e) => {
       sortColumn(i)

@@ -5,11 +5,11 @@ import { populationInfo } from './population.js'
 import { other } from './treaty.js'
 
 const getAllData = async (inputs) => {
-  const { other_un_treaties, disarmament_treaties, nwfz_treaties } = inputs
+  const { otherUNTreaties, disarmamentTreaties, nwfzTreaties } = inputs
   const [otherData, disarmamentData, nwfzData] = await Promise.all([
-    other(other_un_treaties),
-    disarmament(disarmament_treaties),
-    disarmament(nwfz_treaties)
+    other(otherUNTreaties),
+    disarmament(disarmamentTreaties),
+    disarmament(nwfzTreaties)
   ])
   return Object.assign({}, otherData, disarmamentData, nwfzData)
 }
@@ -17,11 +17,11 @@ const getAllData = async (inputs) => {
 const aggregate = (rawData) => {
   const results = {}
   for (const [treaty, data] of Object.entries(rawData)) {
-    for (const [country_code, { signed, joined, joining_mechanism, withdrew }] of Object.entries(data)) {
-      if (results[country_code] === undefined) {
-        results[country_code] = {}
+    for (const [countryCode, { signed, joined, joiningMechanism, withdrew }] of Object.entries(data)) {
+      if (results[countryCode] === undefined) {
+        results[countryCode] = {}
       }
-      results[country_code][treaty] = { signed, joined, joining_mechanism, withdrew }
+      results[countryCode][treaty] = { signed, joined, joiningMechanism, withdrew }
     }
   }
   return results

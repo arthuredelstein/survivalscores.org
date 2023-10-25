@@ -1,6 +1,5 @@
 import { isEmojiSupported } from './is-emoji-supported.js'
 function t (t2 = 'Twemoji Country Flags', e = './country-flag-emoji-polyfill/TwemojiCountryFlags.woff2') {
-  console.log('starting')
   if (isEmojiSupported('\u{1F60A}') && !isEmojiSupported('\u{1F1E8}\u{1F1ED}')) {
     const n = document.createElement('style')
     n.textContent = `@font-face {
