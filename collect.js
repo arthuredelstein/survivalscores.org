@@ -1,50 +1,48 @@
-
-import { readYAML, writeJsonData } from "./utils.js";
-import esMain from 'es-main';
-import { disarmament } from "./disarmament.js";
-import { populationInfo } from "./population.js";
+import { readYAML, writeJsonData } from './utils.js'
+import esMain from 'es-main'
+import { disarmament } from './disarmament.js'
+import { populationInfo } from './population.js'
 import { other } from './treaty.js'
 
 const getAllData = async (inputs) => {
-  const { other_un_treaties, disarmament_treaties, nwfz_treaties } = inputs;
+  const { other_un_treaties, disarmament_treaties, nwfz_treaties } = inputs
   const [otherData, disarmamentData, nwfzData] = await Promise.all([
     other(other_un_treaties),
     disarmament(disarmament_treaties),
-    disarmament(nwfz_treaties),
-  ]);
-  return Object.assign({}, otherData, disarmamentData, nwfzData);
-};
-
-const aggregate = (rawData) => {
-  const results = {};
-  for (const [treaty, data] of Object.entries(rawData)) {
-    for (const [ country_code, {signed, joined, joining_mechanism, withdrew }] of Object.entries(data)) {
-      if (results[country_code] === undefined) {
-        results[country_code] = {};
-      }
-      results[country_code][treaty] = { signed, joined, joining_mechanism, withdrew };
-    }
-  }
-  return results;
-};
-
-export const collectAllData = async () => {
-  const inputs = readYAML("inputs.yaml");
-  const [rawTreatyData, populationData] = await Promise.all([
-    getAllData(inputs),
-    populationInfo(),
-  ]);
-  return {rawTreatyData, populationData, aggregatedData: aggregate(rawTreatyData)};
-};
-
-const main = async () => {
-  const {rawTreatyData, populationData, aggregatedData} = await collectAllData();
-  writeJsonData("raw.json", rawTreatyData);
-  writeJsonData("population.json", populationData);
-  writeJsonData("aggregated.json", aggregatedData);
-};
-
-if (esMain(import.meta)) {
-  main();
+    disarmament(nwfz_treaties)
+  ])
+  return Object.assign({}, otherData, disarmamentData, nwfzData)
 }
 
+const aggregate = (rawData) => {
+  const results = {}
+  for (const [treaty, data] of Object.entries(rawData)) {
+    for (const [country_code, { signed, joined, joining_mechanism, withdrew }] of Object.entries(data)) {
+      if (results[country_code] === undefined) {
+        results[country_code] = {}
+      }
+      results[country_code][treaty] = { signed, joined, joining_mechanism, withdrew }
+    }
+  }
+  return results
+}
+
+export const collectAllData = async () => {
+  const inputs = readYAML('inputs.yaml')
+  const [rawTreatyData, populationData] = await Promise.all([
+    getAllData(inputs),
+    populationInfo()
+  ])
+  return { rawTreatyData, populationData, aggregatedData: aggregate(rawTreatyData) }
+}
+
+const main = async () => {
+  const { rawTreatyData, populationData, aggregatedData } = await collectAllData()
+  writeJsonData('raw.json', rawTreatyData)
+  writeJsonData('population.json', populationData)
+  writeJsonData('aggregated.json', aggregatedData)
+}
+
+if (esMain(import.meta)) {
+  main()
+}

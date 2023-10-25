@@ -1,4 +1,4 @@
-import { mapParallelToObject, formatDate, countryToCode } from "./utils.js";
+import { mapParallelToObject, formatDate, countryToCode } from './utils.js'
 
 const disarmamentGraphQLQuery = (treatyCode) => ({
   operationName: 'Treaty',
@@ -108,58 +108,58 @@ const disarmamentGraphQLQuery = (treatyCode) => ({
       __typename
     }
   }`
-});
+})
 
 const rawDisarmamentTreatyData = async (treatyCode) => {
-  const response = await fetch("https://gql-api-dataportal.unoda.org/", {
-    "headers": {
-      "content-type": "application/json",
+  const response = await fetch('https://gql-api-dataportal.unoda.org/', {
+    headers: {
+      'content-type': 'application/json'
     },
-    "body": JSON.stringify(disarmamentGraphQLQuery(treatyCode)),
-    "method": "POST",
-  });
-  const json = await response.json();
-  return json.data.treaty_.data;
+    body: JSON.stringify(disarmamentGraphQLQuery(treatyCode)),
+    method: 'POST'
+  })
+  const json = await response.json()
+  return json.data.treaty_.data
 }
 
 const gatherDisarmamentData = (rawData) => {
-  const actions = rawData.actions_;
-  const results = {};
+  const actions = rawData.actions_
+  const results = {}
   for (const action of actions) {
-    let country_code = action.state.country_.country_country_name.countryname_country_code_2;
-    if (country_code === "XX") {
-      country_code = countryToCode(action.state.country_.country_country_name.countryname_official_short_name);
+    let country_code = action.state.country_.country_country_name.countryname_country_code_2
+    if (country_code === 'XX') {
+      country_code = countryToCode(action.state.country_.country_country_name.countryname_official_short_name)
     }
-    results[country_code] ||= {};
-    const result = results[country_code];
-    const date = formatDate(new Date(action.date));
-    const joining_mechanism = action.type;
-    if (joining_mechanism === "SIG") {
-      result.signed = date;
+    results[country_code] ||= {}
+    const result = results[country_code]
+    const date = formatDate(new Date(action.date))
+    const joining_mechanism = action.type
+    if (joining_mechanism === 'SIG') {
+      result.signed = date
     }
-    if (joining_mechanism === "RAT") {
-      result.joined = date;
-      result.joining_mechanism = "ratified"
+    if (joining_mechanism === 'RAT') {
+      result.joined = date
+      result.joining_mechanism = 'ratified'
     }
-    if (joining_mechanism === "ACC") {
-      result.joined = date;
-      result.joining_mechanism = "acceded"
+    if (joining_mechanism === 'ACC') {
+      result.joined = date
+      result.joining_mechanism = 'acceded'
     }
     if (joining_mechanism === 'SUC') {
-      result.joined = date;
-      result.joining_mechanism = 'succeeded';
+      result.joined = date
+      result.joining_mechanism = 'succeeded'
     }
   }
-  return results;
+  return results
 }
 
 const disarmamentTreatyInfo = async (treaty) => {
-  const raw = await rawDisarmamentTreatyData(treaty.code);
-  return gatherDisarmamentData(raw);
-};
+  const raw = await rawDisarmamentTreatyData(treaty.code)
+  return gatherDisarmamentData(raw)
+}
 
 export const disarmament = async (treaties) =>
-      mapParallelToObject(async treaty => [
-        treaty.code,
-        await disarmamentTreatyInfo(treaty)
-      ], treaties);
+  mapParallelToObject(async treaty => [
+    treaty.code,
+    await disarmamentTreatyInfo(treaty)
+  ], treaties)
