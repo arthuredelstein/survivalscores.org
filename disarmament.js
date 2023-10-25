@@ -145,6 +145,10 @@ const gatherDisarmamentData = (rawData) => {
       result.joined = date;
       result.joining_mechanism = "acceded"
     }
+    if (joining_mechanism === 'SUC') {
+      result.joined = date;
+      result.joining_mechanism = 'succeeded';
+    }
   }
   return results;
 }
