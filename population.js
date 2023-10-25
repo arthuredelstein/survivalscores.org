@@ -16,8 +16,8 @@ const fixBrokenUtf8 = (s) => Buffer.from(s, 'ascii').toString('utf8')
 const getPopulationDataFromItem = (item) => {
   const countryName = fixBrokenUtf8(item['Country or Area'])
   const population = Math.round(parseFloat(fixBrokenUtf8(item.Value)) * 1000)
-  const country_code = countryToCode(countryName)
-  return { country_code, population }
+  const countryCode = countryToCode(countryName)
+  return { countryCode, population }
 }
 
 const getPopulationZip = async () => {
@@ -32,8 +32,8 @@ export const populationInfo = async () => {
   const result = {}
   for (const item of items) {
     try {
-      const { country_code, population } = getPopulationDataFromItem(item)
-      result[country_code] = population
+      const { countryCode, population } = getPopulationDataFromItem(item)
+      result[countryCode] = population
     } catch (e) {
       console.log(e.message)
     }

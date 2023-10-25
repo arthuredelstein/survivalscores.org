@@ -26,10 +26,10 @@ const getUNDataFromRow = (row, columnCount) => {
   if (footnote) {
     td0.removeChild(footnote)
   }
-  const country_code = countryToCode(td0.textContent.trim())
+  const countryCode = countryToCode(td0.textContent.trim())
   if (td1.textContent.startsWith('[')) {
     return [
-      country_code,
+      countryCode,
       { withdrew: true }
     ]
   }
@@ -38,13 +38,13 @@ const getUNDataFromRow = (row, columnCount) => {
     const { date: signed } = extractData(td1)
     const joiningMechanism = mechanismFromTag(tagJoined)
     return [
-      country_code,
+      countryCode,
       { signed, joined, joiningMechanism }]
   } else if (columnCount === 2) {
     const { date: joined, tag } = extractData(td1)
     const joiningMechanism = mechanismFromTag(tag)
     return [
-      country_code,
+      countryCode,
       { joined, tag, joiningMechanism }]
   }
 }

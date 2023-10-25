@@ -17,11 +17,11 @@ const getAllData = async (inputs) => {
 const aggregate = (rawData) => {
   const results = {}
   for (const [treaty, data] of Object.entries(rawData)) {
-    for (const [country_code, { signed, joined, joiningMechanism, withdrew }] of Object.entries(data)) {
-      if (results[country_code] === undefined) {
-        results[country_code] = {}
+    for (const [countryCode, { signed, joined, joiningMechanism, withdrew }] of Object.entries(data)) {
+      if (results[countryCode] === undefined) {
+        results[countryCode] = {}
       }
-      results[country_code][treaty] = { signed, joined, joiningMechanism, withdrew }
+      results[countryCode][treaty] = { signed, joined, joiningMechanism, withdrew }
     }
   }
   return results

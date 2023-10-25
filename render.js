@@ -71,11 +71,11 @@ const convertCharacter = (char) => {
   return `&#${newIndex};`
 }
 
-const flagEmojiHtml = (country_code) => {
-  if (country_code === 'TP') {
-    country_code = 'TL'
+const flagEmojiHtml = (countryCode) => {
+  if (countryCode === 'TP') {
+    countryCode = 'TL'
   }
-  return country_code.split('').map(convertCharacter).join('')
+  return countryCode.split('').map(convertCharacter).join('')
 }
 
 const composeDescription = ({ country, treaty, nwfz, joiningMechanism, joined, signed }) => {
@@ -114,12 +114,12 @@ const tabulate = (inputs, aggregatedData, population) => {
   const headerNames = ['', 'Country', 'Score', 'Population', ...treatyList]
   let rows = []
   const treatyCount = {}
-  for (const [country_code, treatyData] of Object.entries(aggregatedData)) {
+  for (const [countryCode, treatyData] of Object.entries(aggregatedData)) {
     const row = []
-    const country = codeToCountry(country_code)
-    const flagItem = { value: flagEmojiHtml(country_code), classValue: 'flag' }
+    const country = codeToCountry(countryCode)
+    const flagItem = { value: flagEmojiHtml(countryCode), classValue: 'flag' }
     const countryItem = { value: country, classValue: 'row_header' }
-    const populationItem = { value: population[country_code], classValue: 'row_header' }
+    const populationItem = { value: population[countryCode], classValue: 'row_header' }
     let memberCount = 0
     for (const treaty of treatyList) {
       let joined, nwfz

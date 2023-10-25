@@ -126,12 +126,12 @@ const gatherDisarmamentData = (rawData) => {
   const actions = rawData.actions_
   const results = {}
   for (const action of actions) {
-    let country_code = action.state.country_.country_country_name.countryname_country_code_2
-    if (country_code === 'XX') {
-      country_code = countryToCode(action.state.country_.country_country_name.countryname_official_short_name)
+    let countryCode = action.state.country_.country_country_name.countryname_country_code_2
+    if (countryCode === 'XX') {
+      countryCode = countryToCode(action.state.country_.country_country_name.countryname_official_short_name)
     }
-    results[country_code] ||= {}
-    const result = results[country_code]
+    results[countryCode] ||= {}
+    const result = results[countryCode]
     const date = formatDate(new Date(action.date))
     const joiningMechanism = action.type
     if (joiningMechanism === 'SIG') {
