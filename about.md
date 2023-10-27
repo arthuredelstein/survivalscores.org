@@ -6,7 +6,7 @@ International cooperation is necessary to address the existential risks to human
 
 The primary venue for international cooperation is the United Nations, and the instrument through which such protective cooperation is typically established and coordinated is the international treaty. SurvivalScores.org presents a daily snapshot of the current state of international treaties critical to the survival of humanity.
 
-The degree to which countries have signed and ratified these critical treaties can be seen as a direct measure of our species' progress towards mitigating existential threats. On SurvivalScores.org, when a country joins a treaty, it earns a <img src="./images/check.svg" alt="green check" class="grade">; if a country is not yet a member of treaty, it is given a <img src="./images/cross.svg" alt="red X" class="grade">. We also assign each country a crude score, which is simply a count of how many critical treaties the country has already joined.
+The degree to which countries have signed and ratified these critical treaties can be seen as a direct measure of our species' progress towards mitigating existential threats. On SurvivalScores.org, when a country joins a treaty, it earns a <img src="./images/check.svg" alt="green check" class="grade">; if a country is not yet a member of treaty, it is given a <img src="./images/cross.svg" alt="red X" class="grade">. Each country is also assigned a crude score, which is simply a count of how many critical treaties the country has already joined.
 
 The SurvivalScores table is intended to serve as a global public resource that helps citizens hold governments accountable for their policies with respect to human survival.
 
@@ -22,7 +22,7 @@ These include
 - Ecosystem collapse
 - Hostile artificial intelligence
 
-While we don't know the exact probabilities of these threats, it is plausible that any of them could cause the destruction of the human species over the next century. (This approach excludes things that are rightly banned by treaty but aren't existential threats, such as chemical warfare and landmines.)
+While we don't know the exact probabilities of these threats, it is plausible that any of them could cause the destruction of the human species over the next century. (This approach excludes things that are extremely harmful but aren't existential threats, such as chemical weapons and landmines.)
 
 Fortunately, international treaties have already been established that address most of these threats. Not all nations participate in every treaty, however; the failure of governments to join these treaties presents an ongoing existential threat to us all.
 
@@ -38,7 +38,7 @@ Over the decades, a number of treaties have been created at the UN to reduce the
 * The [Treaty for the Prohibition of Nuclear Weapons](https://disarmament.unoda.org/wmd/nuclear/tpnw/) (TPNW)
 * [Membership of Nuclear Weapons-Free Zones](https://www.un.org/nwfz/content/overview-nuclear-weapon-free-zones) (NWFZ)
 
-It is quite likely that nuclear war could arise from the escalation of a conventional war. In addition, the threat of conventional war is one of the reasons that some states maintain a nuclear deterrent. Unfortunately, the [Security Dilemma](https://en.wikipedia.org/wiki/Security_dilemma) implies that a nuclear deterrent from one state can be perceived by others as a nuclear threat. Therefore, SecurityScores tracks treaties that provide an alternative deterrent to aggressive war:
+It is quite likely that nuclear war could arise from the escalation of a conventional war. In addition, the threat of conventional war is one of the reasons that some states maintain a nuclear deterrent. Unfortunately, the [Security Dilemma](https://en.wikipedia.org/wiki/Security_dilemma) implies that a nuclear deterrent maintained by one state for defensive purposes can be perceived by other states as an offensive nuclear threat. Therefore, SecurityScores tracks treaties that provide an alternative deterrent to aggressive war:
 
 * The [Rome Statute](https://www.icc-cpi.int/sites/default/files/RS-Eng.pdf), establishing the International Criminal Court (ICC), which punishes, and thus deters, war crimes and crimes against humanity.
 * The [Kampala Amendments](https://www.pgaction.org/ilhr/rome-statute/amendments.html) to the Rome Statute, adding the Crime of Aggression to the ICC's jurisdiction, to deter the military invasion of one state by another.
