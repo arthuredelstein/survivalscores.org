@@ -35,8 +35,8 @@ const cleanHtml = (content) => new Promise(resolve => cleaner.clean(content, res
 
 const createPreviewImage = async (htmlFile, pngFile) => {
   await captureWebsite.file(htmlFile, pngFile, {
-    width: 800,
-    height: 418,
+    width: 1000,
+    height: 523,
     scaleFactor: 1.0,
     overwrite: true
   })
