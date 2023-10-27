@@ -230,19 +230,22 @@ const htmlTable = ({ header, rows }) => {
   return fragments.join('')
 }
 
-export const renderSite = async ({ dataDate, aggregatedData, populationData }) => {
+export const renderSite = async (
+  { dataDate, aggregatedData, populationData }, generatePreview) => {
   delete aggregatedData.EU
   delete aggregatedData.XX
   const { rows, header } = tabulate(inputs(), aggregatedData, populationData)
   await render('index.html', htmlHeading() + "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter(dataDate) + '</div>', dataDate)
-  await createPreviewImage('./build/index.html', './build/index-preview.png')
+  if (generatePreview) {
+    await createPreviewImage('./build/index.html', './build/index-preview.png')
+  }
 }
 
 const main = async () => {
   const aggregatedData = JSON.parse(fs.readFileSync('aggregated.json').toString())
   const populationData = JSON.parse(fs.readFileSync('population.json').toString())
   const dataDate = '2010-01-01T00:00:00Z'
-  await renderSite({ aggregatedData, populationData, dataDate })
+  await renderSite({ aggregatedData, populationData, dataDate }, false)
 }
 
 if (esMain(import.meta)) {
