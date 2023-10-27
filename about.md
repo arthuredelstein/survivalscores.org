@@ -51,6 +51,8 @@ The category of human-engineered pandemics can include both the accidental and d
 
 Accidental pathogens and natural pathogens are also highly important sources of civilization-endangering pandemics. The World Health Organization has primary responsibility for protecting the world against such pandemics. All nations apart from Liechtenstein are members of the WHO, and Liechtenstein cooperates with the WHO, so our table doesn't currently include membership of this organization.
 
+An international agreement to prohibit gain-of-function research also seems highly advisable, and if one is created in the future, its participation will be tracked by SurvivalScores.
+
 ### Ecosystem collapse
 
 The threat of collapse of large numbers of species or whole ecosystems is not merely a threat to Earth's natural heritage, but also a threat to the survival of the human species. Humanity's reliance on nature for its sustenance is indisputable and highly complex: we can't risk allowing the destruction of our ecological support system.
@@ -60,7 +62,7 @@ To measure international commitment to combating this risk, we include the [Pari
 ### Hostile artificial intelligence
 
 The danger of artificial intelligence (AI) is only now emerging. No UN
-treaties currently address this danger, but there is an ongoing effort to develop international restrictions on the development and use of autonomous weapons. Once such a treaty exists, it will be added to the SurvivalScores table.
+treaties currently address this danger, but there is an ongoing effort to develop international restrictions on the development and use of autonomous weapons. Once such a treaty exists, it will be added to the SurvivalScores table. Additionally, international agreements to ensure AI remains under the control of humans are also likely to be necessary.
 
 ## Alternative viewpoints
 
