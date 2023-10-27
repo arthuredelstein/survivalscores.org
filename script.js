@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
   polyfillCountryFlagEmojis()
   const headers = [...document.querySelectorAll('thead tr th.sort-arrows')]
   const updatedElement = document.getElementById('updated')
-  updatedElement.innerText = 'As of ' + dataDate.toLocaleDateString() // eslint-disable-line no-undef
+  updatedElement.innerText = 'Data from ' + dataDate.toLocaleDateString() // eslint-disable-line no-undef
   for (let i = 0; i < headers.length; ++i) {
     headers[i].addEventListener('click', (e) => {
       sortColumn(i)
