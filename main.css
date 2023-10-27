@@ -224,3 +224,23 @@ img.treaty-logo {
 img.arrow-icon {
   width: 16px;
 }
+.copy {
+  width: 100%;
+  background-color: white;
+  opacity: 100%;
+  z-index: 2;
+  position: relative;
+  top: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.markdown-container {
+  max-width: 600px;
+  font-size: 20px;
+  line-height: 32px;
+  z-index: 3;
+  opacity: 100%;
+  background-color: white;
+  padding: 20px;
+}

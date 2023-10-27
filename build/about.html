@@ -1,1 +1,696 @@
-Coming soon.
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SurvivalScores.org: Monitoring treaties critical to the survival of humanity</title>
+    <meta charset="utf8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7">
+    <link rel="icon" type="image/x-icon" href="./images/survivalscores_logo_dark.svg">
+    <link rel="preload" href="./images/sortArrowsDown.svg" as="image">
+    <link rel="preload" href="./images/sortArrowsUp.svg" as="image">
+    <link rel="preload" href="./images/sortArrowsUnsorted.svg" as="image">
+    <style>body {
+  font-family: sans-serif;
+  margin: 0px;
+}
+table {
+  position: relative;
+  border-collapse: collapse;
+}
+td {
+  text-align: center;
+  margin: 0px;
+  border: 0px;
+  padding: 5px;
+  height: 30px;
+  cursor: pointer;
+}
+td:first-child, th:first-child {
+  border-radius: 5px 0px 0px 5px;
+}
+td:last-child, th:last-child {
+  border-radius: 0px 5px 5px 0px;
+}
+td:nth-child(2) {
+  text-align: left;
+  padding-left: 20px;
+}
+td:nth-child(3) {
+  text-align: right;
+}
+tr {
+  position: relative;
+  overflow: auto;
+}
+td:nth-child(1) {
+  position: sticky;
+  left: 0px;
+  z-index: 10;
+}
+td:nth-child(2) {
+  position: sticky;
+  left: 30px;
+  z-index: 10;
+}
+th:nth-child(1) {
+  position: sticky;
+  left: 0px;
+  z-index: 10;
+}
+th:nth-child(2) {
+  position: sticky;
+  left: 30px;
+  z-index: 20;
+}
+.table-container {
+  padding: 0px;
+  background-color: white;
+  z-index: 20;
+  position: relative;
+  top: 210px;
+}
+table tr:first {
+  display: flex;
+  flex-direction: row;
+}
+th {
+  text-align: center;
+  margin: 0px;
+  border: 0px;
+  padding: 5px 8px;
+  hyphens: auto;
+  flex-direction: column;
+  cursor: pointer;
+  font-weight: normal;
+}
+th.treaty-header {
+  width: 120px;
+  min-width: 50px;
+  vertical-align: top;
+}
+th.data-header {
+  vertical-align: bottom;
+}
+td, th {
+  cursor: pointer;
+}
+td:first-child,th:first-child {
+  width: 5px;
+  font-size: 24px;
+}
+th.sort-arrows {
+  text-align: center;
+}
+td:nth-child(2),th:nth-child(2) {
+  width: 10%;
+}
+td:nth-child(3),th:nth-child(3) {
+  width: 10px;
+  text-align: center;
+}
+td:nth-child(4) {
+  width: 10%;
+  padding-right: 20px;
+  text-align: right;
+}
+th:nth-child(2) {
+  text-align: left;
+  padding-left: 20px;
+}
+.country-name {
+  flex-grow
+}
+tr:nth-child(2n) td,th {
+  background-color: white;
+}
+tr:nth-child(2n+1) td {
+  background-color: #eee;
+}
+thead {
+  position: sticky;
+  z-index: 30;
+  top: 0;
+  background-color: #fff
+}
+.good, .bad, .na {
+  font-size: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-clip: border-box;
+}
+.good {
+  color: green;
+  background-image: url('./images/check.svg');
+  background-size: 16px;
+}
+.bad {
+  color: red;
+  background-image: url('./images/cross.svg');
+  background-size: 12px;
+}
+.footer {
+  margin: 20px;
+  line-height: 1.5em;
+}
+.footer ul {
+  padding-top: 0px;
+  margin-top: 0px;
+}
+.treaty-count {
+  font-weight: normal;
+  padding: 5px;
+  background-color: #eee;
+}
+.flag {
+  font-family: "Twemoji Country Flags", serif;
+}
+.title {
+  margin: 0px;
+  color: white;
+  padding: 10px;
+  padding-left: 10px;
+  text-align: center;
+  background-image: url("./images/PIA00076~small.jpg");
+  background-position-x: calc(-550px + 40vw);
+  background-position-y: center;
+  background-size: 450px;
+  background-repeat: no-repeat;
+  background-color: black;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  height: 180px;
+  position: fixed;
+}
+.title-group {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color:white;
+}
+.title-text {
+  font-size: max(min(4vw, 48px), 40px);
+  font-weight: bold;
+  margin: 5px;
+}
+.tagline-text {
+  font-size: calc(0.5 * max(min(4vw, 48px), 40px));
+  font-style: italic;
+  font-weight: normal;
+  margin: 5px;
+}
+.links {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+}
+.links a:link {
+  color: white;
+  text-decoration-line: none;
+}
+.links a:hover {
+  text-decoration-line: underline;
+}
+.links a:visited {
+  color: white;
+  text-decoration-line: none;
+}
+#updated {
+  font-style: normal;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+#logo {
+  padding-right: 10px;
+  transform: translate(0px, calc(0.15 * max(min(4vw, 48px), 40px)));
+  width: calc(1.2 * max(min(4vw, 48px), 40px));
+}
+img.treaty-logo {
+  height: 48px;
+}
+img.arrow-icon {
+  width: 16px;
+}
+.copy {
+  width: 100%;
+  background-color: white;
+  opacity: 100%;
+  z-index: 2;
+  position: relative;
+  top: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.markdown-container {
+  max-width: 600px;
+  font-size: 20px;
+  line-height: 32px;
+  z-index: 3;
+  opacity: 100%;
+  background-color: white;
+  padding: 20px;
+}</style>
+    <script type="module">const dataDate = new Date('2010-01-01T00:00:00Z');
+import { polyfillCountryFlagEmojis } from './country-flag-emoji-polyfill/country-flag-emoji-polyfill.js'
+
+// Initially will be sorted by population
+const state = { sortedColumn: 1, ascending: true }
+
+const rowComparator = (row1, row2, columnIndex, reverse = false) => {
+  const reverseFactor = reverse ? -1 : 1
+  const td1 = [...row1.querySelectorAll('td')][columnIndex]
+  const td2 = [...row2.querySelectorAll('td')][columnIndex]
+  const text1 = td1.innerText.trim()
+  const text2 = td2.innerText.trim()
+  if (text1.includes('/') && text2.includes('/')) {
+    // Sorting fractions
+    const numerator1 = text1.split('/')[0]
+    const numerator2 = text2.split('/')[0]
+    return reverseFactor * (parseInt(numerator1) - parseInt(numerator2))
+  }
+  if (text1.length > 0 && !isNaN(text1)) {
+    return reverseFactor * (parseInt(text1) - parseInt(text2))
+  }
+  const class1 = td1.className
+  const class2 = td2.className
+  if (class1 && (class1.includes('good') || class1.includes('bad'))) {
+    return reverseFactor * class1.localeCompare(class2)
+  }
+  return -reverseFactor * text1.localeCompare(text2)
+}
+
+const sortColumn = (columnIndex) => {
+  if (state.sortedColumn === columnIndex) {
+    state.ascending = !state.ascending
+  } else {
+    state.ascending = true
+  }
+  state.sortedColumn = columnIndex
+  const rows = [...document.querySelectorAll('table tr.data')]
+  const table = document.querySelector('table')
+  const rows2 = rows.sort((rowA, rowB) => rowComparator(rowA, rowB, columnIndex, state.ascending))
+  for (const row of rows2) {
+    table.appendChild(row)
+  }
+  const arrowImages = [...document.querySelectorAll('thead tr th.sort-arrows img')]
+  arrowImages.forEach(img => { img.src = './images/sortArrowsUnsorted.svg' })
+  const arrowImage = arrowImages[columnIndex - 1]
+
+  arrowImage.src = !state.ascending ? './images/sortArrowsDown.svg' : './images/sortArrowsUp.svg'
+}
+
+window.addEventListener('DOMContentLoaded', (e) => {
+  console.log('DOMContentLoaded')
+  polyfillCountryFlagEmojis()
+  const headers = [...document.querySelectorAll('thead tr th.sort-arrows')]
+  const updatedElement = document.getElementById('updated')
+  updatedElement.innerText = 'As of ' + dataDate.toLocaleDateString() // eslint-disable-line no-undef
+  for (let i = 0; i < headers.length; ++i) {
+    headers[i].addEventListener('click', (e) => {
+      sortColumn(i)
+    })
+  }
+  sortColumn(3)
+})
+</script>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:image" content="https://survivalscores.org/index-preview.png">
+    <meta property="og:title" content="Is humanity doing its best?">
+    <meta property="og:description" content="Monitoring treaties critical to human survival.">
+    <meta property="og:type" content="website">
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>SurvivalScores.org: Monitoring treaties critical to the survival of humanity</title>
+        <meta charset="utf8">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="viewport" content="width=device-width, initial-scale=0.7">
+        <link rel="icon" type="image/x-icon" href="./images/survivalscores_logo_dark.svg">
+        <link rel="preload" href="./images/sortArrowsDown.svg" as="image">
+        <link rel="preload" href="./images/sortArrowsUp.svg" as="image">
+        <link rel="preload" href="./images/sortArrowsUnsorted.svg" as="image">
+        <style>body {
+  font-family: sans-serif;
+  margin: 0px;
+}
+table {
+  position: relative;
+  border-collapse: collapse;
+}
+td {
+  text-align: center;
+  margin: 0px;
+  border: 0px;
+  padding: 5px;
+  height: 30px;
+  cursor: pointer;
+}
+td:first-child, th:first-child {
+  border-radius: 5px 0px 0px 5px;
+}
+td:last-child, th:last-child {
+  border-radius: 0px 5px 5px 0px;
+}
+td:nth-child(2) {
+  text-align: left;
+  padding-left: 20px;
+}
+td:nth-child(3) {
+  text-align: right;
+}
+tr {
+  position: relative;
+  overflow: auto;
+}
+td:nth-child(1) {
+  position: sticky;
+  left: 0px;
+  z-index: 10;
+}
+td:nth-child(2) {
+  position: sticky;
+  left: 30px;
+  z-index: 10;
+}
+th:nth-child(1) {
+  position: sticky;
+  left: 0px;
+  z-index: 10;
+}
+th:nth-child(2) {
+  position: sticky;
+  left: 30px;
+  z-index: 20;
+}
+.table-container {
+  padding: 0px;
+  background-color: white;
+  z-index: 20;
+  position: relative;
+  top: 210px;
+}
+table tr:first {
+  display: flex;
+  flex-direction: row;
+}
+th {
+  text-align: center;
+  margin: 0px;
+  border: 0px;
+  padding: 5px 8px;
+  hyphens: auto;
+  flex-direction: column;
+  cursor: pointer;
+  font-weight: normal;
+}
+th.treaty-header {
+  width: 120px;
+  min-width: 50px;
+  vertical-align: top;
+}
+th.data-header {
+  vertical-align: bottom;
+}
+td, th {
+  cursor: pointer;
+}
+td:first-child,th:first-child {
+  width: 5px;
+  font-size: 24px;
+}
+th.sort-arrows {
+  text-align: center;
+}
+td:nth-child(2),th:nth-child(2) {
+  width: 10%;
+}
+td:nth-child(3),th:nth-child(3) {
+  width: 10px;
+  text-align: center;
+}
+td:nth-child(4) {
+  width: 10%;
+  padding-right: 20px;
+  text-align: right;
+}
+th:nth-child(2) {
+  text-align: left;
+  padding-left: 20px;
+}
+.country-name {
+  flex-grow
+}
+tr:nth-child(2n) td,th {
+  background-color: white;
+}
+tr:nth-child(2n+1) td {
+  background-color: #eee;
+}
+thead {
+  position: sticky;
+  z-index: 30;
+  top: 0;
+  background-color: #fff
+}
+.good, .bad, .na {
+  font-size: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-clip: border-box;
+}
+.good {
+  color: green;
+  background-image: url('./images/check.svg');
+  background-size: 16px;
+}
+.bad {
+  color: red;
+  background-image: url('./images/cross.svg');
+  background-size: 12px;
+}
+.footer {
+  margin: 20px;
+  line-height: 1.5em;
+}
+.footer ul {
+  padding-top: 0px;
+  margin-top: 0px;
+}
+.treaty-count {
+  font-weight: normal;
+  padding: 5px;
+  background-color: #eee;
+}
+.flag {
+  font-family: "Twemoji Country Flags", serif;
+}
+.title {
+  margin: 0px;
+  color: white;
+  padding: 10px;
+  padding-left: 10px;
+  text-align: center;
+  background-image: url("./images/PIA00076~small.jpg");
+  background-position-x: calc(-550px + 40vw);
+  background-position-y: center;
+  background-size: 450px;
+  background-repeat: no-repeat;
+  background-color: black;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  height: 180px;
+  position: fixed;
+}
+.title-group {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color:white;
+}
+.title-text {
+  font-size: max(min(4vw, 48px), 40px);
+  font-weight: bold;
+  margin: 5px;
+}
+.tagline-text {
+  font-size: calc(0.5 * max(min(4vw, 48px), 40px));
+  font-style: italic;
+  font-weight: normal;
+  margin: 5px;
+}
+.links {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+}
+.links a:link {
+  color: white;
+  text-decoration-line: none;
+}
+.links a:hover {
+  text-decoration-line: underline;
+}
+.links a:visited {
+  color: white;
+  text-decoration-line: none;
+}
+#updated {
+  font-style: normal;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+#logo {
+  padding-right: 10px;
+  transform: translate(0px, calc(0.15 * max(min(4vw, 48px), 40px)));
+  width: calc(1.2 * max(min(4vw, 48px), 40px));
+}
+img.treaty-logo {
+  height: 48px;
+}
+img.arrow-icon {
+  width: 16px;
+}
+.copy {
+  width: 100%;
+  background-color: white;
+  opacity: 100%;
+  z-index: 2;
+  position: relative;
+  top: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.markdown-container {
+  max-width: 600px;
+  font-size: 20px;
+  line-height: 32px;
+  z-index: 3;
+  opacity: 100%;
+  background-color: white;
+  padding: 20px;
+}</style>
+        <script type="module"></script>
+        <meta name="twitter:card" content="summary_large_image">
+        <meta property="og:image" content="https://survivalscores.org/index-preview.png">
+        <meta property="og:title" content="Is humanity doing its best?">
+        <meta property="og:description" content="Monitoring treaties critical to human survival.">
+        <meta property="og:type" content="website">
+      </head>
+      <body>
+        <div class="title">
+          <div class="title-group">
+            <div class="title-text"><img id="logo" src="./images/survivalscores_logo.svg">SurvivalScores.org</div>
+            <div class="tagline-text">Monitoring treaties critical to the survival of humanity</div>
+          </div>
+          <div id="updated"></div>
+          <div class="links"><a href="./about">About</a> &#x2022; <a
+              href="https://twitter.com/survivalscores">Twitter</a> &#x2022; <a rel="me"
+              href="https://mastodon.social/@survivalscores">Mastodon</a></div>
+        </div>
+        <div class="copy">
+          <div class="markdown-container">
+            <h1>About SurvivalScores.org</h1>
+            <p>Humanity won&#39;t last forever -- but let&#39;s keep going as long as we can! The goal of the
+                SurvivalScores project is to provide a clear overview of humanity&#39;s progress toward protecting the
+                long-term survival of our species.</p>
+            <p>To reduce the really big risks to humanity, we need international cooperation. That&#39;s because a
+                threat to human surival might emerge from any individual country or region, whether through war,
+                environmental degradation, viral outbreak or hostile AI, but expand to threaten the globe.</p>
+            <p>The primary venue for international cooperation is, of course, the United Nations, and the instrument
+                through which such protective cooperation is established and codified is, naturally, the international
+                treaty. Therefore, SurvivalScores.org presents a daily snapshot of the current state of international
+                treaties critical to human surival.</p>
+            <p>The degree to which countries have signed and ratified these treaties is a pretty direct measure of our
+                species progress toward mitigating existential threats. When a country joins a treaty, it earns a green
+                check; if a country is not yet a member of treaty, it is given a red X.</p>
+            <p>We assign each country a crude score, which is merely a count of how many treaties the country has
+                already joined. Ideally, this table serves as a scoreboard that encourages friendly competition between
+                nations to be among those most conscientiously supporting human surival.</p>
+            <p>We strive to make this table simple, pragmatic, systematic, and up-to-date:</p>
+            <ul><li>Simple because human survival is ultimately a political problem and thus requires the coordinated
+                efforts of many people.</li><li>Pragmatic because hoping for a moral transformation in human beings is
+                not a strategy.</li><li>Systematic because we need to understand the big picture to know where to focus
+                our efforts.</li><li>Up-to-date: the ongoing effort to ensure human survival can be helped by letting
+                the public know when progress is made or setbacks occur.</li></ul>
+            <h2>Methodology</h2>
+            <p>To ensure that the human species continues, we need to establish a system of constraints to reduce the
+                likelihood of the mass destruction of our species or of our civilization. Destruction could take the
+                form of a natural event (such as an asteroid impact), or a human-initated incident, whether deliberate
+                or accidental.</p>
+            <p>Here we focus on the most likely forms of human extinction or near-extinction. These include:</p>
+            <ol><li>Nuclear war</li><li>Pandemic</li><li>Ecosystem collapse</li><li>Hostile artificial
+                intelligence</li></ol>
+            <p>While we don&#39;t know the exact probabilities of these threats, it is plausible that any of them could
+                cause the destruction of the human species over the next century.</p>
+            <p>International efforts to protect our species against these threats are ongoing, some for many decades. In
+                order to protect against these threats, we need an international effort to prevent these threats from
+                arising in the first place. Most global international agreements that exist today to address threats of
+                this nature are in the form of treaties and conventions facilitated by the United Nations.</p>
+            <h3>Nuclear war</h3>
+            <p>A number of treaties have been created at the UN to prevent nuclear war. In this project, we focus major
+                treaties that appear to be the most likely to reduce the likelihood of nuclear war:</p>
+            <ul><li>Comprehensive Test Ban Treaty (CTBT)</li><li>Non-proliferation Treat (NPT)</li><li>Treaty for the
+                Prohibition of Nuclear Weapons (TPNW)</li><li>Membership of Nuclear Weapons-Free Zones</li></ul>
+            <p>It is quite likely that nuclear war could arise from the escalation of a conventional war. In addition,
+                the threat of conventional war is one of the reasons that some states maintain a nuclear deterrent.
+                Unfortunately, the &quot;Security Dilemma&quot; implies that a nuclear deterrent from one state can be
+                perceived by others as a nuclear threat. So we decided to include treaties that provide an alternative
+                deterrent to aggressive war:</p>
+            <ul><li>Rome Treaty, establishing the International Criminal Court (ICC), which punishes, and thus deters,
+                war crimes and crimes against humanity.</li><li>Aggression Amendment to the Rome Treaty, adding the
+                Crime of Aggression to the ICC&#39;s jurisdiction, to deter the military invasion of one state by
+                another.</li></ul>
+            <h3>Pandemic</h3>
+            <p>The danger of pandemics has become all too familiar in the world following the experience of COVID-19.
+                Two possible sources of pathogens are worth considering: natural and human-engineered.</p>
+            <p>The category of human-engineered pathogens can be both accidental and deliberate spread. The latter
+                (intentional) are frequently called biological weapons. The development of such bioweapons is prohibited
+                by the Biological Weapons Convention, introduced in 1972 and first in effect in 1975.</p>
+            <p>Accidental pathogens and natural pathogens are also highly important source of civilization-endangered
+                pandemics. The World Health Organization has primary responsibility for protecting the world against
+                such pandemics. All nations apart from Liechtenstein are members of the WHO, and Liechtenstein
+                cooperates with the WHO, so our table doesn&#39;t currently include membership of the organization.</p>
+            <h3>Ecosystem collapse</h3>
+            <p>The threat of collapse of large numbers of species or whole ecosystems is not merely a threat to
+                Earth&#39;s natural heritage, but also a threat to the survival of the human species. Humanity&#39;s
+                reliance on nature for its sustenance is indisputable and highly complex -- we can&#39;t risk allowing
+                the destruction of our ecological support system.</p>
+            <p>Treaties we have included include the Paris Agreement on Climate Change and the Convention on Biological
+                Diversity. These two treaties represent fundamental measures that all countries should jointly take to
+                reduce humanity&#39;s devastating impact on the global ecosystem.</p>
+            <h3>Artificial Intelligence</h3>
+            <p>The danger of artificial intelligence (AI) is only now emerging. No UN treaties currently address this
+                danger, but there is an ongoing effort to develop international restrictions on the development and use
+                of autonomous weapons. Once such a treaty exists, we will include it in our table.</p>
+            <h2>Alternative points of view on human threats and the right way to address them</h2>
+            <p>International politics and the trajectory of history is by its nature unpredictable and impossible to
+                reduce to a simple formula. Obviously, the simple formula used by this project to gives national
+                governments a score for their contribution to human survival is highly incomplete. In reality, many more
+                factors will be highly important in how the future plays out.</p>
+            <p>My hope is that this project points to some significant steps that national governments could take to
+                reduce existential risks.</p>
+            <p>I encourage discussion and debate! Not everyone will agree that treaties are the right approach to reduce
+                humanity&#39;s risk of extinction or near extinction. Others will disagree that the treaties chosen on
+                this site are the right ones. I believe it&#39;s important to listen to those voices with an open mind,
+                and I hope all discussion will be respectful and kind even when disagreements are strong.</p>
+            <h2>About the Author</h2>
+            <p>The SurvivalScores.org is an independent project created by Arthur Edelstein.</p>
+          </div>
+        </div>
+      </body>
+    </html>
+  </body>
+</html>

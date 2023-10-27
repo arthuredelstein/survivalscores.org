@@ -1,39 +1,47 @@
-# Survival Scoreboard
+# About SurvivalScores.org
 
 Humanity won't last forever -- but let's keep going as long as we can! The goal
 of the SurvivalScores project is to provide a clear overview of humanity's
 progress toward protecting the long-term survival of our species.
 
-We want this overview to be simple, pragmatic, systematic, and up-to-date:
+To reduce the really big risks to humanity, we need international cooperation.
+That's because a threat to human surival might emerge from any individual country
+or region, whether through war, environmental degradation, viral
+outbreak or hostile AI, but expand to threaten the globe.
+
+The primary venue for international cooperation is, of
+course, the United Nations, and the instrument through which such protective
+cooperation is established and codified is, naturally, the international treaty. Therefore, SurvivalScores.org presents a daily snapshot of the current state of
+international treaties critical to human surival.
+
+The degree to which countries have signed and ratified these treaties is a pretty direct measure of our species progress toward mitigating existential threats. When
+a country joins a treaty, it earns a green check; if a country is not yet a
+member of treaty, it is given a red X.
+
+We assign each country a crude score, which is merely a count of how many
+treaties the country has already joined. Ideally, this table serves as a 
+scoreboard that encourages friendly competition between nations to be among
+those most conscientiously supporting human surival.
+
+We strive to make this table simple, pragmatic, systematic, and up-to-date:
 * Simple because human survival is ultimately a political problem and thus requires the coordinated efforts of many people.
 * Pragmatic because hoping for a moral transformation in human beings is not a strategy.
 * Systematic because we need to understand the big picture to know where to focus our efforts.
-* Up-to-date: the ongoing effort to ensure human survival can be helped by letting the public know when progress has been made or setbacks have occured.
+* Up-to-date: the ongoing effort to ensure human survival can be helped by letting the public know when
+progress is made or setbacks occur.
 
 ## Methodology
 
 To ensure that the human species continues, we need to establish a system of constraints to reduce the likelihood of the mass destruction of our species or of our civilization. Destruction could take the form of a natural event (such as an asteroid impact), or a human-initated incident, whether deliberate or accidental.
 
 Here we focus on the most likely forms of human extinction or near-extinction.
-A number of organizations devoted to human survival have assessed risks and 
-come up with similar lists of existential threats:
-
-Future of Life Institute:
-- Artificial Intelligence
-- Biotechnology
-- Nuclear weapons
-
-
-Existential Risk Observatory, Netherlands
-
-Future of Humanity Institute, Oxford University:
-1. Nuclear war (accidental or deliberate)
-2. Pandemic (natural or engineered)
+These include:
+1. Nuclear war
+2. Pandemic
 3. Ecosystem collapse
 4. Hostile artificial intelligence
-5. Asteroid impact
 
-While we don't know the exact probabilities of these threats, it is plausible that any of them could cause the destruction of the human species over the next century. [Here cite other sources for these threats.]
+While we don't know the exact probabilities of these threats, it is plausible that any of them could cause the destruction of the human species over the next century.
 
 International efforts to protect our species against these threats are ongoing,
 some for many decades. In order to protect against these threats, we need an international effort to prevent these threats from arising in the first place. Most global international agreements that exist today to address threats of this nature are in the form of treaties and conventions facilitated by the United Nations.
@@ -49,7 +57,7 @@ A number of treaties have been created at the UN to prevent nuclear war. In this
 It is quite likely that nuclear war could arise from the escalation of a conventional war. In addition, the threat of conventional war is one of the reasons that some states maintain a nuclear deterrent. Unfortunately, the "Security Dilemma" implies that a nuclear deterrent from one state can be perceived by others as a nuclear threat. So we decided to include treaties that provide an alternative deterrent to aggressive war:
 
 * Rome Treaty, establishing the International Criminal Court (ICC), which punishes, and thus deters, war crimes and crimes against humanity.
-* Aggression Amendment to the Rome Treaty, adding the Crime of Aggression to the ICC's jurisdiction, to deter the invasion of one state by another.
+* Aggression Amendment to the Rome Treaty, adding the Crime of Aggression to the ICC's jurisdiction, to deter the military invasion of one state by another.
 
 ### Pandemic
 
@@ -57,7 +65,8 @@ The danger of pandemics has become all too familiar in the world following the e
 
 The category of human-engineered pathogens can be both accidental and deliberate spread. The latter (intentional) are frequently called biological weapons. The development of such bioweapons is prohibited by the Biological Weapons Convention, introduced in 1972 and first in effect in 1975.
 
-Accidental pathogens and natural pathogens are also highly important source of civilization-endangered pandemics. The World Health Organization has primary responsibility for protecting the world against such pandemics. All nations apart from Liechtenstein are members of the WHO, and Liechtenstein cooperates with the WHO, so membership is currently not included in our table.
+Accidental pathogens and natural pathogens are also highly important source of civilization-endangered pandemics. The World Health Organization has primary responsibility for protecting the world against such pandemics. All nations apart from Liechtenstein are members of the WHO, and Liechtenstein cooperates with the WHO, so our table doesn't currently
+include membership of the organization.
 
 ### Ecosystem collapse
 
@@ -68,12 +77,14 @@ Convention on Biological Diversity. These two treaties represent fundamental
 measures that all countries should jointly take to reduce humanity's devastating 
 impact on the global ecosystem.
 
-### Other threats not included here
+### Artificial Intelligence
 
-Asteroid impact, ...
+The danger of artificial intelligence (AI) is only now emerging. No UN
+treaties currently address this danger, but there is an ongoing effort to develop
+international restrictions on the development and use of autonomous weapons. Once
+such a treaty exists, we will include it in our table.
 
-
-### Alternative points of view on human threats and the right way to address them
+## Alternative points of view on human threats and the right way to address them
 
 International politics and the trajectory of history is by its nature unpredictable
 and impossible to reduce to a simple formula. Obviously, the simple formula
@@ -91,31 +102,6 @@ I believe it's important to listen to those voices with an open mind, and I
 hope all discussion will be respectful and kind even when disagreements are
 strong.
 
+## About the Author
 
-# Frequently Asked Questions
-
-### You have insulted my country!
-
-Surely your country is strong enough to handle a little gentle criticism.
-
-### You have picked the wrong treaties!
-
-Perhaps! Please tell me which treaties you think are the right ones.
-
-### Your selection of treaties is biased to make my country look bad!
-
-No, I selected the treaties based on what I felt were the most critical for
-human survival. I didn't know where most of the red Xs would be until I 
-generated the table.
-
-Your country can look good by signed more of these treaties!
-
-### Even if all countries were to join these treaties, humanity could still destroy itself.
-
-You are right -- there are no guarantees and history is infinitely complex. I only
-hope that signing these treaties will significantly reduce the risk of extinction.
-
-### Why haven't you included the threat of extinction caused by Artifical Intelligence?
-
-I will add the Autonomous Weapons Treaty once it is open for ratification.
-
+The SurvivalScores.org is an independent project created by Arthur Edelstein.

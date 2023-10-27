@@ -4,6 +4,7 @@ import _ from 'lodash'
 import esMain from 'es-main'
 import captureWebsite from 'capture-website'
 import cleaner from 'clean-html'
+import { marked } from 'marked'
 
 const page = ({ css, js, content }) => `
 <!DOCTYPE html>
@@ -241,11 +242,21 @@ export const renderSite = async (
   }
 }
 
+export const aboutPage = async (dataDate) => {
+  const js = ''
+  const css = fs.readFileSync('./main.css').toString()
+  const copy = fs.readFileSync('./about.md').toString()
+  const content = htmlHeading() + "<div class='copy'><div class='markdown-container'>" + marked.parse(copy) + '</div></div>'
+  const htmlPage = await cleanHtml(page({ css, js, content }))
+  await render('about.html', htmlPage, dataDate)
+}
+
 const main = async () => {
   const aggregatedData = JSON.parse(fs.readFileSync('aggregated.json').toString())
   const populationData = JSON.parse(fs.readFileSync('population.json').toString())
   const dataDate = '2010-01-01T00:00:00Z'
   await renderSite({ aggregatedData, populationData, dataDate }, false)
+  await aboutPage(dataDate)
 }
 
 if (esMain(import.meta)) {
