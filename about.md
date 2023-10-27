@@ -1,31 +1,30 @@
 # About SurvivalScores.org
 
-Humanity won't last forever -- but let's keep going as long as we can! The goal
+Humanity won't last forever -- but let's try! The goal
 of the SurvivalScores project is to provide a clear overview of humanity's
 progress toward protecting the long-term survival of our species.
 
 To reduce the really big risks to humanity, we need international cooperation.
-That's because a threat to human surival might emerge from any individual country
+That's because a threat to human survival might emerge from any individual country
 or region, whether through war, environmental degradation, viral
 outbreak or hostile AI, but expand to threaten the globe.
 
 The primary venue for international cooperation is, of
 course, the United Nations, and the instrument through which such protective
 cooperation is established and codified is, naturally, the international treaty. Therefore, SurvivalScores.org presents a daily snapshot of the current state of
-international treaties critical to human surival.
+international treaties critical to the survival of humanity.
 
-The degree to which countries have signed and ratified these treaties is a pretty direct measure of our species progress toward mitigating existential threats. When
-a country joins a treaty, it earns a green check; if a country is not yet a
+The degree to which countries have signed and ratified these treaties is a pretty direct measure of our species' progress toward mitigating existential threats. When a country joins a treaty, it earns a green check; if a country is not yet a
 member of treaty, it is given a red X.
 
 We assign each country a crude score, which is merely a count of how many
 treaties the country has already joined. Ideally, this table serves as a 
 scoreboard that encourages friendly competition between nations to be among
-those most conscientiously supporting human surival.
+those most conscientiously supporting human survival.
 
 ## Methodology
 
-To ensure that the human species continues, we need to establish a system of constraints to reduce the likelihood of the mass destruction of our species or of our civilization. Destruction could take the form of a natural event (such as an asteroid impact), or a human-initated incident, whether deliberate or accidental.
+To ensure that the human species continues, we need to establish a system of worldwide constraints to reduce the likelihood of the mass destruction of our species or of our civilization. Destruction could take the form of a natural event (such as an asteroid impact), or a human-initiated incident, whether deliberate or accidental.
 
 Here we focus on the most likely forms of human extinction or near-extinction.
 These include:
@@ -43,7 +42,7 @@ some for many decades. In order to protect against these threats, we need an int
 
 A number of treaties have been created at the UN to prevent nuclear war. In this project, we focus major treaties that appear to be the most likely to reduce the likelihood of nuclear war:
 * Comprehensive Test Ban Treaty (CTBT)
-* Non-proliferation Treat (NPT)
+* Non-proliferation Treaty (NPT)
 * Treaty for the Prohibition of Nuclear Weapons (TPNW)
 * Membership of Nuclear Weapons-Free Zones
 
