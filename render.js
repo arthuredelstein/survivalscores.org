@@ -46,9 +46,8 @@ const createPreviewImage = async (htmlFile, pngFile) => {
 
 const loadJs = () => fs.readFileSync('./script.js')
 
-const render = async (filename, html, dataDate) => {
+const render = async (filename, html, dataDate, js) => {
   //  consolee.log(aggregated);
-  const js = `const dataDate = new Date('${dataDate}');\n` + loadJs()
   const css = fs.readFileSync('./main.css').toString()
   const htmlPage = await cleanHtml(page({ css, js, content: html }))
   const path = `./build/${filename}`
@@ -236,7 +235,8 @@ export const renderSite = async (
   delete aggregatedData.EU
   delete aggregatedData.XX
   const { rows, header } = tabulate(inputs(), aggregatedData, populationData)
-  await render('index.html', htmlHeading() + "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter(dataDate) + '</div>', dataDate)
+  const js = `const dataDate = new Date('${dataDate}');\n` + loadJs()
+  await render('index.html', htmlHeading() + "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter(dataDate) + '</div>', dataDate, js)
   if (generatePreview) {
     await createPreviewImage('./build/index.html', './build/index-preview.png')
   }
@@ -244,11 +244,9 @@ export const renderSite = async (
 
 export const aboutPage = async (dataDate) => {
   const js = ''
-  const css = fs.readFileSync('./main.css').toString()
   const copy = fs.readFileSync('./about.md').toString()
   const content = htmlHeading() + "<div class='copy'><div class='markdown-container'>" + marked.parse(copy) + '</div></div>'
-  const htmlPage = await cleanHtml(page({ css, js, content }))
-  await render('about.html', htmlPage, dataDate)
+  await render('about.html', content, dataDate, js)
 }
 
 const main = async () => {
