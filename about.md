@@ -23,13 +23,6 @@ treaties the country has already joined. Ideally, this table serves as a
 scoreboard that encourages friendly competition between nations to be among
 those most conscientiously supporting human surival.
 
-We strive to make this table simple, pragmatic, systematic, and up-to-date:
-* Simple because human survival is ultimately a political problem and thus requires the coordinated efforts of many people.
-* Pragmatic because hoping for a moral transformation in human beings is not a strategy.
-* Systematic because we need to understand the big picture to know where to focus our efforts.
-* Up-to-date: the ongoing effort to ensure human survival can be helped by letting the public know when
-progress is made or setbacks occur.
-
 ## Methodology
 
 To ensure that the human species continues, we need to establish a system of constraints to reduce the likelihood of the mass destruction of our species or of our civilization. Destruction could take the form of a natural event (such as an asteroid impact), or a human-initated incident, whether deliberate or accidental.
@@ -82,7 +75,7 @@ impact on the global ecosystem.
 The danger of artificial intelligence (AI) is only now emerging. No UN
 treaties currently address this danger, but there is an ongoing effort to develop
 international restrictions on the development and use of autonomous weapons. Once
-such a treaty exists, we will include it in our table.
+such a treaty exists, we will add it to our table.
 
 ## Alternative points of view on human threats and the right way to address them
 
@@ -91,9 +84,6 @@ and impossible to reduce to a simple formula. Obviously, the simple formula
 used by this project to gives national governments a score for their contribution
 to human survival is highly incomplete. In reality, many more factors will be
 highly important in how the future plays out.
-
-My hope is that this project points to some significant steps that 
-national governments could take to reduce existential risks.
 
 I encourage discussion and debate! Not everyone will agree that treaties are
 the right approach to reduce humanity's risk of extinction or near extinction.
