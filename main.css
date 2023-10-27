@@ -239,6 +239,10 @@ img.arrow-icon {
   flex-direction: row;
   justify-content: center;
 }
+.copy img.grade {
+  height: 18px;
+  transform: translateY(3px);
+}
 .markdown-container {
   max-width: 600px;
   font-size: 20px;
