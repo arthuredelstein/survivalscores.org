@@ -14,8 +14,7 @@ The SurvivalScores table is intended to serve as a global public resource that h
 
 To ensure that the human species continues, we humans need to establish a system of worldwide constraints to reduce the likelihood of the mass destruction of our species or our civilization. Destruction could take the form of a natural event (such as an asteroid impact), or a human-initiated incident, whether deliberate or accidental.
 
-Here SurvivalScores focuses on the most likely forms of human extinction or near-extinction.
-These include:
+SurvivalScores focuses on the most likely forms of human extinction or near-extinction. These include:
 
 - Nuclear war
 - Pandemic
