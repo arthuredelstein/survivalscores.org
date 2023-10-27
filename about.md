@@ -66,7 +66,7 @@ treaties currently address this danger, but there is an ongoing effort to develo
 
 ## Alternative viewpoints
 
-International politics and the trajectory of history is by its nature unpredictable and impossible to reduce to a simple formula. Obviously, the simple formula used in this project, assigning national governments a score for their contribution to human survival, does not represent the complex dynamics of international politics and scientific progress. In reality, many more factors will be highly important to how the future plays out.
+International politics and the trajectory of history is by its nature unpredictable and impossible to reduce to a simple formula. Obviously, the simple formula used in this project, assigning national governments a score for their contribution to human survival, does not represent the complex dynamics of international politics and technological progress. In reality, many more factors will be highly important to how the future plays out.
 
 Nevertheless, SurvivalScores takes the approach that a simple readout can be helpful to focus international efforts towards the universal ratification of treaties that are crucial to the survival of human beings and our civillization.
 
