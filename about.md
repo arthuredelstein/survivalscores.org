@@ -8,7 +8,7 @@ The primary venue for international cooperation is the United Nations, and the i
 
 The degree to which countries have signed and ratified these critical treaties can be seen as a direct measure of our species' progress towards mitigating existential threats. On SurvivalScores.org, when a country joins a treaty, it earns a <img src="./images/check.svg" alt="green check" class="grade">; if a country is not yet a member of treaty, it is given a <img src="./images/cross.svg" alt="red X" class="grade">. We also assign each country a crude score, which is simply a count of how many critical treaties the country has already joined.
 
-The SurvivalScores table is intended to serve as a global public resource that helps citizens hold governments responsible for their attendance to the question of human survival.
+The SurvivalScores table is intended to serve as a global public resource that helps citizens hold governments accountable for their policies with respect to human survival.
 
 ## Existential threats and the treaties addressing them
 
