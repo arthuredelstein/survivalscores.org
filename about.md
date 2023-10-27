@@ -68,6 +68,6 @@ International politics and the trajectory of history is by its nature unpredicta
 
 Nevertheless, a simple readout can be helpful to focus international efforts toward the crucial goal of ensuring the survival of human beings and our civilization.
 
-Discussion, debate and disagreement is encouraged! Not everyone will agree that treaties are the right approach to reduce humanity's risk of extinction or near extinction. Others may argue that the treaties chosen on this site are not the right ones. It's important to listen to those voices with an open mind, Let's keep all discussions respectful and kind even when disagreements are strong.
+Discussion, debate and disagreement is encouraged! Not everyone will agree that treaties are the right approach to reduce humanity's risk of extinction or near extinction. Others may argue that the treaties chosen on this site are not the right ones. It's important to listen to those voices with an open mind. Let's keep all discussions respectful and kind even when disagreements are strong.
 
 *SurvivalScores.org is an independent project created by Arthur Edelstein.*
