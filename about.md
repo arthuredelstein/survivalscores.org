@@ -63,12 +63,9 @@ include membership of the organization.
 
 ### Ecosystem collapse
 
-The threat of collapse of large numbers of species or whole ecosystems is not merely a threat to Earth's natural heritage, but also a threat to the survival of the human species. Humanity's reliance on nature for its sustenance is indisputable and highly complex -- we can't risk allowing the destruction of our ecological support system.
+The threat of collapse of large numbers of species or whole ecosystems is not merely a threat to Earth's natural heritage, but also a threat to the survival of the human species. Humanity's reliance on nature for its sustenance is indisputable and highly complex: we can't risk allowing the destruction of our ecological support system.
 
-Treaties we have included include the Paris Agreement on Climate Change and the
-Convention on Biological Diversity. These two treaties represent fundamental
-measures that all countries should jointly take to reduce humanity's devastating 
-impact on the global ecosystem.
+To measure international commitment to combating this risk, we include the Paris Agreement on Climate Change and the Convention on Biological Diversity. These two treaties represent fundamental measures that all countries should jointly take to reduce humanity's devastating impact on the global ecosystem.
 
 ### Artificial Intelligence
 
