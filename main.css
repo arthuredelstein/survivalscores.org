@@ -171,6 +171,10 @@ thead {
   height: 180px;
   position: fixed;
 }
+.title a {
+  color: white;
+  text-decoration-line: none;
+}
 .title-group {
   height: 100%;
   display: flex;
