@@ -72,4 +72,4 @@ Nevertheless, SurvivalScores takes the approach that a simple readout can be hel
 
 Discussion, debate and disagreement is encouraged! Not everyone will agree that treaties are the right approach to reduce humanity's risk of extinction or near extinction. Others may argue that the treaties tracked by this project are not the right ones. It's important to listen to those voices with an open mind. Let's keep all discussions respectful and kind even when disagreements are strong.
 
-*SurvivalScores.org is an independent project created by Arthur Edelstein.*
+*SurvivalScores.org is an independent project created by Arthur Edelstein. Source code can be found [here](https://github.com/arthuredelstein/survivalscores.org).*
