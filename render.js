@@ -185,7 +185,7 @@ const htmlFooter = (dataDate) => `
 const htmlTable = ({ header, rows }) => {
   const fragments = []
   const total = rows.length
-  fragments.push('<table>')
+  fragments.push('<table id="treaties">')
   fragments.push('<thead>')
   fragments.push("<tr class='header'>")
   for (const headerItem of header) {
