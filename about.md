@@ -39,7 +39,7 @@ Following is a brief description of each of these threats and the relevant treat
 
 ### Nuclear war
 
-The threat of nuclear war is ongoing: ten countries possess nuclear weapons and others are trying to obtain them. It's widely understood that a major nuclear war could kill hundreds of millions or billions of people and end civillization.
+The threat of nuclear war is ongoing: ten countries possess nuclear weapons and others are trying to obtain them. It's widely understood that a major nuclear war could kill hundreds of millions or billions of people and end civilization.
 
 Over the decades, a number of treaties have been created at the UN to reduce the likelihood of nuclear war. The SurvivalScores project focuses on major treaties that appear to be the most likely to reduce the likelihood of nuclear war:
 * The [Comprehensive Test Ban Treaty](https://www.ctbto.org/our-mission/the-treaty) (CTBT)
