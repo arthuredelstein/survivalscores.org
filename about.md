@@ -2,9 +2,19 @@
 
 The goal of the SurvivalScores project is to provide a clear overview of humanity's progress towards protecting the survival of our species.
 
-International cooperation is necessary to address the existential risks to humanity. That's because a threat to human survival could emerge from any individual country or region, whether through war, environmental degradation, viral outbreak or hostile AI, and expand to threaten the globe.
+There is perhaps no problem more deserving of our attention than the ongoing risk of human extinction. What task could be more important than ensuring that our children or grandchildren don't have their lives ended prematurely by a global catastrophe? Yet our international politics seems adrift and unfocused, allowing significant risks of nuclear war, global pandemic, or environmental catastrophe to linger unaddressed without the kind of urgency these risks demand.
 
-The primary venue for international cooperation is the United Nations, and the instrument through which such protective cooperation is typically established and coordinated is the international treaty. SurvivalScores.org presents a daily snapshot of the current state of international treaties critical to the survival of humanity.
+We need a way to get back on track. When we work on any problem, establishing metrics for success can be highly valuable in focusing and orienting our efforts. Whether it's the score in a competitive game, one's grades at school, or the total in one's bank account: we all understand that metrics are a fundamental part of establishing what's important and incentivizing members of our community to work in a particular direction.
+
+Making use of this technique, SurvivalScores publishes a daily scoreboard showing to what degree each national government is participating in existing international treaties that are important to reducing the risk of global catastrophe. At a glance, everyone can see which countries have made good progress in protecting humanity's survival, and which countries are negelecting their responsibilities.
+
+SurvivalScores was created with the hope that this scoreboard can help to contentrate our attention on these key treaties, and promote efforts to push lagging national governments to ratify them.
+
+## Why treaties?
+
+International cooperation is necessary to address the existential risks to humanity. That's because an extinction-level threat to human survival could emerge from any individual country or region, whether through war, environmental degradation, viral outbreak or hostile AI, and expand to threaten the globe.
+
+The primary venue for international cooperation is the United Nations, and the instrument through which long-term cooperation is typically established and coordinated is the international treaty. SurvivalScores.org presents a daily snapshot of the current state of international treaties critical to the survival of humanity.
 
 The degree to which countries have signed and ratified these critical treaties can be seen as a direct measure of our species' progress towards mitigating existential threats. SurvivalScores.org provides a table indicating which treaties have been ratified by each country, using data updated every day from public UN databases. If a country has joined a treaty, it earns a <img src="./images/check.svg" alt="green check" class="grade">; if a country is not yet a member of treaty, it is given a <img src="./images/cross.svg" alt="red X" class="grade">. Each country is also assigned a crude score, which is simply a count of how many critical treaties that country has already joined.
 
