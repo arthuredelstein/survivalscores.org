@@ -2,9 +2,9 @@
 
 The goal of the SurvivalScores project is to provide a clear overview of humanity's progress towards protecting the survival of our species.
 
-There is perhaps no problem more deserving of our attention than the ongoing risk of human extinction. What task could be more important than ensuring that our children or grandchildren don't have their lives ended prematurely by a global catastrophe? Yet our international politics seems adrift and unfocused, allowing significant risks of nuclear war, global pandemic, or environmental catastrophe to linger unaddressed without the kind of urgency these risks demand.
+There is perhaps no problem more deserving of our attention than the ongoing risk of human extinction. What task could be more important than ensuring that our children and grandchildren don't have their lives ended prematurely by a global catastrophe? Yet our international politics seems adrift and unfocused, allowing significant risks of nuclear war, global pandemic, and environmental catastrophe to linger unaddressed without the appropriate urgency.
 
-We need a way to get back on track. When we work on any problem, establishing metrics for success can be highly valuable in focusing and orienting our efforts. Whether it's the score in a competitive game, one's grades at school, or the total in one's bank account: we all understand that metrics are a fundamental part of establishing what's important and incentivizing members of our community to work in a particular direction.
+We need a way to get back on track. When one works on any problem, establishing metrics for success can be highly helpful in focusing and orienting our efforts. Whether it's the score in a competitive game, one's grades at school, or the total in one's bank account: we all understand that metrics are a fundamental part of establishing what's important and incentivizing members of our community to work in a particular direction.
 
 Making use of this insight, SurvivalScores publishes a daily scoreboard showing to what degree each national government is participating in existing international treaties that are important to reducing the risk of global catastrophe. At a glance, everyone can see which countries have made good progress in protecting humanity's survival, and which countries are negelecting their responsibilities.
 
@@ -31,7 +31,7 @@ SurvivalScores focuses on the most likely forms of human extinction or near-exti
 - Ecosystem collapse
 - Hostile artificial intelligence
 
-While we don't know the exact probabilities of these threats, it is plausible that any of them could cause the destruction of the human species over the next century. (This approach excludes things that are extremely harmful but aren't existential threats, such as chemical weapons and landmines.)
+While we don't know the exact probabilities of these threats, it is plausible that any of them could cause the destruction of the human species in the coming decades. (This approach excludes things that are extremely harmful but aren't existential threats, such as chemical weapons and landmines.)
 
 Fortunately, international treaties have already been established that address most of these threats. Not all nations participate in every treaty, however; the failure of governments to join these treaties presents an ongoing existential threat to us all.
 
