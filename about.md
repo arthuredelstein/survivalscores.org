@@ -77,7 +77,7 @@ treaties currently address this danger, but there is an ongoing effort to develo
 
 International politics and the trajectory of history is by its nature unpredictable and impossible to reduce to a simple formula. Obviously, the simple formula used in this project, assigning national governments a score for their contribution to human survival, does not represent the complex dynamics of international politics and technological progress. In reality, many more factors will be highly important to how the future plays out.
 
-Nevertheless, SurvivalScores takes the approach that a simple readout can be helpful to focus international efforts towards the universal ratification of treaties that are crucial to the survival of human beings and our civillization.
+Nevertheless, SurvivalScores takes the approach that a simple readout can be helpful to focus on the basics: on international efforts towards the universal ratification of treaties that are fundamental to addressing threats to survival of human beings and our civillization.
 
 Discussion, debate and disagreement is encouraged! Not everyone will agree that treaties are the right approach to reduce humanity's risk of extinction or near extinction. Others may argue that the treaties tracked by this project are not the right ones. It's important to listen to those voices with an open mind. Let's keep all discussions respectful and kind even when disagreements are strong.
 
