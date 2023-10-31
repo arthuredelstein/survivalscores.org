@@ -56,11 +56,13 @@ It is quite likely that nuclear war could arise from the escalation of a convent
 
 The danger of pandemics has become all too familiar in the world following the experience of COVID-19. Two possible sources of pathogens threatening human survival are worth considering: natural evolution and human engineering.
 
-The category of human-engineered pandemics can include both the accidental and deliberate spread of pathogens. The latter (intentional) are frequently called biological weapons. The development of such bioweapons is prohibited by the [Biological Weapons Convention](https://disarmament.unoda.org/biological-weapons/), introduced in 1972 and first in effect in 1975.
+The category of human-engineered pandemics includes both the deliberate spread of pathogens and the accidental leaks from laboratories.
 
-Accidentally engineered pathogens and natural pathogens are also important potential sources of civilization-endangering pandemics. The World Health Organization has primary responsibility for protecting the world against such pandemics. All nations apart from Liechtenstein are members of the WHO, and Liechtenstein cooperates with the WHO, so our table doesn't currently include membership of this organization.
+The development of bioweapons, pathogens intended for war, is prohibited by the [Biological Weapons Convention](https://disarmament.unoda.org/biological-weapons/), an international treaty tracked by SurvivalScores.
 
-An international agreement to prohibit gain-of-function engineering of pathogens also seems advisable, and if one is created in the future, its participation will be tracked by SurvivalScores.
+Accidentally engineered pathogens and natural pathogens are also important potential sources of civilization-endangering pandemics. The World Health Organization has primary responsibility for protecting the world against such pandemics. All nations apart from Liechtenstein are members of the WHO, and Liechtenstein cooperates with the WHO, so SurvivalScores table doesn't currently include membership of this organization.
+
+An international agreement to prohibit gain-of-function engineering of pathogens also seems advisable, and if one is created in the future, its participation will be monitored by SurvivalScores.
 
 ### Ecosystem collapse
 
