@@ -45,7 +45,7 @@ Over the decades, a number of treaties have been created at the UN to reduce the
 * The [Comprehensive Test Ban Treaty](https://www.ctbto.org/our-mission/the-treaty) (CTBT)
 * The [Treaty on the Non-Proliferation of Nuclear Weapons](https://disarmament.unoda.org/wmd/nuclear/npt/) (NPT)
 * The [Treaty for the Prohibition of Nuclear Weapons](https://disarmament.unoda.org/wmd/nuclear/tpnw/) (TPNW)
-* [Membership of Nuclear Weapons-Free Zones](https://www.un.org/nwfz/content/overview-nuclear-weapon-free-zones) (NWFZ)
+* Membership of [Nuclear Weapons-Free Zones](https://www.un.org/nwfz/content/overview-nuclear-weapon-free-zones) (NWFZ)
 
 It is quite likely that nuclear war could arise from the escalation of a conventional war. In addition, the threat of conventional war is one of the reasons that some states maintain a nuclear deterrent. Unfortunately, the [Security Dilemma](https://en.wikipedia.org/wiki/Security_dilemma) implies that a nuclear deterrent maintained by one state for defensive purposes can be perceived by other states as an offensive nuclear threat. Therefore, SecurityScores tracks treaties that provide an alternative deterrent to aggressive war:
 
