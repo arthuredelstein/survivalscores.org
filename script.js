@@ -7,22 +7,13 @@ const rowComparator = (row1, row2, columnIndex, reverse = false) => {
   const reverseFactor = reverse ? -1 : 1
   const td1 = [...row1.querySelectorAll('td')][columnIndex]
   const td2 = [...row2.querySelectorAll('td')][columnIndex]
+  const value1 = td1.getAttribute('data-value')
+  const value2 = td2.getAttribute('data-value')
+  if (!isNaN(value1) && !isNaN(value2)) {
+    return reverseFactor * (value1 - value2)
+  }
   const text1 = td1.innerText.trim()
   const text2 = td2.innerText.trim()
-  if (text1.includes('/') && text2.includes('/')) {
-    // Sorting fractions
-    const numerator1 = text1.split('/')[0]
-    const numerator2 = text2.split('/')[0]
-    return reverseFactor * (parseInt(numerator1) - parseInt(numerator2))
-  }
-  if (text1.length > 0 && !isNaN(text1)) {
-    return reverseFactor * (parseInt(text1) - parseInt(text2))
-  }
-  const class1 = td1.className
-  const class2 = td2.className
-  if (class1 && (class1.includes('good') || class1.includes('bad'))) {
-    return reverseFactor * class1.localeCompare(class2)
-  }
   return -reverseFactor * text1.localeCompare(text2)
 }
 

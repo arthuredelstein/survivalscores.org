@@ -109,6 +109,14 @@ const composeDescription = ({ country, treaty, nwfz, joiningMechanism, joined, s
   return description
 }
 
+const formatPopulation = (populationInteger) => {
+  try {
+    return populationInteger.toLocaleString('en-US')
+  } catch (e) {
+    return populationInteger
+  }
+}
+
 const tabulate = (inputs, aggregatedData, population) => {
   const { nwfzTreaties } = inputs
   // const treatyList = [...otherUNTreaties.map(t => t.code),
@@ -122,7 +130,8 @@ const tabulate = (inputs, aggregatedData, population) => {
     const country = codeToCountry(countryCode)
     const flagItem = { value: flagEmojiHtml(countryCode), classValue: 'flag' }
     const countryItem = { value: country, classValue: 'row_header' }
-    const populationItem = { value: population[countryCode], classValue: 'row_header' }
+    const populationValue = population[countryCode]
+    const populationItem = { value: formatPopulation(populationValue), dataValue: populationValue, classValue: 'row_header' }
     let memberCount = 0
     for (const treaty of treatyList) {
       let joined, nwfz
@@ -140,11 +149,13 @@ const tabulate = (inputs, aggregatedData, population) => {
       const value = joined ? 'yes' : 'no'
       const { joiningMechanism, signed } = treatyData[treaty] ?? {}
       const description = composeDescription({ country, treaty, nwfz, joined, joiningMechanism, signed })
-      row.push({ description, value })
+      const dataValue = joined ? 1 : 0
+      row.push({ description, value, dataValue })
     }
     const countryScoreItem = {
       value: `${memberCount}/${treatyList.length}`,
       classValue: 'row_header',
+      dataValue: memberCount,
       description: ''
     }
     rows.push([flagItem, countryItem, countryScoreItem, populationItem, ...row])
@@ -219,9 +230,9 @@ const htmlTable = ({ header, rows }) => {
     for (const cell of row) {
       const tooltip = cell.description ? `title="${cell.description}"` : ''
       if (cell.classValue) {
-        fragments.push(`<td ${tooltip} class="${cell.classValue}">${cell.value}</td>`)
+        fragments.push(`<td ${tooltip} data-value="${cell.dataValue}" class="${cell.classValue}">${cell.value}</td>`)
       } else {
-        fragments.push(`<td ${tooltip} class="${cell.value === 'yes' ? 'good' : 'bad'}">&nbsp;</td>`)
+        fragments.push(`<td ${tooltip} data-value="${cell.dataValue}" class="${cell.value === 'yes' ? 'good' : 'bad'}">&nbsp;</td>`)
       }
     }
     fragments.push('</tr>')
