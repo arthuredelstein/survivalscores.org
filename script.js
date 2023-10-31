@@ -26,12 +26,8 @@ const rowComparator = (row1, row2, columnIndex, reverse = false) => {
   return -reverseFactor * text1.localeCompare(text2)
 }
 
-const sortColumn = (columnIndex) => {
-  if (state.sortedColumn === columnIndex) {
-    state.ascending = !state.ascending
-  } else {
-    state.ascending = true
-  }
+const sortColumn = (columnIndex, ascending) => {
+  state.ascending = ascending
   state.sortedColumn = columnIndex
   const rows = [...document.querySelectorAll('table tr.data')]
   const table = document.querySelector('table')
@@ -42,8 +38,17 @@ const sortColumn = (columnIndex) => {
   const arrowImages = [...document.querySelectorAll('thead tr th.sort-arrows img')]
   arrowImages.forEach(img => { img.src = './images/sortArrowsUnsorted.svg' })
   const arrowImage = arrowImages[columnIndex - 1]
-
   arrowImage.src = !state.ascending ? './images/sortArrowsDown.svg' : './images/sortArrowsUp.svg'
+}
+
+const toggleSortedColumn = (columnIndex) => {
+  let ascending
+  if (state.sortedColumn === columnIndex) {
+    ascending = !state.ascending
+  } else {
+    ascending = true
+  }
+  sortColumn(columnIndex, ascending)
 }
 
 window.addEventListener('DOMContentLoaded', (e) => {
@@ -54,8 +59,8 @@ window.addEventListener('DOMContentLoaded', (e) => {
   updatedElement.innerText = 'Data from ' + dataDate.toLocaleDateString() // eslint-disable-line no-undef
   for (let i = 0; i < headers.length; ++i) {
     headers[i].addEventListener('click', (e) => {
-      sortColumn(i)
+      toggleSortedColumn(i)
     })
   }
-  sortColumn(3)
+  sortColumn(2, false)
 })

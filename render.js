@@ -151,7 +151,8 @@ const tabulate = (inputs, aggregatedData, population) => {
   }
   const header = headerNames.map(name => ({ name, count: treatyCount[name] }))
   // Sort by population
-  rows = _.sortBy(rows, row => row[3].value).reverse()
+  rows = _.sortBy(rows, row => row[1].value)
+  rows = _.sortBy(rows, row => row[2].value)
   return { rows, header }
 }
 
