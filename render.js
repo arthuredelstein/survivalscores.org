@@ -32,7 +32,7 @@ const page = ({ css, js, content }) => `
 </html>
 `
 
-const cleanHtml = (content) => new Promise(resolve => cleaner.clean(content, resolve))
+const cleanHtml = (content) => new Promise(resolve => cleaner.clean(content, { wrap: 0 }, resolve))
 
 const createPreviewImage = async (htmlFile, pngFile) => {
   await captureWebsite.file(htmlFile, pngFile, {
@@ -99,7 +99,7 @@ const composeDescription = ({ country, treaty, nwfz, joiningMechanism, joined, s
       ratified: 'ratified',
       acceded: 'acceded to',
       accepted: 'accepted membership of',
-      approved: 'gave its approval to',
+      approved: 'gave approval to',
       succeeded: 'inherited membership of',
       joined: 'joined'
     }[joiningMechanism] ?? 'joined')
