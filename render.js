@@ -264,7 +264,7 @@ export const aboutPage = async (dataDate) => {
 const main = async () => {
   const aggregatedData = JSON.parse(fs.readFileSync('aggregated.json').toString())
   const populationData = JSON.parse(fs.readFileSync('population.json').toString())
-  const dataDate = '2010-01-01T00:00:00Z'
+  const dataDate = '1945-10-24T12:00:00Z'
   await renderSite({ aggregatedData, populationData, dataDate }, false)
   await aboutPage(dataDate)
 }
