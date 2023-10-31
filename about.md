@@ -6,7 +6,7 @@ There is perhaps no problem more deserving of our attention than the ongoing ris
 
 We need a way to get back on track. When one works on any problem, establishing metrics for success can be helpful in focusing and orienting our efforts. Whether it's the score in a competitive game, one's grades at school, or the total in one's bank account: we all understand that metrics are a fundamental part of establishing what's important and incentivizing members of our community to work in a particular direction.
 
-Making use of this insight, SurvivalScores publishes a daily scoreboard showing to what degree each national government is participating in existing international treaties that are important to reducing the risk of global catastrophe. At a glance, everyone can see which countries have made good progress in protecting humanity's survival, and which countries are neglecting their responsibilities.
+Making use of this insight, SurvivalScores publishes a daily scoreboard showing to what degree each national government is participating in existing international treaties that serve as existential hygiene to reduce the risk of global catastrophe. At a glance, everyone can see which countries have made good progress in protecting humanity's survival, and which countries are neglecting their responsibilities.
 
 SurvivalScores was created with the hope that this scoreboard can help to concentrate our attention on these key treaties, and promote efforts to push lagging national governments to ratify them.
 
