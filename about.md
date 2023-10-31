@@ -4,7 +4,7 @@ The goal of the SurvivalScores project is to provide a clear overview of humanit
 
 There is perhaps no problem more deserving of our attention than the ongoing risk of human extinction. What task could be more important than ensuring that our children and grandchildren don't have their lives ended prematurely by a global catastrophe? Yet our international politics seems adrift and unfocused, allowing significant risks of nuclear war, global pandemic, and environmental catastrophe to linger unaddressed without the appropriate urgency.
 
-We need a way to get back on track. When one works on any problem, establishing metrics for success can be highly helpful in focusing and orienting our efforts. Whether it's the score in a competitive game, one's grades at school, or the total in one's bank account: we all understand that metrics are a fundamental part of establishing what's important and incentivizing members of our community to work in a particular direction.
+We need a way to get back on track. When one works on any problem, establishing metrics for success can be helpful in focusing and orienting our efforts. Whether it's the score in a competitive game, one's grades at school, or the total in one's bank account: we all understand that metrics are a fundamental part of establishing what's important and incentivizing members of our community to work in a particular direction.
 
 Making use of this insight, SurvivalScores publishes a daily scoreboard showing to what degree each national government is participating in existing international treaties that are important to reducing the risk of global catastrophe. At a glance, everyone can see which countries have made good progress in protecting humanity's survival, and which countries are neglecting their responsibilities.
 
@@ -58,13 +58,13 @@ The danger of pandemics has become all too familiar in the world following the e
 
 The category of human-engineered pandemics can include both the accidental and deliberate spread of pathogens. The latter (intentional) are frequently called biological weapons. The development of such bioweapons is prohibited by the [Biological Weapons Convention](https://disarmament.unoda.org/biological-weapons/), introduced in 1972 and first in effect in 1975.
 
-Accidentally engineered pathogens and natural pathogens are also highly important potential sources of civilization-endangering pandemics. The World Health Organization has primary responsibility for protecting the world against such pandemics. All nations apart from Liechtenstein are members of the WHO, and Liechtenstein cooperates with the WHO, so our table doesn't currently include membership of this organization.
+Accidentally engineered pathogens and natural pathogens are also important potential sources of civilization-endangering pandemics. The World Health Organization has primary responsibility for protecting the world against such pandemics. All nations apart from Liechtenstein are members of the WHO, and Liechtenstein cooperates with the WHO, so our table doesn't currently include membership of this organization.
 
-An international agreement to prohibit gain-of-function engineering of pathogens also seems highly advisable, and if one is created in the future, its participation will be tracked by SurvivalScores.
+An international agreement to prohibit gain-of-function engineering of pathogens also seems advisable, and if one is created in the future, its participation will be tracked by SurvivalScores.
 
 ### Ecosystem collapse
 
-The threat of collapse of large numbers of species or whole ecosystems is not merely a threat to Earth's natural heritage, but also a threat to the survival of the human species. Humanity's reliance on nature for its sustenance is indisputable and highly complex: we can't risk allowing the destruction of our ecological support system.
+The threat of collapse of large numbers of species or whole ecosystems is not merely a threat to Earth's natural heritage, but also a threat to the survival of the human species. Humanity's reliance on nature for its sustenance is indisputable and complex: we can't risk allowing the destruction of our ecological support system.
 
 To measure international commitment to combating this risk, SurvivalScores includes the [Paris Agreement on Climate Change](https://www.un.org/en/climatechange/paris-agreement) and the [Convention on Biological Diversity](https://www.un.org/en/observances/biological-diversity-day/convention). These two treaties represent fundamental measures that all countries should jointly take to reduce humanity's devastating impact on the global ecosystem.
 
@@ -75,9 +75,9 @@ treaties currently address this danger, but there is an ongoing effort to develo
 
 ## Alternative viewpoints
 
-International politics and the trajectory of history is by its nature unpredictable and impossible to reduce to a simple formula. Obviously, the simple formula used in this project, assigning national governments a score for their contribution to human survival, does not represent the complex dynamics of international politics and technological progress. In reality, many more factors will be highly important to how the future plays out.
+International politics and the trajectory of history is by its nature unpredictable and impossible to reduce to a simple formula. Obviously, the simple formula used in this project, assigning national governments a score for their contribution to human survival, does not represent the complex dynamics of international politics and technological progress. In reality, many more factors will be important to how the future plays out.
 
-Nevertheless, SurvivalScores takes the approach that a simple readout can be helpful to focus on the basics: on international efforts towards the universal ratification of treaties that are fundamental to addressing threats to survival of human beings and our civilization.
+Nevertheless, SurvivalScores is built with the view that a simple readout can be helpful to focus on the basics: on international efforts towards the universal ratification of treaties that are fundamental to addressing threats to survival of human beings and our civilization.
 
 Discussion, debate and disagreement is encouraged! Not everyone will agree that treaties are the right approach to reduce humanity's risk of extinction or near extinction. Others may argue that the treaties tracked by this project are not the right ones. It's important to listen to those voices with an open mind. Let's keep all discussions respectful and kind even when disagreements are strong.
 
