@@ -101,6 +101,7 @@ const composeDescription = ({ country, treaty, nwfz, joiningMechanism, joined, s
       accepted: 'accepted membership of',
       approved: 'gave approval to',
       succeeded: 'inherited membership of',
+      withdrew: 'withdrew from',
       joined: 'joined'
     }[joiningMechanism] ?? 'joined')
     description += treatyMentioned ? ' it' : ` the ${treatyOrNwfzName}`
