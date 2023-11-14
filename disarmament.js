@@ -151,7 +151,7 @@ const gatherDisarmamentData = (rawData) => {
     }
     if (joiningMechanism === 'WTW') {
       result.withdrew = date
-      results.joiningMechanism = 'withdrew'
+      result.joiningMechanism = 'withdrew'
     }
   }
   return results
