@@ -81,7 +81,7 @@ const flagEmojiHtml = (countryCode) => {
   return countryCode.split('').map(convertCharacter).join('')
 }
 
-const composeDescription = ({ country, treaty, nwfz, joiningMechanism, joined, signed }) => {
+const composeDescription = ({ country, treaty, nwfz, withdrew, joiningMechanism, joined, signed }) => {
   let description = ''
   const isNwfz = treaty === 'nwfz'
   const { name: treatyName } = treatyInfoByCode()[isNwfz ? (nwfz ?? 'nwfz') : treaty]
@@ -101,11 +101,14 @@ const composeDescription = ({ country, treaty, nwfz, joiningMechanism, joined, s
       accepted: 'accepted membership of',
       approved: 'gave approval to',
       succeeded: 'inherited membership of',
-      withdrew: 'withdrew from',
       joined: 'joined'
     }[joiningMechanism] ?? 'joined')
     description += treatyMentioned ? ' it' : ` the ${treatyOrNwfzName}`
-    description += ` on ${joined}.`
+    description += ` on ${joined}`
+    if (withdrew) {
+      description += `, but withdrew on ${withdrew}`
+    }
+    description += '.'
   }
   return description
 }
@@ -136,6 +139,7 @@ const tabulate = (inputs, aggregatedData, population) => {
     let memberCount = 0
     for (const treaty of treatyList) {
       let joined, nwfz
+      const withdrew = treatyData[treaty] && treatyData[treaty].withdrew
       if (treaty === 'nwfz') {
         const found = findNwfzMembership(treatyData, nwfzList)
         joined = found.joined
@@ -147,10 +151,10 @@ const tabulate = (inputs, aggregatedData, population) => {
         ++memberCount
         treatyCount[treaty] = 1 + (treatyCount[treaty] ?? 0)
       }
-      const value = joined ? 'yes' : 'no'
+      const value = joined && !withdrew ? 'yes' : 'no'
       const { joiningMechanism, signed } = treatyData[treaty] ?? {}
-      const description = composeDescription({ country, treaty, nwfz, joined, joiningMechanism, signed })
-      const dataValue = joined ? 1 : 0
+      const description = composeDescription({ country, treaty, nwfz, joined, joiningMechanism, signed, withdrew })
+      const dataValue = (joined && !withdrew) ? 1 : 0
       row.push({ description, value, dataValue })
     }
     const countryScoreItem = {
