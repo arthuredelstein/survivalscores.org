@@ -147,15 +147,15 @@ const tabulate = (inputs, aggregatedData, population) => {
       } else {
         joined = treatyData[treaty] && treatyData[treaty].joined
       }
-      if (joined) {
+      const member = joined && !withdrew
+      if (member) {
         ++memberCount
         treatyCount[treaty] = 1 + (treatyCount[treaty] ?? 0)
       }
-      const value = joined && !withdrew ? 'yes' : 'no'
       const { joiningMechanism, signed } = treatyData[treaty] ?? {}
       const description = composeDescription({ country, treaty, nwfz, joined, joiningMechanism, signed, withdrew })
-      const dataValue = (joined && !withdrew) ? 1 : 0
-      row.push({ description, value, dataValue })
+      const dataValue = member ? 1 : 0
+      row.push({ description, dataValue })
     }
     const countryScoreItem = {
       value: `${memberCount}/${treatyList.length}`,
@@ -237,7 +237,7 @@ const htmlTable = ({ header, rows }) => {
       if (cell.classValue) {
         fragments.push(`<td ${tooltip} data-value="${cell.dataValue}" class="${cell.classValue}">${cell.value}</td>`)
       } else {
-        fragments.push(`<td ${tooltip} data-value="${cell.dataValue}" class="${cell.value === 'yes' ? 'good' : 'bad'}">&nbsp;</td>`)
+        fragments.push(`<td ${tooltip} data-value="${cell.dataValue}" class="${cell.value === 1 ? 'good' : 'bad'}">&nbsp;</td>`)
       }
     }
     fragments.push('</tr>')
