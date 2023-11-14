@@ -33,14 +33,14 @@ export const collectAllData = async () => {
     getAllData(inputs),
     populationInfo()
   ])
+  writeJsonData('raw.json', rawTreatyData)
+  writeJsonData('population.json', populationData)
+  writeJsonData('aggregated.json', aggregatedData)
   return { rawTreatyData, populationData, aggregatedData: aggregate(rawTreatyData) }
 }
 
 const main = async () => {
-  const { rawTreatyData, populationData, aggregatedData } = await collectAllData()
-  writeJsonData('raw.json', rawTreatyData)
-  writeJsonData('population.json', populationData)
-  writeJsonData('aggregated.json', aggregatedData)
+  await collectAllData()
 }
 
 if (esMain(import.meta)) {
