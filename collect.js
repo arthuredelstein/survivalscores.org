@@ -33,10 +33,11 @@ export const collectAllData = async () => {
     getAllData(inputs),
     populationInfo()
   ])
+  const aggregatedData = aggregate(rawTreatyData)
   writeJsonData('raw.json', rawTreatyData)
   writeJsonData('population.json', populationData)
   writeJsonData('aggregated.json', aggregatedData)
-  return { rawTreatyData, populationData, aggregatedData: aggregate(rawTreatyData) }
+  return { rawTreatyData, populationData, aggregatedData }
 }
 
 const main = async () => {
