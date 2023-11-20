@@ -42,12 +42,19 @@ const toggleSortedColumn = (columnIndex) => {
   sortColumn(columnIndex, ascending)
 }
 
+const dateYMD = (date) => {
+  const year = date.toLocaleString('default', { year: 'numeric' })
+  const month = date.toLocaleString('default', { month: '2-digit' })
+  const day = date.toLocaleString('default', { day: '2-digit' })
+  return `${year}-${month}-${day}`
+}
+
 window.addEventListener('DOMContentLoaded', (e) => {
   console.log('DOMContentLoaded')
   polyfillCountryFlagEmojis()
   const headers = [...document.querySelectorAll('thead tr th.sort-arrows')]
   const updatedElement = document.getElementById('updated')
-  updatedElement.innerText = 'Data from ' + dataDate.toISOString().split('T')[0] // eslint-disable-line no-undef
+  updatedElement.innerText = 'Data from ' + dateYMD(dataDate) // eslint-disable-line no-undef
   for (let i = 0; i < headers.length; ++i) {
     headers[i].addEventListener('click', (e) => {
       toggleSortedColumn(i)
