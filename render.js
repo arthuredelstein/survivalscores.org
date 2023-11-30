@@ -189,14 +189,16 @@ const htmlHeading = () =>
 `
 
 const htmlFooter = (dataDate) => `
-  <div class="footer"><b>Data sources</b><br>
-    Data presented in this table was retrieved from live databases maintained by the United Nations:
+  <div class="footer">
+    <h3><b>Sources</b></h3>
+    <p>Data presented in this table were retrieved from live databases maintained by the United Nations:</p>
     <ul>
       <li><a href="https://treaties.unoda.org/">Disarmament Treaties Database</a>, United Nations Office for Disarmament Affairs</li>
       <li><a href="https://treaties.un.org/Pages/ParticipationStatus.aspx">Multilateral Treaties Deposited with the Secretary-General</a>, United Nations, New York</li>
       <li><a href="https://data.un.org/">UNdata</a>, United Nations Statistics Division</li>
     </ul>
-    Data retrieved at ${(new Date(dataDate)).toISOString()}
+    <p>Data retrieved at ${(new Date(dataDate)).toISOString()}</p>
+    <p>Source code for this project is <a href="https://github.com/arthuredelstein/survivalscores.org">available on GitHub</a>.</p>
   </div>
 `
 
