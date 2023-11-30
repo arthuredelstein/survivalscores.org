@@ -199,6 +199,7 @@ const htmlFooter = (dataDate) => `
     </ul>
     <p>Data retrieved at ${(new Date(dataDate)).toISOString()}</p>
     <p>Source code for this project is <a href="https://github.com/arthuredelstein/survivalscores.org">available on GitHub</a>.</p>
+    <br>
   </div>
 `
 
