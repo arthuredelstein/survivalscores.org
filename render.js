@@ -176,7 +176,13 @@ const tabulate = (inputs, aggregatedData, population) => {
 const htmlHeading = () =>
   `<div class='title'>
     <div class='title-group'>
-      <div class='title-text'><a href="/"><img id='logo' src='./images/survivalscores_logo.svg'>SurvivalScores.org</a></div>
+      <div class='title-text'>
+        <a href="/">
+          <img id='logo' alt='SurvivalScores.org logo'
+               src='./images/survivalscores_logo.svg'>
+          SurvivalScores.org
+        </a>
+      </div>
       <div class='tagline-text'>Monitoring treaties critical to the survival of humanity</div>
     </div>
     <div id='updated'></div>
@@ -212,7 +218,7 @@ const htmlTable = ({ header, rows }) => {
   for (const headerItem of header) {
     const treatyInfo = treatyInfoByCode()[headerItem.name]
     const logo = treatyInfo ? treatyInfo.logo : undefined
-    const imageElement = logo ? `<img src='./images/${logo}' class='treaty-logo'>` : ''
+    const imageElement = logo ? `<img alt='${treatyInfo?.name} logo' src='./images/${logo}' class='treaty-logo'>` : ''
     const className = imageElement.length > 0 ? 'treaty-header' : 'data-header'
     fragments.push(`<th class='${className}'>${imageElement}<br>${treatyInfo?.name ?? headerItem.name}</th>`)
   }
@@ -241,7 +247,10 @@ const htmlTable = ({ header, rows }) => {
       if (cell.classValue) {
         fragments.push(`<td ${tooltip} data-value="${cell.dataValue}" class="${cell.classValue}">${cell.value}</td>`)
       } else {
-        fragments.push(`<td ${tooltip} data-value="${cell.dataValue}" class="${cell.value === 'yes' ? 'good' : 'bad'}">&nbsp;</td>`)
+        const yes = cell.value === 'yes'
+        fragments.push(`<td ${tooltip} data-value="${cell.dataValue}" class="${yes ? 'good' : 'bad'}">
+                          <img class="status" alt="${yes ? 'member' : 'non-member'}">
+                        </td>`)
       }
     }
     fragments.push('</tr>')
