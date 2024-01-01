@@ -8,7 +8,7 @@ We need a way to get back on track. When one works on any problem, establishing 
 
 Making use of this insight, SurvivalScores publishes a daily scoreboard showing to what degree each national government is participating in existing international treaties that serve as existential hygiene to reduce the risk of global catastrophe. At a glance, everyone can see which countries have made good progress in protecting humanity's survival, and which countries are neglecting their responsibilities.
 
-SurvivalScores was created with the hope that this scoreboard can help to concentrate our attention on these key treaties, and promote efforts to push lagging national governments to ratify them.
+SurvivalScores was created with the hope that a scoreboard can help to concentrate our attention on these key treaties, and promote efforts to push lagging national governments to ratify them.
 
 ## Why treaties?
 
