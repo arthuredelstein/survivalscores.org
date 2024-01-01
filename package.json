@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "render-dev": "npx live-server ./build/ & npx nodemon --ext js,css,md --watch . render.js",
+    "render-table": "npx live-server ./build/ & npx nodemon --ext js,css,md --watch . render-table.js",
+    "render-timeline": "npx live-server ./build/ --open=timeline.html & npx nodemon --ext js,css,md --watch . render-timeline.js",
     "publish": "npx gh-pages -d build",
     "build": "node index.js"
   },

@@ -2,7 +2,7 @@ import { mapParallelToObject, formatDate, countryToCode } from './utils.js'
 import { JSDOM } from 'jsdom'
 
 const extractData = (td) => {
-  const pieces = td.textContent.trim().split(/\s+/)
+  const pieces = td.textContent.replace(/[[\]]/g, '').trim().split(/\s+/)
   const raw = pieces.slice(0, 3).join(' ')
   const cleanString = raw.replaceAll(/\t|&nbsp;/g, ' ').trim()
   const rawDate = new Date(cleanString)
@@ -27,12 +27,6 @@ const getUNDataFromRow = (row, columnCount) => {
     td0.removeChild(footnote)
   }
   const countryCode = countryToCode(td0.textContent.trim())
-  if (td1.textContent.startsWith('[')) {
-    return [
-      countryCode,
-      { withdrew: true }
-    ]
-  }
   if (columnCount === 3) {
     const { date: joined, tag: tagJoined } = extractData(td2)
     const { date: signed } = extractData(td1)
@@ -65,11 +59,35 @@ const tableRowsFromUrl = async (url, selector) => {
   return [...table.querySelectorAll('tr')]
 }
 
+const getNoteDataFromRow = (row) => {
+  const [t1,, t3] = row.querySelectorAll('td')
+  const country = t1?.textContent
+  const dateOfEffect = t3?.textContent
+  if (dateOfEffect === undefined) {
+    return
+  }
+  if (country.includes(':')) {
+    return
+  }
+  if (dateOfEffect.includes('Withdrawn')) {
+    return
+  }
+  return [countryToCode(country), formatDate(new Date(dateOfEffect))]
+}
+
 const unTreatyInfo = async (treaty) => {
   const { chapter, mtdsgNo, columnCount } = treaty
   const url = `https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&mtdsg_no=${mtdsgNo}&chapter=${chapter}&clang=_en`
   const rows = await tableRowsFromUrl(url, '#ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolderInnerPage_tblgrid')
-  return Object.fromEntries(rows.slice(1).map(row => getUNDataFromRow(row, columnCount)))
+  const mainData = Object.fromEntries(rows.slice(1).map(row => getUNDataFromRow(row, columnCount)))
+  if (treaty.code === 'rome') {
+    const rows2 = await tableRowsFromUrl(url, '#ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolderInnerPage_dgNotesAll_ctl03_divNotesAll')
+    const withdrawalData = rows2.map(getNoteDataFromRow).filter(x => x)
+    for (const [country, withdrawalDate] of withdrawalData) {
+      mainData[country].withdrew = withdrawalDate
+    }
+  }
+  return mainData
 }
 
 export const other = async (otherUNTreaties) =>

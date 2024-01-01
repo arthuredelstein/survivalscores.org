@@ -36,6 +36,16 @@ const getTypeLogo = (type) => ({
   approved: 'check.svg'
 })[type] ?? type
 
+const regularCountryName = (countryCode) => {
+  const raw = codeToCountry(countryCode)
+  if (raw.includes(', ')) {
+    const [a, b] = raw.split(', ')
+    return `${b} ${a}`
+  } else {
+    return raw
+  }
+}
+
 const htmlTimelineTable = (aggregatedData) => {
   const eventsList = listDataByTime(aggregatedData)
   // console.log('htmlTimelineTable')
@@ -46,17 +56,13 @@ const htmlTimelineTable = (aggregatedData) => {
     const treatyName = treatyInfoByCode()[event.treaty].name
     //    console.log(event.treaty, treatyName)
     const treatyLogo = treatyInfo ? treatyInfo.logo : undefined
-    if (treatyLogo === undefined) {
-      // console.log(event.treaty)
-    }
-    if (event.country === 'PH') { console.log(event) }
     const imageElement = treatyLogo ? `<img alt='${treatyInfo?.name} logo' src='./images/${treatyLogo}' class='treaty-logo'>` : ''
     html += '<tr>'
     html += `<td class='date'>${event.date}</td>`
     html += `<td class='flag'>${flagEmojiHtml(event.country)}</td>`
     html += `<td class='type'><img src='images/${getTypeLogo(event.type)}'></td>`
     html += `<td class='treaty'>${imageElement}</td>`
-    html += `<td>${codeToCountry(event.country)} ${addPrepositions(event.type)} the ${treatyName}.</td>`
+    html += `<td>${regularCountryName(event.country)} ${addPrepositions(event.type)} the ${treatyName}.</td>`
     html += '</tr>'
   }
   return html
