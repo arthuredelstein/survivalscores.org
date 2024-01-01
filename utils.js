@@ -32,6 +32,11 @@ const countryData = _.memoize(() => {
   }
 })
 
+export const nwfzList = _.memoize(() => {
+  const { nwfzTreaties } = readYAML('inputs.yaml')
+  return nwfzTreaties.map(t => t.code)
+})
+
 export const countryToCode = (country) => {
   const { countryToCode } = countryData()
   if (!countryToCode[country]) {

@@ -1,0 +1,27 @@
+td {
+  font-size: 24px;
+  padding: 8px;
+}
+td.date {
+  width: 130px;
+}
+td.treaty {
+  text-align: center;
+}
+img.treaty-logo {
+  height: 24px;
+}
+td.flag {
+  text-align: center;
+  font-size: 40px;
+}
+td.type {
+  text-align: center;
+}
+td.type img {
+  height: 24px;
+}
+.table-container {
+  display: flex;
+  justify-items: center;
+}

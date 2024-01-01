@@ -1,59 +1,11 @@
 import fs from 'fs'
-import { inputs, codeToCountry, treatyInfoByCode } from './utils.js'
+import { inputs, codeToCountry, treatyInfoByCode, nwfzList } from './utils.js'
 import _ from 'lodash'
 import esMain from 'es-main'
-import captureWebsite from 'capture-website'
-import cleaner from 'clean-html'
 import { marked } from 'marked'
-
-const page = ({ css, js, content }) => `
-<!DOCTYPE html>
-<html>
- <head>
-  <title>SurvivalScores.org: Monitoring treaties critical to the survival of humanity</title>
-  <meta charset="utf8"/>
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="viewport" content="width=device-width, initial-scale=0.7" />
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta property="og:image" content="https://survivalscores.org/index-preview.png"/>
-  <meta property="og:title" content="Can humanity survive?"/>
-  <meta property="og:description" content="Monitoring treaties critical to human survival."/>
-  <meta property="og:type" content="website"/>
-  <link rel="icon" type="image/x-icon" href="./images/survivalscores_logo_dark.svg">
-  <link rel="preload" href="./images/sortArrowsDown.svg" as="image">
-  <link rel="preload" href="./images/sortArrowsUp.svg" as="image">
-  <link rel="preload" href="./images/sortArrowsUnsorted.svg" as="image">
-  <style>${css}</style>
-  <script type="module">${js}</script>
- </head>
- <body>
-  ${content}
- </body>
-</html>
-`
-
-const cleanHtml = (content) => new Promise(resolve => cleaner.clean(content, { wrap: 0 }, resolve))
-
-const createPreviewImage = async (htmlFile, pngFile) => {
-  await captureWebsite.file(htmlFile, pngFile, {
-    width: 1000,
-    height: 523,
-    scaleFactor: 1.0,
-    overwrite: true
-  })
-  console.log('wrote', pngFile)
-}
+import { render, createPreviewImage, htmlHeading, flagEmojiHtml, htmlFooter } from './render-utils.js'
 
 const loadJs = () => fs.readFileSync('./script.js')
-
-const render = async (filename, html, dataDate, js) => {
-  //  consolee.log(aggregated);
-  const css = fs.readFileSync('./main.css').toString()
-  const htmlPage = await cleanHtml(page({ css, js, content: html }))
-  const path = `./build/${filename}`
-  fs.writeFileSync(path, htmlPage)
-  console.log(`wrote ${path}`)
-}
 
 const treatyList = [
   'rome', 'aggression', 'npt', 'ctbt', 'nwfz', 'tpnw', 'bwc', 'biodiversity', 'paris'
@@ -66,19 +18,6 @@ const findNwfzMembership = (treatyData, nwfzList) => {
     }
   }
   return { joined: false }
-}
-
-const convertCharacter = (char) => {
-  const index = char.charCodeAt(0) - 64
-  const newIndex = index + 127461
-  return `&#${newIndex};`
-}
-
-const flagEmojiHtml = (countryCode) => {
-  if (countryCode === 'TP') {
-    countryCode = 'TL'
-  }
-  return countryCode.split('').map(convertCharacter).join('')
 }
 
 const composeDescription = ({ country, treaty, nwfz, withdrew, joiningMechanism, joined, signed }) => {
@@ -122,10 +61,6 @@ const formatPopulation = (populationInteger) => {
 }
 
 const tabulate = (inputs, aggregatedData, population) => {
-  const { nwfzTreaties } = inputs
-  // const treatyList = [...otherUNTreaties.map(t => t.code),
-  //  ...disarmamentTreaties.map(t => t.code)];
-  const nwfzList = nwfzTreaties.map(t => t.code)
   const headerNames = ['', 'Country', 'Score', 'Population', ...treatyList]
   let rows = []
   const treatyCount = {}
@@ -141,7 +76,7 @@ const tabulate = (inputs, aggregatedData, population) => {
       let joined, nwfz
       const withdrew = treatyData[treaty] && treatyData[treaty].withdrew
       if (treaty === 'nwfz') {
-        const found = findNwfzMembership(treatyData, nwfzList)
+        const found = findNwfzMembership(treatyData, nwfzList())
         joined = found.joined
         nwfz = found.nwfz
       } else {
@@ -172,42 +107,6 @@ const tabulate = (inputs, aggregatedData, population) => {
   rows = _.sortBy(rows, row => row[2].value)
   return { rows, header }
 }
-
-const htmlHeading = () =>
-  `<div class='title'>
-    <div class='title-group'>
-      <div class='title-text'>
-        <a href="/">
-          <img id='logo' alt='SurvivalScores.org logo'
-               src='./images/survivalscores_logo.svg'>
-          SurvivalScores.org
-        </a>
-      </div>
-      <div class='tagline-text'>Monitoring treaties critical to the survival of humanity</div>
-    </div>
-    <div id='updated'></div>
-    <div class='links'>
-    <a href="./about">About</a> &#x2022;
-    <a href="https://twitter.com/survivalscores">Twitter</a> &#x2022;
-    <a rel="me" href="https://mastodon.social/@survivalscores">Mastodon</a>
-  </div>
-  </div>
-`
-
-const htmlFooter = (dataDate) => `
-  <div class="footer">
-    <h3><b>Sources</b></h3>
-    <p>Data presented in this table were retrieved from live databases maintained by the United Nations:</p>
-    <ul>
-      <li><a href="https://treaties.unoda.org/">Disarmament Treaties Database</a>, United Nations Office for Disarmament Affairs</li>
-      <li><a href="https://treaties.un.org/Pages/ParticipationStatus.aspx">Multilateral Treaties Deposited with the Secretary-General</a>, United Nations, New York</li>
-      <li><a href="https://data.un.org/">UNdata</a>, United Nations Statistics Division</li>
-    </ul>
-    <p>Data retrieved at ${(new Date(dataDate)).toISOString()}</p>
-    <p>Source code for this project is <a href="https://github.com/arthuredelstein/survivalscores.org">available on GitHub</a>.</p>
-    <br>
-  </div>
-`
 
 const htmlTable = ({ header, rows }) => {
   const fragments = []
@@ -260,13 +159,14 @@ const htmlTable = ({ header, rows }) => {
   return fragments.join('')
 }
 
-export const renderSite = async (
+export const renderTable = async (
   { dataDate, aggregatedData, populationData }, generatePreview) => {
   delete aggregatedData.EU
   delete aggregatedData.XX
   const { rows, header } = tabulate(inputs(), aggregatedData, populationData)
   const js = `const dataDate = new Date('${dataDate}');\n` + loadJs()
-  await render('index.html', htmlHeading() + "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter(dataDate) + '</div>', dataDate, js)
+  const css = fs.readFileSync('./main.css').toString() + fs.readFileSync('./main-table.css').toString()
+  await render('index.html', htmlHeading() + "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter(dataDate) + '</div>', dataDate, js, css)
   if (generatePreview) {
     await createPreviewImage('./build/index.html', './build/index-preview.png')
   }
@@ -276,14 +176,15 @@ export const aboutPage = async (dataDate) => {
   const js = ''
   const copy = fs.readFileSync('./about.md').toString()
   const content = htmlHeading() + "<div class='copy'><div class='markdown-container'>" + marked.parse(copy) + '</div></div>'
-  await render('about.html', content, dataDate, js)
+  const css = fs.readFileSync('./main.css').toString()
+  await render('about.html', content, dataDate, js, css)
 }
 
 const main = async () => {
   const aggregatedData = JSON.parse(fs.readFileSync('aggregated.json').toString())
   const populationData = JSON.parse(fs.readFileSync('population.json').toString())
   const dataDate = '1945-10-24T12:00:00Z'
-  await renderSite({ aggregatedData, populationData, dataDate }, false)
+  await renderTable({ aggregatedData, populationData, dataDate }, false)
   await aboutPage(dataDate)
 }
 
