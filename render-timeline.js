@@ -49,7 +49,8 @@ const regularCountryName = (countryCode) => {
 const htmlTimelineTable = (aggregatedData) => {
   const eventsList = listDataByTime(aggregatedData)
   // console.log('htmlTimelineTable')
-  let html = '<table id="timeline-table">'
+  let html = `<h1>Survival Treaty Timeline</h1>
+  <table id="timeline-table">`
   for (const event of eventsList) {
     const isNwfz = nwfzList().includes(event.treaty)
     const treatyInfo = treatyInfoByCode()[isNwfz ? 'nwfz' : event.treaty]

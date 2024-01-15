@@ -1,9 +1,10 @@
 td {
-  font-size: 24px;
-  padding: 8px;
+  font-size: 22px;
+  padding: 10px;
 }
 td.date {
   width: 130px;
+  text-align: center;
 }
 td.treaty {
   text-align: center;
@@ -21,7 +22,16 @@ td.type {
 td.type img {
   height: 24px;
 }
+table#timeline-table {
+  max-width: 1000px;
+}
 .table-container {
   display: flex;
-  justify-items: center;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap:wrap;
+}
+h1 {
+  text-align: left;
+  padding-top: 20px;
 }
