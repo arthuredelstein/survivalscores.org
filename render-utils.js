@@ -63,6 +63,7 @@ export const htmlHeading = () =>
     <div id='updated'></div>
     <div class='links'>
     <a href="./about">About</a> &#x2022;
+    <a href="/timeline.html">Timeline</a> &#x2022;
     <a href="https://twitter.com/survivalscores">Twitter</a> &#x2022;
     <a rel="me" href="https://mastodon.social/@survivalscores">Mastodon</a>
   </div>
