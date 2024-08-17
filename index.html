@@ -22,14 +22,25 @@ table {
   position: relative;
   border-collapse: collapse;
 }
+#title-background {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  height: 200px;
+  background-color: black;
+  z-index: -100
+}
 .table-container {
   background-color: white;
   z-index: 20;
   position: relative;
-  top: 200px;
+  width: 100%;
+  margin: 0px;
 }
 table#treaties {
-  margin: 20px;
+  margin: 0px auto;
+  width: min(100vw, 1400px);
 }
 table#treaties tr:first {
   display: flex;
@@ -46,8 +57,10 @@ table#treaties tr:first {
   vertical-align: middle;
 }
 .footer {
-  margin: 30px;
+  margin: 30px auto;
   line-height: 1.5em;
+  max-width: 1400px;
+  padding: 10px;
 }
 .footer ul {
   padding-top: 0px;
@@ -73,11 +86,10 @@ table#treaties tr:first {
   background-size: 450px;
   background-repeat: no-repeat;
   background-color: black;
-  left: 0px;
-  right: 0px;
+  left: 0vw;
   top: 0px;
+/*  width: 100vw;*/
   height: 180px;
-  position: fixed;
 }
 .title a {
   color: white;
@@ -105,7 +117,7 @@ table#treaties tr:first {
 .links {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 50px;
   color: white;
 }
 .links a:link {
@@ -123,7 +135,7 @@ table#treaties tr:first {
   font-style: normal;
   position: absolute;
   bottom: 10px;
-  right: 10px;
+  right: 50px;
 }
 #logo {
   padding-right: 10px;
@@ -139,7 +151,6 @@ img.arrow-icon {
   opacity: 100%;
   z-index: 2;
   position: relative;
-  top: 200px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -156,6 +167,10 @@ img.arrow-icon {
   opacity: 100%;
   background-color: white;
   padding: 20px;
+}
+#timeline-heading {
+  text-align: left;
+  padding-left: 20px;
 }td {
   text-align: center;
   margin: 0px;
@@ -264,7 +279,7 @@ img.treaty-logo {
   height: 48px;
 }
 </style>
-    <script type="module">const dataDate = new Date('Sat Aug 17 2024 18:07:07 GMT+0000 (Coordinated Universal Time)');
+    <script type="module">const dataDate = new Date('Sat Aug 17 2024 20:06:30 GMT+0000 (Coordinated Universal Time)');
 import { polyfillCountryFlagEmojis } from './country-flag-emoji-polyfill/country-flag-emoji-polyfill.js'
 
 // Initially will be sorted by population
@@ -332,13 +347,16 @@ window.addEventListener('DOMContentLoaded', (e) => {
 </script>
   </head>
   <body>
-    <div class="title">
-      <div class="title-group">
-        <div class="title-text"><a href="/"><img id="logo" alt="SurvivalScores.org logo" src="./images/survivalscores_logo.svg"> SurvivalScores.org</a></div>
-        <div class="tagline-text">Monitoring treaties critical to the survival of humanity</div>
+    <div id="title-background"></div>
+    <div class="title-container">
+      <div class="title" id="title">
+        <div class="title-group">
+          <div class="title-text"><a href="/"><img id="logo" alt="SurvivalScores.org logo" src="./images/survivalscores_logo.svg"> SurvivalScores.org</a></div>
+          <div class="tagline-text">Monitoring treaties critical to the survival of humanity</div>
+        </div>
+        <div id="updated"></div>
+        <div class="links"><a href="./about">About</a> &#x2022; <a href="/timeline.html">Timeline</a> &#x2022; <a href="https://twitter.com/survivalscores">Twitter</a> &#x2022; <a rel="me" href="https://mastodon.social/@survivalscores">Mastodon</a></div>
       </div>
-      <div id="updated"></div>
-      <div class="links"><a href="./about">About</a> &#x2022; <a href="/timeline.html">Timeline</a> &#x2022; <a href="https://twitter.com/survivalscores">Twitter</a> &#x2022; <a rel="me" href="https://mastodon.social/@survivalscores">Mastodon</a></div>
     </div>
     <div class="table-container">
       <table id="treaties">
@@ -3370,7 +3388,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
         <h3><b>Sources</b></h3>
         <p>Data presented in this table were retrieved from live databases maintained by the United Nations:</p>
         <ul><li><a href="https://treaties.unoda.org/">Disarmament Treaties Database</a>, United Nations Office for Disarmament Affairs</li><li><a href="https://treaties.un.org/Pages/ParticipationStatus.aspx">Multilateral Treaties Deposited with the Secretary-General</a>, United Nations, New York</li><li><a href="https://data.un.org/">UNdata</a>, United Nations Statistics Division</li></ul>
-        <p>Data retrieved at 2024-08-17T18:07:07.072Z</p>
+        <p>Data retrieved at 2024-08-17T20:06:30.041Z</p>
         <p>Source code for this project is <a href="https://github.com/arthuredelstein/survivalscores.org">available on GitHub</a>.</p>
         <br>
       </div>

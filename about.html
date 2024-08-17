@@ -22,14 +22,25 @@ table {
   position: relative;
   border-collapse: collapse;
 }
+#title-background {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  height: 200px;
+  background-color: black;
+  z-index: -100
+}
 .table-container {
   background-color: white;
   z-index: 20;
   position: relative;
-  top: 200px;
+  width: 100%;
+  margin: 0px;
 }
 table#treaties {
-  margin: 20px;
+  margin: 0px auto;
+  width: min(100vw, 1400px);
 }
 table#treaties tr:first {
   display: flex;
@@ -46,8 +57,10 @@ table#treaties tr:first {
   vertical-align: middle;
 }
 .footer {
-  margin: 30px;
+  margin: 30px auto;
   line-height: 1.5em;
+  max-width: 1400px;
+  padding: 10px;
 }
 .footer ul {
   padding-top: 0px;
@@ -73,11 +86,10 @@ table#treaties tr:first {
   background-size: 450px;
   background-repeat: no-repeat;
   background-color: black;
-  left: 0px;
-  right: 0px;
+  left: 0vw;
   top: 0px;
+/*  width: 100vw;*/
   height: 180px;
-  position: fixed;
 }
 .title a {
   color: white;
@@ -105,7 +117,7 @@ table#treaties tr:first {
 .links {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 50px;
   color: white;
 }
 .links a:link {
@@ -123,7 +135,7 @@ table#treaties tr:first {
   font-style: normal;
   position: absolute;
   bottom: 10px;
-  right: 10px;
+  right: 50px;
 }
 #logo {
   padding-right: 10px;
@@ -139,7 +151,6 @@ img.arrow-icon {
   opacity: 100%;
   z-index: 2;
   position: relative;
-  top: 200px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -156,17 +167,24 @@ img.arrow-icon {
   opacity: 100%;
   background-color: white;
   padding: 20px;
+}
+#timeline-heading {
+  text-align: left;
+  padding-left: 20px;
 }</style>
     <script type="module"></script>
   </head>
   <body>
-    <div class="title">
-      <div class="title-group">
-        <div class="title-text"><a href="/"><img id="logo" alt="SurvivalScores.org logo" src="./images/survivalscores_logo.svg"> SurvivalScores.org</a></div>
-        <div class="tagline-text">Monitoring treaties critical to the survival of humanity</div>
+    <div id="title-background"></div>
+    <div class="title-container">
+      <div class="title" id="title">
+        <div class="title-group">
+          <div class="title-text"><a href="/"><img id="logo" alt="SurvivalScores.org logo" src="./images/survivalscores_logo.svg"> SurvivalScores.org</a></div>
+          <div class="tagline-text">Monitoring treaties critical to the survival of humanity</div>
+        </div>
+        <div id="updated"></div>
+        <div class="links"><a href="./about">About</a> &#x2022; <a href="/timeline.html">Timeline</a> &#x2022; <a href="https://twitter.com/survivalscores">Twitter</a> &#x2022; <a rel="me" href="https://mastodon.social/@survivalscores">Mastodon</a></div>
       </div>
-      <div id="updated"></div>
-      <div class="links"><a href="./about">About</a> &#x2022; <a href="/timeline.html">Timeline</a> &#x2022; <a href="https://twitter.com/survivalscores">Twitter</a> &#x2022; <a rel="me" href="https://mastodon.social/@survivalscores">Mastodon</a></div>
     </div>
     <div class="copy">
       <div class="markdown-container">
