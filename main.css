@@ -117,9 +117,10 @@ table#treaties tr:first {
 }
 #updated {
   font-style: normal;
-  position: absolute;
-  bottom: 10px;
+  position: relative;
+  bottom: 20px;
   right: 50px;
+  text-align: right;
 }
 #logo {
   padding-right: 10px;
