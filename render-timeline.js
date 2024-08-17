@@ -1,5 +1,5 @@
 import esMain from 'es-main'
-import { render, createPreviewImage, htmlHeading, htmlFooter, flagEmojiHtml } from './render-utils.js'
+import { render, createPreviewImage, htmlFooter, flagEmojiHtml } from './render-utils.js'
 import fs from 'fs'
 import { codeToCountry, treatyInfoByCode, nwfzList } from './utils.js'
 
@@ -49,7 +49,7 @@ const regularCountryName = (countryCode) => {
 const htmlTimelineTable = (aggregatedData) => {
   const eventsList = listDataByTime(aggregatedData)
   // console.log('htmlTimelineTable')
-  let html = `<h1>Survival Treaty Timeline</h1>
+  let html = `<h1 id="timeline-heading">Survival Treaty Timeline</h1>
   <table id="timeline-table">`
   for (const event of eventsList) {
     const isNwfz = nwfzList().includes(event.treaty)
@@ -75,7 +75,7 @@ export const renderTimelinePage = async (
   delete aggregatedData.XX
   const js = `const dataDate = new Date('${dataDate}');\n`
   const css = fs.readFileSync('./main.css').toString() + '\n' + fs.readFileSync('./timeline-table.css').toString()
-  await render('timeline.html', htmlHeading() + '<div class=\'table-container\'>' + htmlTimelineTable(aggregatedData) + '</div>' + '<div>' + htmlFooter(dataDate) + '</div>', dataDate, js, css)
+  await render('timeline.html', '<div class=\'table-container\'>' + htmlTimelineTable(aggregatedData) + '</div>' + '<div>' + htmlFooter(dataDate) + '</div>', dataDate, js, css)
   if (generatePreview) {
     await createPreviewImage('./build/index.html', './build/index-preview.png')
   }

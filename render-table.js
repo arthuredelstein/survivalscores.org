@@ -3,7 +3,7 @@ import { inputs, codeToCountry, treatyInfoByCode, nwfzList } from './utils.js'
 import _ from 'lodash'
 import esMain from 'es-main'
 import { marked } from 'marked'
-import { render, createPreviewImage, htmlHeading, flagEmojiHtml, htmlFooter } from './render-utils.js'
+import { render, createPreviewImage, flagEmojiHtml, htmlFooter } from './render-utils.js'
 
 const loadJs = () => fs.readFileSync('./script.js')
 
@@ -166,7 +166,7 @@ export const renderTable = async (
   const { rows, header } = tabulate(inputs(), aggregatedData, populationData)
   const js = `const dataDate = new Date('${dataDate}');\n` + loadJs()
   const css = fs.readFileSync('./main.css').toString() + fs.readFileSync('./main-table.css').toString()
-  await render('index.html', htmlHeading() + "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter(dataDate) + '</div>', dataDate, js, css)
+  await render('index.html', "<div class='table-container'>" + htmlTable({ rows, header }) + htmlFooter(dataDate) + '</div>', dataDate, js, css)
   if (generatePreview) {
     await createPreviewImage('./build/index.html', './build/index-preview.png')
   }
@@ -175,7 +175,7 @@ export const renderTable = async (
 export const aboutPage = async (dataDate) => {
   const js = ''
   const copy = fs.readFileSync('./about.md').toString()
-  const content = htmlHeading() + "<div class='copy'><div class='markdown-container'>" + marked.parse(copy) + '</div></div>'
+  const content = "<div class='copy'><div class='markdown-container'>" + marked.parse(copy) + '</div></div>'
   const css = fs.readFileSync('./main.css').toString()
   await render('about.html', content, dataDate, js, css)
 }
