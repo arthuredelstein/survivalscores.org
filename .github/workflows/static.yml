@@ -17,6 +17,8 @@ jobs:
       - name: Install and Build 🔧
         run: |
           export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
+          sudo chown root:root $CHROME_DEVEL_SANDBOX
+          sudo chmod 4755 $CHROME_DEVEL_SANDBOX
           npm ci
           npm run build
 
