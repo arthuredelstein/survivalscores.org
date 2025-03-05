@@ -118,8 +118,15 @@ const rawDisarmamentTreatyData = async (treatyCode) => {
     body: JSON.stringify(disarmamentGraphQLQuery(treatyCode)),
     method: 'POST'
   })
-  const json = await response.json()
-  return json.data.treaty_.data
+
+  const text = await response.text()
+  try {
+    const json = JSON.parse(text)
+    return json.data.treaty_.data
+  } catch (e) {
+    console.log('Unexpected response:', text)
+    throw e
+  }
 }
 
 const gatherDisarmamentData = (rawData) => {
