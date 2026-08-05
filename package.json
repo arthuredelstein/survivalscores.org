@@ -33,7 +33,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "five-server": "^0.5.0",
     "gh-pages": "^6.0.0",
-    "simple-git-hooks": "^2.9.0",
+    "simple-git-hooks": "^2.13.1",
     "standard": "^17.1.2"
   },
   "simple-git-hooks": {
