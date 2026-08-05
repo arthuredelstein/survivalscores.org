@@ -5,6 +5,14 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    ignore:
+      # standard / eslint-config-standard only support ESLint 8
+      - dependency-name: eslint
+        update-types: ["version-update:semver-major"]
+      - dependency-name: eslint-config-standard
+        update-types: ["version-update:semver-major"]
+      - dependency-name: standard
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: /
