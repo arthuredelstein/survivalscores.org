@@ -21,7 +21,7 @@
     "lodash": "^4.17.21",
     "marked": "^18.0.7",
     "nodemon": "^3.0.1",
-    "unzipper": "^0.10.11",
+    "unzipper": "^0.12.5",
     "yaml": "^2.1.1"
   },
   "type": "module",
