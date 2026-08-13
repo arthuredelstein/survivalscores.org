@@ -38,5 +38,8 @@
   },
   "simple-git-hooks": {
     "pre-commit": "npx standard"
+  },
+  "overrides": {
+    "puppeteer": "25.6.0"
   }
 }
