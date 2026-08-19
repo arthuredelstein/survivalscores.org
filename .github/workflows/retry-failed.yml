@@ -1,0 +1,23 @@
+name: Retry failed build
+
+on:
+  workflow_run:
+    workflows: ["Build and Deploy"]
+    types: [completed]
+
+jobs:
+  retry:
+    if: >
+      github.event.workflow_run.conclusion == 'failure' &&
+      github.event.workflow_run.run_attempt < 3
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Wait before retry
+        run: sleep 60
+
+      - name: Re-run failed jobs
+        run: gh run rerun "${{ github.event.workflow_run.id }}" --failed --repo "${{ github.repository }}"
+        env:
+          GH_TOKEN: ${{ github.token }}
