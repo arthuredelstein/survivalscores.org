@@ -1,42 +1,36 @@
-import unzipper from 'unzipper'
+import { gunzipSync } from 'zlib'
 import { parse } from 'csv-parse/sync'
-import { countryToCode } from './utils.js'
+import { readYAML } from './utils.js'
 
-const readRemoteZippedCSV = async (url) => {
+const WPP_POPULATION_URL =
+  'https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_TotalPopulationBySex.csv.gz'
+
+const readRemoteGzippedCSV = async (url) => {
   const response = await fetch(url)
-  const buffer = await response.arrayBuffer()
-  const directory = await unzipper.Open.buffer(Buffer.from(buffer))
-  const mainFile = await directory.files[0].buffer()
-  return parse(mainFile,
-    { columns: true, skipEmptyLines: true, encoding: 'utf8' })
-}
-
-const fixBrokenUtf8 = (s) => Buffer.from(s, 'ascii').toString('utf8')
-
-const getPopulationDataFromItem = (item) => {
-  const countryName = fixBrokenUtf8(item['Country or Area'])
-  const population = Math.round(parseFloat(fixBrokenUtf8(item.Value)) * 1000)
-  const countryCode = countryToCode(countryName)
-  return { countryCode, population }
-}
-
-const getPopulationZip = async () => {
-  const populationUrl = 'http://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=variableID:12;varID:2&DataMartId=PopDiv&Format=csv&c=2,4,7&s=_crEngNameOrderBy:asc,_timeEngNameOrderBy:desc,_varEngNameOrderBy:asc'
-  return await readRemoteZippedCSV(populationUrl)
+  if (!response.ok) {
+    throw new Error(`population download failed: ${response.status} ${url}`)
+  }
+  const compressed = Buffer.from(await response.arrayBuffer())
+  const csvText = gunzipSync(compressed).toString('utf8')
+  return parse(csvText, { columns: true, skip_empty_lines: true, bom: true })
 }
 
 export const populationInfo = async () => {
-  const itemsRaw = await getPopulationZip()
+  const knownCodes = new Set(Object.keys(readYAML('countries.yaml')))
+  const rows = await readRemoteGzippedCSV(WPP_POPULATION_URL)
   const thisYear = new Date().getFullYear().toString()
-  const items = itemsRaw.filter(i => i['Year(s)'] === thisYear)
+  const items = rows.filter(row =>
+    row.LocTypeName === 'Country/Area' &&
+    row.Variant === 'Medium' &&
+    row.Time === thisYear)
   const result = {}
   for (const item of items) {
-    try {
-      const { countryCode, population } = getPopulationDataFromItem(item)
-      result[countryCode] = population
-    } catch (e) {
-      console.log(e.message)
+    const countryCode = item.ISO2_code?.trim()
+    if (!countryCode || !knownCodes.has(countryCode)) {
+      continue
     }
+    // PopTotal is reported in thousands.
+    result[countryCode] = Math.round(parseFloat(item.PopTotal) * 1000)
   }
   return result
 }
