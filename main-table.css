@@ -91,16 +91,16 @@ th:nth-child(2) {
   flex-grow
 }
 tr:nth-child(2n) td,th {
-  background-color: white;
+  background-color: var(--bg);
 }
 tr:nth-child(2n+1) td {
-  background-color: #eee;
+  background-color: var(--bg-alt);
 }
 thead {
   position: sticky;
   z-index: 30;
   top: 0;
-  background-color: #fff
+  background-color: var(--bg);
 }
 img.treaty-logo {
   height: 48px;
