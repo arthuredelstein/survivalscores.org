@@ -14,9 +14,63 @@
     <link rel="preload" href="./images/sortArrowsDown.svg" as="image">
     <link rel="preload" href="./images/sortArrowsUp.svg" as="image">
     <link rel="preload" href="./images/sortArrowsUnsorted.svg" as="image">
-    <style>body {
+    <style>:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --bg-alt: #eeeeee;
+  --text: #111111;
+  --link: #0645ad;
+  --link-visited: #551a8b;
+  --header-bg: #000000;
+  --header-text: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --bg-alt: #1e1e1e;
+    --text: #e8e8e8;
+    --link: #8ab4f8;
+    --link-visited: #c58af9;
+  }
+
+  img.treaty-logo[src$="aggression.png"] {
+    filter: invert(1);
+  }
+
+  img.treaty-logo[src$="ctbt.svg"] {
+    filter: brightness(0) invert(1);
+  }
+
+  img[src$="quill.svg"] {
+    filter: invert(1);
+  }
+
+  img.treaty-logo[src$="nwfz.png"],
+  img.treaty-logo[src$="nwfz.jpeg"] {
+    filter: invert(1) hue-rotate(180deg);
+  }
+
+  img.treaty-logo[src$="icc.svg"] {
+    filter: brightness(4.5);
+  }
+
+  img.treaty-logo[src$="tpnw.svg"] {
+    filter: brightness(1.5) saturate(5) contrast(1.4);
+  }
+}
+
+body {
   font-family: sans-serif;
   margin: 0px;
+  color: var(--text);
+  background-color: var(--bg);
+}
+a:link {
+  color: var(--link);
+}
+a:visited {
+  color: var(--link-visited);
 }
 table {
   position: relative;
@@ -28,11 +82,11 @@ table {
   right: 0px;
   top: 0px;
   height: 200px;
-  background-color: black;
+  background-color: var(--header-bg);
   z-index: -100
 }
 .table-container {
-  background-color: white;
+  background-color: var(--bg);
   z-index: 20;
   position: relative;
   width: 100%;
@@ -69,14 +123,14 @@ table#treaties tr:first {
 .treaty-count {
   font-weight: normal;
   padding: 5px;
-  background-color: #eee;
+  background-color: var(--bg-alt);
 }
 .flag {
   font-family: "Twemoji Country Flags", serif;
 }
 .title {
   margin: 0px;
-  color: white;
+  color: var(--header-text);
   padding: 10px;
   padding-left: 10px;
   text-align: center;
@@ -85,14 +139,14 @@ table#treaties tr:first {
   background-position-y: center;
   background-size: 450px;
   background-repeat: no-repeat;
-  background-color: black;
+  background-color: var(--header-bg);
   left: 0vw;
   top: 0px;
 /*  width: 100vw;*/
   height: 180px;
 }
 .title a {
-  color: white;
+  color: var(--header-text);
   text-decoration-line: none;
 }
 .title-group {
@@ -101,7 +155,7 @@ table#treaties tr:first {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color:white;
+  color: var(--header-text);
 }
 .title-text {
   font-size: max(min(4vw, 48px), 40px);
@@ -118,17 +172,17 @@ table#treaties tr:first {
   position: absolute;
   top: 10px;
   right: 50px;
-  color: white;
+  color: var(--header-text);
 }
 .links a:link {
-  color: white;
+  color: var(--header-text);
   text-decoration-line: none;
 }
 .links a:hover {
   text-decoration-line: underline;
 }
 .links a:visited {
-  color: white;
+  color: var(--header-text);
   text-decoration-line: none;
 }
 #updated {
@@ -148,7 +202,7 @@ img.arrow-icon {
 }
 .copy {
   width: 100%;
-  background-color: white;
+  background-color: var(--bg);
   opacity: 100%;
   z-index: 2;
   position: relative;
@@ -166,7 +220,7 @@ img.arrow-icon {
   line-height: 32px;
   z-index: 3;
   opacity: 100%;
-  background-color: white;
+  background-color: var(--bg);
   padding: 20px;
 }
 #timeline-heading {
@@ -210,7 +264,7 @@ h1 {
   text-align: left;
   padding-top: 20px;
 }</style>
-    <script type="module">const dataDate = new Date('Mon Oct 05 2026 21:56:08 GMT+0000 (Coordinated Universal Time)');
+    <script type="module">const dataDate = new Date('Wed Oct 07 2026 05:40:07 GMT+0000 (Coordinated Universal Time)');
 </script>
   </head>
   <body>
@@ -302,7 +356,7 @@ h1 {
           <td class="date">2025-10-25</td>
           <td class="flag">&#127481;&#127473;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Timor-Leste acceded to the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -344,7 +398,7 @@ h1 {
           <td class="date">2025-03-03</td>
           <td class="flag">&#127474;&#127469;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Marshall Islands acceded to the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -652,7 +706,7 @@ h1 {
           <td class="date">2022-04-18</td>
           <td class="flag">&#127474;&#127462;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Morocco ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -687,7 +741,7 @@ h1 {
           <td class="date">2022-02-23</td>
           <td class="flag">&#127464;&#127465;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Democratic Republic of the Congo ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -988,7 +1042,7 @@ h1 {
           <td class="date">2020-02-07</td>
           <td class="flag">&#127464;&#127483;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Cape Verde ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -2332,7 +2386,7 @@ h1 {
           <td class="date">2017-02-22</td>
           <td class="flag">&#127475;&#127466;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Niger ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -4859,14 +4913,14 @@ h1 {
           <td class="date">2014-06-20</td>
           <td class="flag">&#127462;&#127476;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Angola ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">2014-05-23</td>
           <td class="flag">&#127480;&#127464;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Seychelles ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -4901,7 +4955,7 @@ h1 {
           <td class="date">2013-11-26</td>
           <td class="flag">&#127464;&#127468;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Republic of the Congo ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5055,7 +5109,7 @@ h1 {
           <td class="date">2012-07-24</td>
           <td class="flag">&#127472;&#127474;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Comoros ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5083,7 +5137,7 @@ h1 {
           <td class="date">2012-03-01</td>
           <td class="flag">&#127475;&#127462;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Namibia ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5097,7 +5151,7 @@ h1 {
           <td class="date">2012-01-18</td>
           <td class="flag">&#127481;&#127465;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Chad ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5111,7 +5165,7 @@ h1 {
           <td class="date">2012-01-04</td>
           <td class="flag">&#127468;&#127484;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Guinea-Bissau ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5160,7 +5214,7 @@ h1 {
           <td class="date">2011-06-27</td>
           <td class="flag">&#127468;&#127469;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Ghana ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5202,14 +5256,14 @@ h1 {
           <td class="date">2010-09-28</td>
           <td class="flag">&#127464;&#127474;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Cameroon ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">2010-08-18</td>
           <td class="flag">&#127487;&#127474;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Zambia ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5272,7 +5326,7 @@ h1 {
           <td class="date">2009-10-07</td>
           <td class="flag">&#127481;&#127475;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Tunisia ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5314,7 +5368,7 @@ h1 {
           <td class="date">2009-07-15</td>
           <td class="flag">&#127463;&#127470;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Burundi ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5335,28 +5389,28 @@ h1 {
           <td class="date">2009-04-23</td>
           <td class="flag">&#127474;&#127484;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Malawi ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">2009-02-19</td>
           <td class="flag">&#127472;&#127487;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Kazakhstan ratified the Central Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">2009-01-17</td>
           <td class="flag">&#127481;&#127474;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Turkmenistan ratified the Central Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">2009-01-13</td>
           <td class="flag">&#127481;&#127471;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Tajikistan ratified the Central Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5405,7 +5459,7 @@ h1 {
           <td class="date">2008-08-28</td>
           <td class="flag">&#127474;&#127487;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Mozambique ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5454,7 +5508,7 @@ h1 {
           <td class="date">2008-03-13</td>
           <td class="flag">&#127466;&#127481;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Ethiopia ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5517,7 +5571,7 @@ h1 {
           <td class="date">2007-09-04</td>
           <td class="flag">&#127463;&#127471;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Benin ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5538,7 +5592,7 @@ h1 {
           <td class="date">2007-07-27</td>
           <td class="flag">&#127472;&#127468;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Kyrgyzstan ratified the Central Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5566,21 +5620,21 @@ h1 {
           <td class="date">2007-06-12</td>
           <td class="flag">&#127468;&#127462;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Gabon ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">2007-05-10</td>
           <td class="flag">&#127482;&#127487;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Uzbekistan ratified the Central Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">2007-02-01</td>
           <td class="flag">&#127479;&#127484;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Rwanda ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5622,7 +5676,7 @@ h1 {
           <td class="date">2006-10-25</td>
           <td class="flag">&#127480;&#127475;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Senegal ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5664,35 +5718,35 @@ h1 {
           <td class="date">2006-09-08</td>
           <td class="flag">&#127481;&#127474;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Turkmenistan signed the Central Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">2006-09-08</td>
           <td class="flag">&#127472;&#127487;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Kazakhstan signed the Central Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">2006-09-08</td>
           <td class="flag">&#127482;&#127487;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Uzbekistan signed the Central Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">2006-09-08</td>
           <td class="flag">&#127481;&#127471;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Tajikistan signed the Central Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">2006-09-08</td>
           <td class="flag">&#127472;&#127468;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Kyrgyzstan signed the Central Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5748,7 +5802,7 @@ h1 {
           <td class="date">2006-02-23</td>
           <td class="flag">&#127480;&#127476;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Somalia signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -5846,7 +5900,7 @@ h1 {
           <td class="date">2005-05-11</td>
           <td class="flag">&#127473;&#127486;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Libya ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -6042,7 +6096,7 @@ h1 {
           <td class="date">2003-12-23</td>
           <td class="flag">&#127474;&#127468;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Madagascar acceded to the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -6210,7 +6264,7 @@ h1 {
           <td class="date">2003-02-19</td>
           <td class="flag">&#127468;&#127478;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Equatorial Guinea acceded to the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -6308,7 +6362,7 @@ h1 {
           <td class="date">2002-10-23</td>
           <td class="flag">&#127464;&#127482;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Cuba ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -6574,7 +6628,7 @@ h1 {
           <td class="date">2002-03-14</td>
           <td class="flag">&#127473;&#127480;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Lesotho ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -6882,7 +6936,7 @@ h1 {
           <td class="date">2001-06-21</td>
           <td class="flag">&#127477;&#127469;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Philippines ratified the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -6896,7 +6950,7 @@ h1 {
           <td class="date">2001-06-18</td>
           <td class="flag">&#127475;&#127468;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Nigeria ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -7015,7 +7069,7 @@ h1 {
           <td class="date">2001-01-09</td>
           <td class="flag">&#127472;&#127466;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Kenya ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -7176,7 +7230,7 @@ h1 {
           <td class="date">2000-12-18</td>
           <td class="flag">&#127481;&#127476;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Tonga ratified the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -7526,14 +7580,14 @@ h1 {
           <td class="date">2000-07-18</td>
           <td class="flag">&#127481;&#127468;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Togo ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">2000-07-17</td>
           <td class="flag">&#127480;&#127487;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Eswatini ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -7701,7 +7755,7 @@ h1 {
           <td class="date">2000-01-21</td>
           <td class="flag">&#127468;&#127475;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Guinea ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -7890,7 +7944,7 @@ h1 {
           <td class="date">1999-07-28</td>
           <td class="flag">&#127464;&#127470;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Côte d'Ivoire ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -7904,7 +7958,7 @@ h1 {
           <td class="date">1999-07-22</td>
           <td class="flag">&#127474;&#127473;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Mali ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -7946,7 +8000,7 @@ h1 {
           <td class="date">1999-06-16</td>
           <td class="flag">&#127463;&#127484;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Botswana ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -8513,7 +8567,7 @@ h1 {
           <td class="date">1998-08-27</td>
           <td class="flag">&#127463;&#127467;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Burkina Faso ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -8765,7 +8819,7 @@ h1 {
           <td class="date">1998-06-19</td>
           <td class="flag">&#127481;&#127487;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Tanzania ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -8779,7 +8833,7 @@ h1 {
           <td class="date">1998-06-09</td>
           <td class="flag">&#127463;&#127484;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Botswana signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -8793,7 +8847,7 @@ h1 {
           <td class="date">1998-04-06</td>
           <td class="flag">&#127487;&#127484;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Zimbabwe ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -8821,7 +8875,7 @@ h1 {
           <td class="date">1998-03-27</td>
           <td class="flag">&#127487;&#127462;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>South Africa ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -8842,7 +8896,7 @@ h1 {
           <td class="date">1998-02-24</td>
           <td class="flag">&#127474;&#127479;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Mauritania ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -8856,7 +8910,7 @@ h1 {
           <td class="date">1998-02-11</td>
           <td class="flag">&#127465;&#127487;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Algeria ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -9003,28 +9057,28 @@ h1 {
           <td class="date">1997-04-10</td>
           <td class="flag">&#127470;&#127465;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Indonesia ratified the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1997-03-27</td>
           <td class="flag">&#127480;&#127468;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Singapore ratified the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1997-03-27</td>
           <td class="flag">&#127472;&#127469;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Cambodia ratified the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1997-03-20</td>
           <td class="flag">&#127481;&#127469;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Thailand ratified the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -9080,7 +9134,7 @@ h1 {
           <td class="date">1997-01-27</td>
           <td class="flag">&#127464;&#127468;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Republic of the Congo signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -9122,7 +9176,7 @@ h1 {
           <td class="date">1996-11-26</td>
           <td class="flag">&#127483;&#127475;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Vietnam ratified the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -9143,7 +9197,7 @@ h1 {
           <td class="date">1996-11-22</td>
           <td class="flag">&#127463;&#127475;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Brunei ratified the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -9227,7 +9281,7 @@ h1 {
           <td class="date">1996-10-16</td>
           <td class="flag">&#127468;&#127474;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Gambia ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -9255,7 +9309,7 @@ h1 {
           <td class="date">1996-10-11</td>
           <td class="flag">&#127474;&#127486;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Malaysia ratified the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -10193,7 +10247,7 @@ h1 {
           <td class="date">1996-08-02</td>
           <td class="flag">&#127481;&#127476;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Tonga signed the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -10214,14 +10268,14 @@ h1 {
           <td class="date">1996-07-17</td>
           <td class="flag">&#127474;&#127474;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Myanmar ratified the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-07-16</td>
           <td class="flag">&#127473;&#127462;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Laos ratified the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -10242,21 +10296,21 @@ h1 {
           <td class="date">1996-07-09</td>
           <td class="flag">&#127480;&#127464;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Seychelles signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-07-09</td>
           <td class="flag">&#127480;&#127481;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Sao Tome and Principe signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-07-09</td>
           <td class="flag">&#127473;&#127479;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Liberia signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -10291,7 +10345,7 @@ h1 {
           <td class="date">1996-04-24</td>
           <td class="flag">&#127474;&#127482;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Mauritius ratified the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -10305,315 +10359,315 @@ h1 {
           <td class="date">1996-04-11</td>
           <td class="flag">&#127481;&#127468;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Togo signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127479;&#127484;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Rwanda signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127474;&#127479;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Mauritania signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127473;&#127486;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Libya signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127466;&#127481;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Ethiopia signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127480;&#127487;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Eswatini signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127487;&#127484;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Zimbabwe signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127487;&#127474;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Zambia signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127481;&#127487;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Tanzania signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127482;&#127468;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Uganda signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127481;&#127475;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Tunisia signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127480;&#127465;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Sudan signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127487;&#127462;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>South Africa signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127480;&#127473;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Sierra Leone signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127480;&#127475;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Senegal signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127475;&#127468;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Nigeria signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127475;&#127466;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Niger signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127475;&#127462;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Namibia signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127474;&#127487;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Mozambique signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127474;&#127462;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Morocco signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127474;&#127482;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Mauritius signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127474;&#127473;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Mali signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127474;&#127484;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Malawi signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127473;&#127480;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Lesotho signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127472;&#127466;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Kenya signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127468;&#127484;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Guinea-Bissau signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127468;&#127475;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Guinea signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127468;&#127469;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Ghana signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127468;&#127474;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Gambia signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127468;&#127462;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Gabon signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127466;&#127479;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Eritrea signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127466;&#127468;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Egypt signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127465;&#127471;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Djibouti signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127464;&#127465;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Democratic Republic of the Congo signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127464;&#127470;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Côte d'Ivoire signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127472;&#127474;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Comoros signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127481;&#127465;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Chad signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127464;&#127467;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Central African Republic signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127464;&#127474;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Cameroon signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127464;&#127483;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Cape Verde signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127463;&#127470;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Burundi signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127463;&#127467;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Burkina Faso signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127463;&#127471;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Benin signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127462;&#127476;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Angola signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1996-04-11</td>
           <td class="flag">&#127465;&#127487;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Algeria signed the African Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -10662,7 +10716,7 @@ h1 {
           <td class="date">1996-02-09</td>
           <td class="flag">&#127483;&#127482;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Vanuatu ratified the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -10718,70 +10772,70 @@ h1 {
           <td class="date">1995-12-15</td>
           <td class="flag">&#127483;&#127475;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Vietnam signed the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1995-12-15</td>
           <td class="flag">&#127480;&#127468;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Singapore signed the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1995-12-15</td>
           <td class="flag">&#127474;&#127474;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Myanmar signed the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1995-12-15</td>
           <td class="flag">&#127474;&#127486;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Malaysia signed the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1995-12-15</td>
           <td class="flag">&#127473;&#127462;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Laos signed the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1995-12-15</td>
           <td class="flag">&#127470;&#127465;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Indonesia signed the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1995-12-15</td>
           <td class="flag">&#127463;&#127475;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Brunei signed the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1995-12-15</td>
           <td class="flag">&#127481;&#127469;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Thailand signed the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1995-12-15</td>
           <td class="flag">&#127477;&#127469;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Philippines signed the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1995-12-15</td>
           <td class="flag">&#127472;&#127469;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Cambodia signed the Southeast Asian Nuclear-Weapon-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -10865,7 +10919,7 @@ h1 {
           <td class="date">1995-09-16</td>
           <td class="flag">&#127483;&#127482;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Vanuatu signed the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -10942,7 +10996,7 @@ h1 {
           <td class="date">1995-06-02</td>
           <td class="flag">&#127473;&#127464;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Saint Lucia ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -10956,7 +11010,7 @@ h1 {
           <td class="date">1995-04-18</td>
           <td class="flag">&#127472;&#127475;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Saint Kitts and Nevis ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -11005,7 +11059,7 @@ h1 {
           <td class="date">1995-03-25</td>
           <td class="flag">&#127464;&#127482;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Cuba signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -11082,14 +11136,14 @@ h1 {
           <td class="date">1995-01-16</td>
           <td class="flag">&#127468;&#127486;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Guyana ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1995-01-16</td>
           <td class="flag">&#127468;&#127486;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Guyana signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -11208,7 +11262,7 @@ h1 {
           <td class="date">1994-11-09</td>
           <td class="flag">&#127463;&#127487;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Belize ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -11614,7 +11668,7 @@ h1 {
           <td class="date">1994-02-18</td>
           <td class="flag">&#127472;&#127475;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Saint Kitts and Nevis signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -11635,7 +11689,7 @@ h1 {
           <td class="date">1994-01-18</td>
           <td class="flag">&#127462;&#127479;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Argentina ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -11873,7 +11927,7 @@ h1 {
           <td class="date">1993-06-04</td>
           <td class="flag">&#127465;&#127474;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Dominica ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -12153,7 +12207,7 @@ h1 {
           <td class="date">1992-08-25</td>
           <td class="flag">&#127473;&#127464;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Saint Lucia signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -13329,21 +13383,21 @@ h1 {
           <td class="date">1992-02-14</td>
           <td class="flag">&#127483;&#127464;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Saint Vincent and the Grenadines ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1992-02-14</td>
           <td class="flag">&#127483;&#127464;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Saint Vincent and the Grenadines signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1992-02-14</td>
           <td class="flag">&#127463;&#127487;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Belize signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -13490,14 +13544,14 @@ h1 {
           <td class="date">1989-09-15</td>
           <td class="flag">&#127477;&#127468;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Papua New Guinea ratified the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1989-06-27</td>
           <td class="flag">&#127480;&#127463;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Solomon Islands ratified the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -13511,7 +13565,7 @@ h1 {
           <td class="date">1989-05-02</td>
           <td class="flag">&#127465;&#127474;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Dominica signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -13567,14 +13621,14 @@ h1 {
           <td class="date">1987-05-29</td>
           <td class="flag">&#127480;&#127463;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Solomon Islands signed the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1987-04-13</td>
           <td class="flag">&#127475;&#127479;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Nauru ratified the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -13588,7 +13642,7 @@ h1 {
           <td class="date">1986-12-11</td>
           <td class="flag">&#127462;&#127482;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Australia ratified the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -13623,7 +13677,7 @@ h1 {
           <td class="date">1986-11-13</td>
           <td class="flag">&#127475;&#127487;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>New Zealand ratified the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -13637,7 +13691,7 @@ h1 {
           <td class="date">1986-10-28</td>
           <td class="flag">&#127472;&#127470;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Kiribati ratified the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -13651,14 +13705,14 @@ h1 {
           <td class="date">1986-10-20</td>
           <td class="flag">&#127484;&#127480;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Samoa ratified the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1986-07-17</td>
           <td class="flag">&#127475;&#127479;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Nauru signed the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -13672,7 +13726,7 @@ h1 {
           <td class="date">1986-05-12</td>
           <td class="flag">&#127475;&#127482;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Niue ratified the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -13693,7 +13747,7 @@ h1 {
           <td class="date">1986-01-16</td>
           <td class="flag">&#127481;&#127483;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Tuvalu ratified the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -13707,21 +13761,21 @@ h1 {
           <td class="date">1985-10-28</td>
           <td class="flag">&#127464;&#127472;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Cook Islands ratified the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1985-10-04</td>
           <td class="flag">&#127467;&#127471;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Fiji ratified the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1985-09-16</td>
           <td class="flag">&#127477;&#127468;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Papua New Guinea signed the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -13735,56 +13789,56 @@ h1 {
           <td class="date">1985-08-06</td>
           <td class="flag">&#127481;&#127483;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Tuvalu signed the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1985-08-06</td>
           <td class="flag">&#127475;&#127482;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Niue signed the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1985-08-06</td>
           <td class="flag">&#127484;&#127480;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Samoa signed the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1985-08-06</td>
           <td class="flag">&#127475;&#127487;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>New Zealand signed the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1985-08-06</td>
           <td class="flag">&#127472;&#127470;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Kiribati signed the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1985-08-06</td>
           <td class="flag">&#127467;&#127471;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Fiji signed the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1985-08-06</td>
           <td class="flag">&#127464;&#127472;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Cook Islands signed the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
           <td class="date">1985-08-06</td>
           <td class="flag">&#127462;&#127482;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Australia signed the South Pacific Nuclear-Free Zone Treaty.</td>
         </tr>
         <tr>
@@ -13882,14 +13936,14 @@ h1 {
           <td class="date">1983-10-11</td>
           <td class="flag">&#127462;&#127468;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Antigua and Barbuda ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1983-10-11</td>
           <td class="flag">&#127462;&#127468;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Antigua and Barbuda signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -14190,14 +14244,14 @@ h1 {
           <td class="date">1977-06-10</td>
           <td class="flag">&#127480;&#127479;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Suriname ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1977-04-26</td>
           <td class="flag">&#127463;&#127480;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Bahamas ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -14218,7 +14272,7 @@ h1 {
           <td class="date">1976-11-29</td>
           <td class="flag">&#127463;&#127480;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Bahamas signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -14316,7 +14370,7 @@ h1 {
           <td class="date">1976-02-13</td>
           <td class="flag">&#127480;&#127479;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Suriname signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -14400,7 +14454,7 @@ h1 {
           <td class="date">1975-06-20</td>
           <td class="flag">&#127468;&#127465;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Grenada ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -14512,7 +14566,7 @@ h1 {
           <td class="date">1975-04-29</td>
           <td class="flag">&#127468;&#127465;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Grenada signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -14652,7 +14706,7 @@ h1 {
           <td class="date">1974-10-09</td>
           <td class="flag">&#127464;&#127473;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Chile ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -15023,7 +15077,7 @@ h1 {
           <td class="date">1972-08-04</td>
           <td class="flag">&#127464;&#127476;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Colombia ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -15737,7 +15791,7 @@ h1 {
           <td class="date">1971-06-11</td>
           <td class="flag">&#127477;&#127462;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Panama ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -15772,7 +15826,7 @@ h1 {
           <td class="date">1970-12-03</td>
           <td class="flag">&#127481;&#127481;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Trinidad and Tobago ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -15877,7 +15931,7 @@ h1 {
           <td class="date">1970-03-23</td>
           <td class="flag">&#127483;&#127466;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Venezuela ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -16031,7 +16085,7 @@ h1 {
           <td class="date">1970-02-06</td>
           <td class="flag">&#127468;&#127481;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Guatemala ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -16136,7 +16190,7 @@ h1 {
           <td class="date">1969-08-25</td>
           <td class="flag">&#127464;&#127479;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Costa Rica ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -16164,7 +16218,7 @@ h1 {
           <td class="date">1969-06-26</td>
           <td class="flag">&#127471;&#127474;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Jamaica ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -16192,7 +16246,7 @@ h1 {
           <td class="date">1969-05-23</td>
           <td class="flag">&#127469;&#127481;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Haiti ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -16213,7 +16267,7 @@ h1 {
           <td class="date">1969-04-25</td>
           <td class="flag">&#127463;&#127463;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Barbados ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -16241,7 +16295,7 @@ h1 {
           <td class="date">1969-03-19</td>
           <td class="flag">&#127477;&#127486;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Paraguay ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -16255,21 +16309,21 @@ h1 {
           <td class="date">1969-03-04</td>
           <td class="flag">&#127477;&#127466;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Peru ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1969-02-18</td>
           <td class="flag">&#127463;&#127476;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Bolivia ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1969-02-11</td>
           <td class="flag">&#127466;&#127464;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Ecuador ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -16353,14 +16407,14 @@ h1 {
           <td class="date">1968-10-24</td>
           <td class="flag">&#127475;&#127470;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Nicaragua ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1968-10-18</td>
           <td class="flag">&#127463;&#127463;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Barbados signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -16388,7 +16442,7 @@ h1 {
           <td class="date">1968-09-23</td>
           <td class="flag">&#127469;&#127475;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Honduras ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -16430,7 +16484,7 @@ h1 {
           <td class="date">1968-08-20</td>
           <td class="flag">&#127482;&#127486;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Uruguay ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
@@ -16948,175 +17002,175 @@ h1 {
           <td class="date">1968-06-14</td>
           <td class="flag">&#127465;&#127476;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Dominican Republic ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1968-04-22</td>
           <td class="flag">&#127480;&#127483;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>El Salvador ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1968-01-29</td>
           <td class="flag">&#127463;&#127479;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Brazil ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-10-26</td>
           <td class="flag">&#127471;&#127474;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Jamaica signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-09-27</td>
           <td class="flag">&#127462;&#127479;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Argentina signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-09-20</td>
           <td class="flag">&#127474;&#127485;</td>
           <td class="type"><img src="images/check.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Mexico ratified the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-07-28</td>
           <td class="flag">&#127465;&#127476;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Dominican Republic signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-06-27</td>
           <td class="flag">&#127481;&#127481;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Trinidad and Tobago signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-05-09</td>
           <td class="flag">&#127463;&#127479;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Brazil signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-04-26</td>
           <td class="flag">&#127477;&#127486;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Paraguay signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-02-15</td>
           <td class="flag">&#127475;&#127470;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Nicaragua signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-02-14</td>
           <td class="flag">&#127483;&#127466;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Venezuela signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-02-14</td>
           <td class="flag">&#127482;&#127486;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Uruguay signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-02-14</td>
           <td class="flag">&#127477;&#127466;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Peru signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-02-14</td>
           <td class="flag">&#127477;&#127462;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Panama signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-02-14</td>
           <td class="flag">&#127474;&#127485;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Mexico signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-02-14</td>
           <td class="flag">&#127469;&#127475;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Honduras signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-02-14</td>
           <td class="flag">&#127469;&#127481;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Haiti signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-02-14</td>
           <td class="flag">&#127468;&#127481;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Guatemala signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-02-14</td>
           <td class="flag">&#127480;&#127483;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>El Salvador signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-02-14</td>
           <td class="flag">&#127466;&#127464;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Ecuador signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-02-14</td>
           <td class="flag">&#127464;&#127479;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Costa Rica signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-02-14</td>
           <td class="flag">&#127464;&#127476;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Colombia signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-02-14</td>
           <td class="flag">&#127464;&#127473;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Chile signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
         <tr>
           <td class="date">1967-02-14</td>
           <td class="flag">&#127463;&#127476;</td>
           <td class="type"><img src="images/quill.svg"></td>
-          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.jpeg" class="treaty-logo"></td>
+          <td class="treaty"><img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo"></td>
           <td>Bolivia signed the Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean.</td>
         </tr>
       </table>
@@ -17126,7 +17180,7 @@ h1 {
         <h3><b>Sources</b></h3>
         <p>Data presented in this table were retrieved from live databases maintained by the United Nations:</p>
         <ul><li><a href="https://treaties.unoda.org/">Disarmament Treaties Database</a>, United Nations Office for Disarmament Affairs</li><li><a href="https://treaties.un.org/Pages/ParticipationStatus.aspx">Multilateral Treaties Deposited with the Secretary-General</a>, United Nations, New York</li><li><a href="https://data.un.org/">UNdata</a>, United Nations Statistics Division</li></ul>
-        <p>Data retrieved at 2026-10-05T21:56:08.560Z</p>
+        <p>Data retrieved at 2026-10-07T05:40:07.891Z</p>
         <p>Source code for this project is <a href="https://github.com/arthuredelstein/survivalscores.org">available on GitHub</a>.</p>
         <br>
       </div>
