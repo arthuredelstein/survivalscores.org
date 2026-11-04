@@ -15,7 +15,7 @@
   "dependencies": {
     "capture-website": "^5.1.0",
     "clean-html": "^2.0.1",
-    "csv-parse": "^7.0.2",
+    "csv-parse": "^7.0.3",
     "es-main": "^1.4.0",
     "jsdom": "^20.0.0",
     "lodash": "^4.17.21",
