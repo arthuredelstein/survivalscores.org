@@ -8,7 +8,7 @@ import { render, createPreviewImage, flagEmojiHtml, htmlFooter } from './render-
 const loadJs = () => fs.readFileSync('./script.js')
 
 const treatyList = [
-  'rome', 'aggression', 'npt', 'ctbt', 'nwfz', 'tpnw', 'bwc', 'biodiversity', 'paris'
+  'rome', 'aggression', 'icj', 'npt', 'ctbt', 'nwfz', 'tpnw', 'bwc', 'biodiversity', 'paris'
 ]
 
 const findNwfzMembership = (treatyData, nwfzList) => {
@@ -25,7 +25,9 @@ const composeDescription = ({ country, treaty, nwfz, withdrew, joiningMechanism,
   const isNwfz = treaty === 'nwfz'
   const { name: treatyName } = treatyInfoByCode()[isNwfz ? (nwfz ?? 'nwfz') : treaty]
   if (!joined) {
-    description = `${country} has not yet joined ${isNwfz ? 'a' : 'the'} ${treatyName}.`
+    description = treaty === 'icj'
+      ? `${country} has not yet accepted compulsory ICJ jurisdiction.`
+      : `${country} has not yet joined ${isNwfz ? 'a' : 'the'} ${treatyName}.`
   } else {
     const treatyOrNwfzName = treatyName
     description = country
@@ -40,6 +42,7 @@ const composeDescription = ({ country, treaty, nwfz, withdrew, joiningMechanism,
       accepted: 'accepted membership of',
       approved: 'gave approval to',
       succeeded: 'inherited membership of',
+      declared: 'declared acceptance of',
       joined: 'joined'
     }[joiningMechanism] ?? 'joined')
     description += treatyMentioned ? ' it' : ` the ${treatyOrNwfzName}`

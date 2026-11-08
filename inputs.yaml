@@ -36,6 +36,10 @@ otherUNTreaties:
     chapter: 18
     columnCount: 2
     logo: "aggression.png"
+  - code: "icj"
+    name: "ICJ Compulsory Jurisdiction"
+    source: "icj-declarations"
+    logo: "icj.svg"
   - code: "biodiversity"
     name: "Convention on Biological Diversity"
     chapter: 27

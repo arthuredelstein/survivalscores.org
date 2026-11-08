@@ -39,6 +39,10 @@
     filter: brightness(4.5);
   }
 
+  img.treaty-logo[src$="icj.svg"] {
+    filter: brightness(1.55) saturate(1.6);
+  }
+
   img.treaty-logo[src$="tpnw.svg"] {
     filter: brightness(1.5) saturate(5) contrast(1.4);
   }

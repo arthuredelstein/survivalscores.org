@@ -90,8 +90,36 @@ const unTreatyInfo = async (treaty) => {
   return mainData
 }
 
+// Article 36(2) optional-clause declarations from the ICJ site.
+// Use country names (not URL slugs): ICJ's /declarations/cg is DRC, not Congo.
+const icjDeclarationsInfo = async () => {
+  const url = 'https://www.icj-cij.org/declarations'
+  const dom = await domFromUrl(url)
+  const rows = [...dom.window.document.querySelectorAll('.views-row a[href^="/declarations/"]')]
+  return Object.fromEntries(rows.map(anchor => {
+    const name = anchor.childNodes[0].textContent.trim()
+    const time = anchor.querySelector('time')
+    const datetime = time.getAttribute('datetime')
+    // Prefer the ISO calendar date so local timezones do not shift deposit day.
+    const joined = /^\d{4}-\d{2}-\d{2}/.test(datetime ?? '')
+      ? datetime.slice(0, 10)
+      : formatDate(new Date(time.textContent))
+    return [
+      countryToCode(name),
+      { joined, joiningMechanism: 'declared' }
+    ]
+  }))
+}
+
+const treatyInfo = async (treaty) => {
+  if (treaty.source === 'icj-declarations') {
+    return icjDeclarationsInfo()
+  }
+  return unTreatyInfo(treaty)
+}
+
 export const other = async (otherUNTreaties) =>
   mapParallelToObject(async treaty => {
     return [treaty.code,
-      await unTreatyInfo(treaty)]
+      await treatyInfo(treaty)]
   }, otherUNTreaties)

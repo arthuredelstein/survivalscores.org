@@ -37,6 +37,7 @@ export const htmlFooter = (dataDate) => `
     <ul>
       <li><a href="https://treaties.unoda.org/">Disarmament Treaties Database</a>, United Nations Office for Disarmament Affairs</li>
       <li><a href="https://treaties.un.org/Pages/ParticipationStatus.aspx">Multilateral Treaties Deposited with the Secretary-General</a>, United Nations, New York</li>
+      <li><a href="https://www.icj-cij.org/declarations">Declarations recognizing the jurisdiction of the Court as compulsory</a>, International Court of Justice</li>
       <li><a href="https://data.un.org/">UNdata</a>, United Nations Statistics Division</li>
     </ul>
     <p>Data retrieved at ${(new Date(dataDate)).toISOString()}</p>

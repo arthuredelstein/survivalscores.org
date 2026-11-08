@@ -47,10 +47,11 @@ Over the decades, a number of treaties have been created at the UN to reduce the
 * The [Treaty for the Prohibition of Nuclear Weapons](https://disarmament.unoda.org/wmd/nuclear/tpnw/) (TPNW)
 * Membership of [Nuclear Weapons-Free Zones](https://www.un.org/nwfz/content/overview-nuclear-weapon-free-zones) (NWFZ)
 
-It is quite likely that nuclear war could arise from the escalation of a conventional war. In addition, the threat of conventional war is one of the reasons that some states maintain a nuclear deterrent. Unfortunately, the [Security Dilemma](https://en.wikipedia.org/wiki/Security_dilemma) implies that a nuclear deterrent maintained by one state for defensive purposes can be perceived by other states as an offensive nuclear threat. Therefore, SecurityScores tracks treaties that provide an alternative deterrent to aggressive war:
+It is quite likely that nuclear war could arise from the escalation of a conventional war. In addition, the threat of conventional war is one of the reasons that some states maintain a nuclear deterrent. Unfortunately, the [Security Dilemma](https://en.wikipedia.org/wiki/Security_dilemma) implies that a nuclear deterrent maintained by one state for defensive purposes can be perceived by other states as an offensive nuclear threat. Therefore, SecurityScores tracks treaties and institutions that provide an alternative deterrent to aggressive war:
 
 * The [Rome Statute](https://www.icc-cpi.int/sites/default/files/RS-Eng.pdf), establishing the International Criminal Court (ICC), which punishes, and thus deters, war crimes and crimes against humanity.
 * The [Kampala Amendments](https://www.pgaction.org/ilhr/rome-statute/amendments.html) to the Rome Statute, adding the Crime of Aggression to the ICC's jurisdiction, to deter the military invasion of one state by another.
+* The [International Court of Justice](https://www.icj-cij.org/) (ICJ) is the primary court of the United Nations designed to resolve disputes between states; some nations have agreed to accept ICJ decisions as binding.
 
 ### Pandemic
 

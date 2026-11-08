@@ -23,7 +23,8 @@ const listDataByTime = (aggregatedData) => {
 
 const addPrepositions = (type) => ({
   withdrew: 'withdrew from',
-  acceded: 'acceded to'
+  acceded: 'acceded to',
+  declared: 'declared acceptance of'
 })[type] ?? type
 
 const getTypeLogo = (type) => ({
@@ -33,7 +34,8 @@ const getTypeLogo = (type) => ({
   signed: 'quill.svg',
   accepted: 'check.svg',
   succeeded: 'check.svg',
-  approved: 'check.svg'
+  approved: 'check.svg',
+  declared: 'check.svg'
 })[type] ?? type
 
 const regularCountryName = (countryCode) => {
