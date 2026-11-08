@@ -4,7 +4,6 @@ td {
   border: 0px;
   padding: 5px;
   height: 30px;
-  cursor: pointer;
 }
 td:first-child, th:first-child {
   border-radius: 5px 0px 0px 5px;
@@ -50,7 +49,6 @@ th {
   padding: 5px 8px;
   hyphens: auto;
   flex-direction: column;
-  cursor: pointer;
   font-weight: normal;
 }
 th.treaty-header {
@@ -61,7 +59,8 @@ th.treaty-header {
 th.data-header {
   vertical-align: bottom;
 }
-td, th {
+th.sort-arrows,
+a.treaty-link {
   cursor: pointer;
 }
 td:first-child,th:first-child {
@@ -104,4 +103,13 @@ thead {
 }
 img.treaty-logo {
   height: 48px;
+}
+a.treaty-link,
+a.treaty-link:link,
+a.treaty-link:visited {
+  color: inherit;
+  text-decoration: none;
+}
+a.treaty-link:hover .treaty-name {
+  text-decoration: underline;
 }

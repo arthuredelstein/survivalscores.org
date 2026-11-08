@@ -2,7 +2,14 @@ import captureWebsite from 'capture-website'
 import cleaner from 'clean-html'
 import fs from 'fs'
 
-export const cleanHtml = (content) => new Promise(resolve => cleaner.clean(content, { wrap: 0 }, resolve))
+export const cleanHtml = (content) => new Promise(resolve => cleaner.clean(content, {
+  wrap: 0,
+  // Keep target=_blank for external links (default clean-html strips target).
+  'remove-attributes': [
+    'align', 'bgcolor', 'border', 'cellpadding', 'cellspacing',
+    'color', 'height', 'valign', 'width'
+  ]
+}, resolve))
 
 const htmlHeading = () =>
   `<div id='title-background'></div>

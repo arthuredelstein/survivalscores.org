@@ -120,9 +120,16 @@ const htmlTable = ({ header, rows }) => {
   for (const headerItem of header) {
     const treatyInfo = treatyInfoByCode()[headerItem.name]
     const logo = treatyInfo ? treatyInfo.logo : undefined
-    const imageElement = logo ? `<img alt='${treatyInfo?.name} logo' src='./images/${logo}' class='treaty-logo'>` : ''
+    const label = treatyInfo?.name ?? headerItem.name
+    const imageElement = logo ? `<img alt='${label} logo' src='./images/${logo}' class='treaty-logo'>` : ''
     const className = imageElement.length > 0 ? 'treaty-header' : 'data-header'
-    fragments.push(`<th class='${className}'>${imageElement}<br>${treatyInfo?.name ?? headerItem.name}</th>`)
+    const content = imageElement
+      ? `${imageElement}<br><span class='treaty-name'>${label}</span>`
+      : label
+    const linkedContent = treatyInfo?.wikipedia
+      ? `<a class='treaty-link' href='${treatyInfo.wikipedia}' target='_blank' rel='noopener noreferrer'>${content}</a>`
+      : content
+    fragments.push(`<th class='${className}'>${linkedContent}</th>`)
   }
   fragments.push('</tr>')
   fragments.push("<tr class='header'>")

@@ -60,7 +60,12 @@ export const treatyInfoByCode = _.memoize(() => {
   const { disarmamentTreaties, otherUNTreaties, nwfzTreaties } = inputs()
   const list = [...disarmamentTreaties, ...otherUNTreaties,
     ...nwfzTreaties,
-    { code: 'nwfz', name: 'Nuclear-Weapon-Free Zone', logo: 'nwfz.png' }]
+    {
+      code: 'nwfz',
+      name: 'Nuclear-Weapon-Free Zone',
+      logo: 'nwfz.png',
+      wikipedia: 'https://en.wikipedia.org/wiki/Nuclear-weapon-free_zone'
+    }]
   for (const item of list) {
     results[item.code] = item
   }

@@ -3,15 +3,19 @@ disarmamentTreaties:
   - code: "tpnw"
     name: "Prohibition of Nuclear Weapons"
     logo: "tpnw.svg"
+    wikipedia: "https://en.wikipedia.org/wiki/Treaty_on_the_Prohibition_of_Nuclear_Weapons"
   - code: "ctbt"
     name: "Comprehensive Nuclear-Test-Ban Treaty"
     logo: "ctbt.svg"
+    wikipedia: "https://en.wikipedia.org/wiki/Comprehensive_Nuclear-Test-Ban_Treaty"
   - code: "npt"
     name: "Non-Proliferation Treaty"
     logo: "npt.svg"
+    wikipedia: "https://en.wikipedia.org/wiki/Treaty_on_the_Non-Proliferation_of_Nuclear_Weapons"
   - code: "bwc"
     name: "Biological Weapons Convention"
     logo: "bwc.svg"
+    wikipedia: "https://en.wikipedia.org/wiki/Biological_Weapons_Convention"
 nwfzTreaties:
   - code: "rarotonga"
     name: "South Pacific Nuclear-Free Zone Treaty"
@@ -30,25 +34,30 @@ otherUNTreaties:
     chapter: 18
     columnCount: 3
     logo: "icc.svg"
+    wikipedia: "https://en.wikipedia.org/wiki/Rome_Statute"
   - code: "aggression"
     name: "ICC Crime of Aggression Amendment"
     mtdsgNo: "XVIII-10-b"
     chapter: 18
     columnCount: 2
     logo: "aggression.png"
+    wikipedia: "https://en.wikipedia.org/wiki/Amendments_to_the_Rome_Statute_of_the_International_Criminal_Court"
   - code: "icj"
     name: "ICJ Compulsory Jurisdiction"
     source: "icj-declarations"
     logo: "icj.svg"
+    wikipedia: "https://en.wikipedia.org/wiki/Jurisdiction_of_the_International_Court_of_Justice"
   - code: "biodiversity"
     name: "Convention on Biological Diversity"
     chapter: 27
     mtdsgNo: "XXVII-8"
     columnCount: 3
     logo: "biodiversity.svg"
+    wikipedia: "https://en.wikipedia.org/wiki/Convention_on_Biological_Diversity"
   - code: "paris"
     name: "Paris Agreement on Climate"
     chapter: 27
     mtdsgNo: "XXVII-7-d"
     columnCount: 3
     logo: "paris.svg"
+    wikipedia: "https://en.wikipedia.org/wiki/Paris_Agreement"
