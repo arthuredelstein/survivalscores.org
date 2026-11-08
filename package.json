@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "check-overrides": "node check-override-expirations.js",
     "render-table": "npx five-server ./build/ & npx nodemon --ext js,css,md --watch . render-table.js",
     "render-timeline": "npx five-server ./build/ --open=timeline.html & npx nodemon --ext js,css,md --watch . render-timeline.js",
     "publish": "npx gh-pages -d build",
@@ -36,11 +37,34 @@
     "standard": "^17.1.2"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx standard"
+    "pre-commit": "npm run check-overrides && npx standard"
   },
   "overrides": {
     "puppeteer": "25.16.0",
-    "zod": "^4.6.6",
-    "chokidar": "^4.0.3"
+    "chokidar": "^4.0.3",
+    "html-validate": {
+      "glob": "^14.0.4"
+    },
+    "nodemon": {
+      "minimatch": "^11.0.5"
+    }
+  },
+  "overridesMeta": {
+    "puppeteer": {
+      "expires": "2026-12-07",
+      "reason": "Remove when capture-website supports puppeteer 25+"
+    },
+    "chokidar": {
+      "expires": "2026-12-07",
+      "reason": "Remove when five-server/nodemon depend on chokidar 4+"
+    },
+    "html-validate.glob": {
+      "expires": "2026-12-07",
+      "reason": "Remove when five-server uses html-validate 11.1+ (no glob) or glob 14.0.2+"
+    },
+    "nodemon.minimatch": {
+      "expires": "2026-12-07",
+      "reason": "Remove when nodemon depends on minimatch 11.0.1+"
+    }
   }
 }
