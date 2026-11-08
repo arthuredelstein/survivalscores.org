@@ -236,7 +236,6 @@ img.arrow-icon {
   border: 0px;
   padding: 5px;
   height: 30px;
-  cursor: pointer;
 }
 td:first-child, th:first-child {
   border-radius: 5px 0px 0px 5px;
@@ -282,7 +281,6 @@ th {
   padding: 5px 8px;
   hyphens: auto;
   flex-direction: column;
-  cursor: pointer;
   font-weight: normal;
 }
 th.treaty-header {
@@ -293,7 +291,8 @@ th.treaty-header {
 th.data-header {
   vertical-align: bottom;
 }
-td, th {
+th.sort-arrows,
+a.treaty-link {
   cursor: pointer;
 }
 td:first-child,th:first-child {
@@ -337,8 +336,17 @@ thead {
 img.treaty-logo {
   height: 48px;
 }
+a.treaty-link,
+a.treaty-link:link,
+a.treaty-link:visited {
+  color: inherit;
+  text-decoration: none;
+}
+a.treaty-link:hover .treaty-name {
+  text-decoration: underline;
+}
 </style>
-    <script type="module">const dataDate = new Date('Sun Nov 08 2026 04:25:32 GMT+0000 (Coordinated Universal Time)');
+    <script type="module">const dataDate = new Date('Sun Nov 08 2026 04:35:12 GMT+0000 (Coordinated Universal Time)');
 import { polyfillCountryFlagEmojis } from './country-flag-emoji-polyfill/country-flag-emoji-polyfill.js'
 
 // Initially will be sorted by population
@@ -421,70 +429,76 @@ window.addEventListener('DOMContentLoaded', (e) => {
       <table id="treaties">
         <thead>
           <tr class="header">
-            <th class="data-header">
-              <br>
-            </th>
-            <th class="data-header">
-              <br>
-              Country
-            </th>
-            <th class="data-header">
-              <br>
-              Score
-            </th>
-            <th class="data-header">
-              <br>
-              Population
+            <th class="data-header"></th><th class="data-header">Country</th><th class="data-header">Score</th><th class="data-header">Population</th>
+            <th class="treaty-header">
+              <a class="treaty-link" href="https://en.wikipedia.org/wiki/Rome_Statute" target="_blank" rel="noopener noreferrer">
+                <img alt="International Criminal Court logo" src="./images/icc.svg" class="treaty-logo">
+                <br>
+                <span class="treaty-name">International Criminal Court</span>
+              </a>
             </th>
             <th class="treaty-header">
-              <img alt="International Criminal Court logo" src="./images/icc.svg" class="treaty-logo">
-              <br>
-              International Criminal Court
+              <a class="treaty-link" href="https://en.wikipedia.org/wiki/Amendments_to_the_Rome_Statute_of_the_International_Criminal_Court" target="_blank" rel="noopener noreferrer">
+                <img alt="ICC Crime of Aggression Amendment logo" src="./images/aggression.png" class="treaty-logo">
+                <br>
+                <span class="treaty-name">ICC Crime of Aggression Amendment</span>
+              </a>
             </th>
             <th class="treaty-header">
-              <img alt="ICC Crime of Aggression Amendment logo" src="./images/aggression.png" class="treaty-logo">
-              <br>
-              ICC Crime of Aggression Amendment
+              <a class="treaty-link" href="https://en.wikipedia.org/wiki/Jurisdiction_of_the_International_Court_of_Justice" target="_blank" rel="noopener noreferrer">
+                <img alt="ICJ Compulsory Jurisdiction logo" src="./images/icj.svg" class="treaty-logo">
+                <br>
+                <span class="treaty-name">ICJ Compulsory Jurisdiction</span>
+              </a>
             </th>
             <th class="treaty-header">
-              <img alt="ICJ Compulsory Jurisdiction logo" src="./images/icj.svg" class="treaty-logo">
-              <br>
-              ICJ Compulsory Jurisdiction
+              <a class="treaty-link" href="https://en.wikipedia.org/wiki/Treaty_on_the_Non-Proliferation_of_Nuclear_Weapons" target="_blank" rel="noopener noreferrer">
+                <img alt="Non-Proliferation Treaty logo" src="./images/npt.svg" class="treaty-logo">
+                <br>
+                <span class="treaty-name">Non-Proliferation Treaty</span>
+              </a>
             </th>
             <th class="treaty-header">
-              <img alt="Non-Proliferation Treaty logo" src="./images/npt.svg" class="treaty-logo">
-              <br>
-              Non-Proliferation Treaty
+              <a class="treaty-link" href="https://en.wikipedia.org/wiki/Comprehensive_Nuclear-Test-Ban_Treaty" target="_blank" rel="noopener noreferrer">
+                <img alt="Comprehensive Nuclear-Test-Ban Treaty logo" src="./images/ctbt.svg" class="treaty-logo">
+                <br>
+                <span class="treaty-name">Comprehensive Nuclear-Test-Ban Treaty</span>
+              </a>
             </th>
             <th class="treaty-header">
-              <img alt="Comprehensive Nuclear-Test-Ban Treaty logo" src="./images/ctbt.svg" class="treaty-logo">
-              <br>
-              Comprehensive Nuclear-Test-Ban Treaty
+              <a class="treaty-link" href="https://en.wikipedia.org/wiki/Nuclear-weapon-free_zone" target="_blank" rel="noopener noreferrer">
+                <img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo">
+                <br>
+                <span class="treaty-name">Nuclear-Weapon-Free Zone</span>
+              </a>
             </th>
             <th class="treaty-header">
-              <img alt="Nuclear-Weapon-Free Zone logo" src="./images/nwfz.png" class="treaty-logo">
-              <br>
-              Nuclear-Weapon-Free Zone
+              <a class="treaty-link" href="https://en.wikipedia.org/wiki/Treaty_on_the_Prohibition_of_Nuclear_Weapons" target="_blank" rel="noopener noreferrer">
+                <img alt="Prohibition of Nuclear Weapons logo" src="./images/tpnw.svg" class="treaty-logo">
+                <br>
+                <span class="treaty-name">Prohibition of Nuclear Weapons</span>
+              </a>
             </th>
             <th class="treaty-header">
-              <img alt="Prohibition of Nuclear Weapons logo" src="./images/tpnw.svg" class="treaty-logo">
-              <br>
-              Prohibition of Nuclear Weapons
+              <a class="treaty-link" href="https://en.wikipedia.org/wiki/Biological_Weapons_Convention" target="_blank" rel="noopener noreferrer">
+                <img alt="Biological Weapons Convention logo" src="./images/bwc.svg" class="treaty-logo">
+                <br>
+                <span class="treaty-name">Biological Weapons Convention</span>
+              </a>
             </th>
             <th class="treaty-header">
-              <img alt="Biological Weapons Convention logo" src="./images/bwc.svg" class="treaty-logo">
-              <br>
-              Biological Weapons Convention
+              <a class="treaty-link" href="https://en.wikipedia.org/wiki/Convention_on_Biological_Diversity" target="_blank" rel="noopener noreferrer">
+                <img alt="Convention on Biological Diversity logo" src="./images/biodiversity.svg" class="treaty-logo">
+                <br>
+                <span class="treaty-name">Convention on Biological Diversity</span>
+              </a>
             </th>
             <th class="treaty-header">
-              <img alt="Convention on Biological Diversity logo" src="./images/biodiversity.svg" class="treaty-logo">
-              <br>
-              Convention on Biological Diversity
-            </th>
-            <th class="treaty-header">
-              <img alt="Paris Agreement on Climate logo" src="./images/paris.svg" class="treaty-logo">
-              <br>
-              Paris Agreement on Climate
+              <a class="treaty-link" href="https://en.wikipedia.org/wiki/Paris_Agreement" target="_blank" rel="noopener noreferrer">
+                <img alt="Paris Agreement on Climate logo" src="./images/paris.svg" class="treaty-logo">
+                <br>
+                <span class="treaty-name">Paris Agreement on Climate</span>
+              </a>
             </th>
           </tr>
           <tr class="header"><th class="treaty-count"></th><th class="treaty-count"></th><th class="treaty-count"></th><th class="treaty-count"></th><th class="treaty-count">119/197</th><th class="treaty-count">49/197</th><th class="treaty-count">75/197</th><th class="treaty-count">191/197</th><th class="treaty-count">179/197</th><th class="treaty-count">106/197</th><th class="treaty-count">75/197</th><th class="treaty-count">189/197</th><th class="treaty-count">195/197</th><th class="treaty-count">194/197</th></tr>
@@ -3649,7 +3663,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
         <h3><b>Sources</b></h3>
         <p>Data presented in this table were retrieved from live databases maintained by the United Nations:</p>
         <ul><li><a href="https://treaties.unoda.org/">Disarmament Treaties Database</a>, United Nations Office for Disarmament Affairs</li><li><a href="https://treaties.un.org/Pages/ParticipationStatus.aspx">Multilateral Treaties Deposited with the Secretary-General</a>, United Nations, New York</li><li><a href="https://www.icj-cij.org/declarations">Declarations recognizing the jurisdiction of the Court as compulsory</a>, International Court of Justice</li><li><a href="https://data.un.org/">UNdata</a>, United Nations Statistics Division</li></ul>
-        <p>Data retrieved at 2026-11-08T04:25:32.393Z</p>
+        <p>Data retrieved at 2026-11-08T04:35:12.092Z</p>
         <p>Source code for this project is <a href="https://github.com/arthuredelstein/survivalscores.org">available on GitHub</a>.</p>
         <br>
       </div>
